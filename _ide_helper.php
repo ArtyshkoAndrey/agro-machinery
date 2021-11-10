@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.62.0.
+ * Generated for Laravel 8.70.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -700,7 +700,7 @@
          * @param int $code
          * @param string $message
          * @param array $headers
-         * @return void 
+         * @return \Illuminate\Foundation\never 
          * @throws \Symfony\Component\HttpKernel\Exception\HttpException
          * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
          * @static 
@@ -708,7 +708,7 @@
         public static function abort($code, $message = '', $headers = [])
         {
                         /** @var \Illuminate\Foundation\Application $instance */
-                        $instance->abort($code, $message, $headers);
+                        return $instance->abort($code, $message, $headers);
         }
                     /**
          * Register a terminating callback with the application.
@@ -2979,6 +2979,17 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
                         $instance->assertNotDispatched($command, $callback);
+        }
+                    /**
+         * Assert that no jobs were dispatched.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function assertNothingDispatched()
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        $instance->assertNothingDispatched();
         }
                     /**
          * Assert if a job was explicitly dispatched synchronously based on a truth-test callback.
@@ -7342,6 +7353,17 @@
                         $instance->setParsedKey($key, $parsed);
         }
                     /**
+         * Flush the cache of parsed keys.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushParsedKeys()
+        {            //Method inherited from \Illuminate\Support\NamespacedItemResolver         
+                        /** @var \Illuminate\Translation\Translator $instance */
+                        $instance->flushParsedKeys();
+        }
+                    /**
          * Register a custom macro.
          *
          * @param string $name
@@ -7389,6 +7411,18 @@
      * @see \Illuminate\Log\Logger
      */ 
         class Log {
+                    /**
+         * Build an on-demand log channel.
+         *
+         * @param array $config
+         * @return \Psr\Log\LoggerInterface 
+         * @static 
+         */ 
+        public static function build($config)
+        {
+                        /** @var \Illuminate\Log\LogManager $instance */
+                        return $instance->build($config);
+        }
                     /**
          * Create a new, on-demand aggregate logger instance.
          *
@@ -8148,6 +8182,20 @@
                         return $instance->forgetDrivers();
         }
                     /**
+         * Assert if a notification was sent on-demand based on a truth-test callback.
+         *
+         * @param string|\Closure $notification
+         * @param callable|null $callback
+         * @return void 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function assertSentOnDemand($notification, $callback = null)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
+                        $instance->assertSentOnDemand($notification, $callback);
+        }
+                    /**
          * Assert if a notification was sent based on a truth-test callback.
          *
          * @param mixed $notifiable
@@ -8161,6 +8209,19 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
                         $instance->assertSentTo($notifiable, $notification, $callback);
+        }
+                    /**
+         * Assert if a notification was sent on-demand a number of times.
+         *
+         * @param string $notification
+         * @param int $times
+         * @return void 
+         * @static 
+         */ 
+        public static function assertSentOnDemandTimes($notification, $times = 1)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
+                        $instance->assertSentOnDemandTimes($notification, $times);
         }
                     /**
          * Assert if a notification was sent a number of times.
@@ -8969,6 +9030,18 @@
         {
                         /** @var \Illuminate\Cache\RateLimiter $instance */
                         return $instance->availableIn($key);
+        }
+                    /**
+         * Clean the rate limiter key from unicode characters.
+         *
+         * @param string $key
+         * @return string 
+         * @static 
+         */ 
+        public static function cleanRateLimiterKey($key)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->cleanRateLimiterKey($key);
         }
          
     }
@@ -11042,7 +11115,7 @@
                     /**
          * Retrieve input from the request as a collection.
          *
-         * @param string|null $key
+         * @param array|string|null $key
          * @return \Illuminate\Support\Collection 
          * @static 
          */ 
@@ -15215,6 +15288,19 @@
                         return $instance->renderComponent();
         }
                     /**
+         * Get an item from the component data that exists above the current component.
+         *
+         * @param string $key
+         * @param mixed $default
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function getConsumableComponentData($key, $default = null)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->getConsumableComponentData($key, $default);
+        }
+                    /**
          * Start the slot rendering process.
          *
          * @param string $name
@@ -15622,7 +15708,656 @@
      
 }
 
-        namespace Facade\Ignition\Facades { 
+        namespace Barryvdh\DomPDF { 
+            /**
+     * 
+     *
+     */ 
+        class Facade {
+                    /**
+         * Get the DomPDF instance
+         *
+         * @return \Dompdf\Dompdf 
+         * @static 
+         */ 
+        public static function getDomPDF()
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->getDomPDF();
+        }
+                    /**
+         * Set the paper size (default A4)
+         *
+         * @param string $paper
+         * @param string $orientation
+         * @return \Barryvdh\DomPDF\PDF 
+         * @static 
+         */ 
+        public static function setPaper($paper, $orientation = 'portrait')
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->setPaper($paper, $orientation);
+        }
+                    /**
+         * Show or hide warnings
+         *
+         * @param bool $warnings
+         * @return \Barryvdh\DomPDF\PDF 
+         * @static 
+         */ 
+        public static function setWarnings($warnings)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->setWarnings($warnings);
+        }
+                    /**
+         * Load a HTML string
+         *
+         * @param string $string
+         * @param string $encoding Not used yet
+         * @return static 
+         * @static 
+         */ 
+        public static function loadHTML($string, $encoding = null)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->loadHTML($string, $encoding);
+        }
+                    /**
+         * Load a HTML file
+         *
+         * @param string $file
+         * @return static 
+         * @static 
+         */ 
+        public static function loadFile($file)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->loadFile($file);
+        }
+                    /**
+         * Add metadata info
+         *
+         * @param array $info
+         * @return static 
+         * @static 
+         */ 
+        public static function addInfo($info)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->addInfo($info);
+        }
+                    /**
+         * Load a View and convert to HTML
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @param string $encoding Not used yet
+         * @return static 
+         * @static 
+         */ 
+        public static function loadView($view, $data = [], $mergeData = [], $encoding = null)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->loadView($view, $data, $mergeData, $encoding);
+        }
+                    /**
+         * Set/Change an option in DomPdf
+         *
+         * @param array $options
+         * @return static 
+         * @static 
+         */ 
+        public static function setOptions($options)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->setOptions($options);
+        }
+                    /**
+         * Output the PDF as a string.
+         *
+         * @return string The rendered PDF as string
+         * @static 
+         */ 
+        public static function output()
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->output();
+        }
+                    /**
+         * Save the PDF to a file
+         *
+         * @param $filename
+         * @return static 
+         * @static 
+         */ 
+        public static function save($filename)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->save($filename);
+        }
+                    /**
+         * Make the PDF downloadable by the user
+         *
+         * @param string $filename
+         * @return \Illuminate\Http\Response 
+         * @static 
+         */ 
+        public static function download($filename = 'document.pdf')
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->download($filename);
+        }
+                    /**
+         * Return a response with the PDF to show in the browser
+         *
+         * @param string $filename
+         * @return \Illuminate\Http\Response 
+         * @static 
+         */ 
+        public static function stream($filename = 'document.pdf')
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->stream($filename);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setEncryption($password)
+        {
+                        /** @var \Barryvdh\DomPDF\PDF $instance */
+                        return $instance->setEncryption($password);
+        }
+         
+    }
+     
+}
+
+    namespace Codedge\Fpdf\Facades { 
+            /**
+     * Class Fpdf.
+     *
+     */ 
+        class Fpdf {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetMargins($left, $top, $right = null)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetMargins($left, $top, $right);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetLeftMargin($margin)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetLeftMargin($margin);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetTopMargin($margin)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetTopMargin($margin);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetRightMargin($margin)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetRightMargin($margin);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetAutoPageBreak($auto, $margin = 0)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetAutoPageBreak($auto, $margin);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetDisplayMode($zoom, $layout = 'default')
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetDisplayMode($zoom, $layout);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetCompression($compress)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetCompression($compress);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetTitle($title, $isUTF8 = false)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetTitle($title, $isUTF8);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetAuthor($author, $isUTF8 = false)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetAuthor($author, $isUTF8);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetSubject($subject, $isUTF8 = false)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetSubject($subject, $isUTF8);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetKeywords($keywords, $isUTF8 = false)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetKeywords($keywords, $isUTF8);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetCreator($creator, $isUTF8 = false)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetCreator($creator, $isUTF8);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function AliasNbPages($alias = '{nb}')
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->AliasNbPages($alias);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Error($msg)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Error($msg);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Close()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Close();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function AddPage($orientation = '', $size = '', $rotation = 0)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->AddPage($orientation, $size, $rotation);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Header()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Header();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Footer()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Footer();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function PageNo()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->PageNo();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetDrawColor($r, $g = null, $b = null)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetDrawColor($r, $g, $b);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetFillColor($r, $g = null, $b = null)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetFillColor($r, $g, $b);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetTextColor($r, $g = null, $b = null)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetTextColor($r, $g, $b);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function GetStringWidth($s)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->GetStringWidth($s);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetLineWidth($width)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetLineWidth($width);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Line($x1, $y1, $x2, $y2)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Line($x1, $y1, $x2, $y2);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Rect($x, $y, $w, $h, $style = '')
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Rect($x, $y, $w, $h, $style);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function AddFont($family, $style = '', $file = '')
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->AddFont($family, $style, $file);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetFont($family, $style = '', $size = 0)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetFont($family, $style, $size);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetFontSize($size)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetFontSize($size);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function AddLink()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->AddLink();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetLink($link, $y = 0, $page = -1)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetLink($link, $y, $page);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Link($x, $y, $w, $h, $link)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Link($x, $y, $w, $h, $link);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Text($x, $y, $txt)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Text($x, $y, $txt);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function AcceptPageBreak()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->AcceptPageBreak();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Cell($w, $h = 0, $txt = '', $border = 0, $ln = 0, $align = '', $fill = false, $link = '')
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Cell($w, $h, $txt, $border, $ln, $align, $fill, $link);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function MultiCell($w, $h, $txt, $border = 0, $align = 'J', $fill = false)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->MultiCell($w, $h, $txt, $border, $align, $fill);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Write($h, $txt, $link = '')
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Write($h, $txt, $link);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Ln($h = null)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Ln($h);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Image($file, $x = null, $y = null, $w = 0, $h = 0, $type = '', $link = '')
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Image($file, $x, $y, $w, $h, $type, $link);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function GetPageWidth()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->GetPageWidth();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function GetPageHeight()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->GetPageHeight();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function GetX()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->GetX();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetX($x)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetX($x);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function GetY()
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->GetY();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetY($y, $resetX = true)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetY($y, $resetX);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function SetXY($x, $y)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->SetXY($x, $y);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function Output($dest = '', $name = '', $isUTF8 = false)
+        {
+                        /** @var \Codedge\Fpdf\Fpdf\Fpdf $instance */
+                        return $instance->Output($dest, $name, $isUTF8);
+        }
+         
+    }
+     
+}
+
+    namespace Facade\Ignition\Facades { 
             /**
      * Class Flare.
      *
@@ -17775,6 +18510,37 @@ namespace  {
             }
              
                 /**
+             * Add a "belongs to" relationship where clause to the query.
+             *
+             * @param \Illuminate\Database\Eloquent\Model $related
+             * @param string $relationship
+             * @param string $boolean
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @throws \Exception
+             * @static 
+             */ 
+            public static function whereBelongsTo($related, $relationshipName = null, $boolean = 'and')
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->whereBelongsTo($related, $relationshipName, $boolean);
+            }
+             
+                /**
+             * Add an "BelongsTo" relationship with an "or where" clause to the query.
+             *
+             * @param \Illuminate\Database\Eloquent\Model $related
+             * @param string $relationship
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @throws \Exception
+             * @static 
+             */ 
+            public static function orWhereBelongsTo($related, $relationshipName = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orWhereBelongsTo($related, $relationshipName);
+            }
+             
+                /**
              * Add subselect queries to include an aggregate value for a relationship.
              *
              * @param mixed $relations
@@ -19756,6 +20522,19 @@ namespace  {
             }
              
                 /**
+             * Update records in a PostgreSQL database using the update from syntax.
+             *
+             * @param array $values
+             * @return int 
+             * @static 
+             */ 
+            public static function updateFrom($values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->updateFrom($values);
+            }
+             
+                /**
              * Insert or update a record matching the attributes, and fill it with values.
              *
              * @param array $attributes
@@ -19846,6 +20625,19 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->addBinding($value, $type);
+            }
+             
+                /**
+             * Cast the given binding value.
+             *
+             * @param mixed $value
+             * @return mixed 
+             * @static 
+             */ 
+            public static function castBinding($value)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->castBinding($value);
             }
              
                 /**
@@ -19951,13 +20743,13 @@ namespace  {
                 /**
              * Die and dump the current SQL and bindings.
              *
-             * @return void 
+             * @return \Illuminate\Database\Query\never 
              * @static 
              */ 
             public static function dd()
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
-                                $instance->dd();
+                                return $instance->dd();
             }
              
                 /**
@@ -20025,6 +20817,8 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class PDF extends \Barryvdh\DomPDF\Facade {}
+            class Fpdf extends \Codedge\Fpdf\Facades\Fpdf {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Verta extends \Hekmatinasser\Verta\Verta {}
             class Socialite extends \Laravel\Socialite\Facades\Socialite {}

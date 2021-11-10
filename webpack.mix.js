@@ -7,6 +7,9 @@ mix
   .js('resources/js/admin/app.js', 'public/admin_spa/dist/js').vue({version: 2})
   .sass('resources/scss/admin/app.scss', 'public/admin_spa/dist/css')
 
+  .js('resources/js/user/app.js', 'public/user/dist/js').vue({version: 2})
+  .sass('resources/scss/user/app.scss', 'public/user/dist/css')
+
   .disableNotifications()
 
 if (mix.inProduction()) {

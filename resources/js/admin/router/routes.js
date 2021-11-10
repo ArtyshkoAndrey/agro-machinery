@@ -15,7 +15,7 @@ export default [
       {path: '/admin', redirect: {name: 'dashboard.invoice.index'}},
       {path: '/admin/index', name: 'dashboard.index', redirect: {name: 'dashboard.invoice.index'}},
       {
-        path: 'invoice',
+        path: '/admin/invoice',
         component: {render: (c) => c('router-view')},
         alias: 'dashboard.invoice.index',
         children: [
