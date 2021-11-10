@@ -3,6 +3,13 @@ const fs = require('fs-extra')
 const mix = require('laravel-mix')
 require('laravel-mix-versionhash')
 
+
+const publicDir = path.resolve(__dirname, './public')
+
+fs.removeSync(path.join(publicDir, 'dist'))
+fs.removeSync(path.join(publicDir, 'user'))
+fs.removeSync(path.join(publicDir, 'admin_spa'))
+
 mix
   .js('resources/js/admin/app.js', 'public/admin_spa/dist/js').vue({version: 2})
   .sass('resources/scss/admin/app.scss', 'public/admin_spa/dist/css')
@@ -13,7 +20,8 @@ mix
   .disableNotifications()
 
 if (mix.inProduction()) {
-  mix.versionHash()
+  // mix.versionHash()
+  mix.sourceMaps()
 } else {
   mix.sourceMaps()
 }
@@ -30,13 +38,13 @@ mix.webpackConfig({
   },
   output: {
     chunkFilename: 'dist/js/[chunkhash].js',
-    path: mix.inProduction() ? path.resolve(__dirname, './public/build') : path.resolve(__dirname, './public')
+    path: path.resolve(__dirname, './public')
   }
 })
 
 mix.then(() => {
   if (mix.inProduction()) {
-    process.nextTick(() => publishAseets())
+    // process.nextTick(() => publishAseets())
   }
 })
 

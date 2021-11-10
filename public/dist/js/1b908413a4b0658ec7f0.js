@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[198],{9198:(t,n,e)=>{e.r(n),e.d(n,{default:()=>i});const o={middleware:"guest",metaInfo:function(){return{title:"Главная страница"}},scrollToTop:!1,components:{Child:e(2643).Z},data:function(){return{title:window.config.appName}},mounted:function(){this.$root.$loading.finish()}};const i=(0,e(1900).Z)(o,(function(){var t=this.$createElement;return(this._self._c||t)("Child")}),[],!1,null,"6e48ab1d",null).exports}}]);
+//# sourceMappingURL=1b908413a4b0658ec7f0.js.map

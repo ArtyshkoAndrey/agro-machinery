@@ -1,10 +1,7 @@
 <template>
-  <div class="theme-container" :style="!user ? 'margin-left: 0' : ''">
-
-    <main class="container">
-      <Child />
-    </main>
-  </div>
+  <main class="container">
+    <Child />
+  </main>
 </template>
 
 <script>
