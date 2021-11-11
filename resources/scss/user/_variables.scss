@@ -1,0 +1,49 @@
+$container-max-widths: (
+        sm: 100%,
+        md: 740px,
+        lg: 1080px,
+        xl: 1280px,
+);
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 1200px,
+        xl: 1365px,
+);
+
+/// Mixin to manage responsive breakpoints
+/// @author Fulliton
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin respond-to($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+
+    // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($grid-breakpoints)}.";
+  }
+}
+
+@mixin respond-up($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media (max-width: map-get($grid-breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+
+    // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($grid-breakpoints)}.";
+  }
+}
