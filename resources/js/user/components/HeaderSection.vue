@@ -2,12 +2,12 @@
   <div class="row mx-0">
     <div class="bg-images ">
       <div class="col-12">
-        <h2>Добро пожаловать в</h2>
-        <h1>AGRO  MACHINERY</h1>
+        <h2>{{ $t('HeaderSection.great') }}</h2>
+        <h1>{{ $t('HeaderSection.title') }}</h1>
       </div>
       <div class="col-12 col-sm-10 col-md-9 col-lg-5">
         <p>
-          Наша компания, занимающаяся продажей сельхозтехники в городе Алматы, Казахстан, существует для того, чтобы познакомить вас с лучшими брендами сельхозтехники, которые регулярно поступают к нам из Турции.
+          {{ $t('HeaderSection.content') }} 
         </p>
       </div>
 

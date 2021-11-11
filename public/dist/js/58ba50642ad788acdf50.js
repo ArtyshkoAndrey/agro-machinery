@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[8],{8:(t,e,n)=>{n.r(e),n.d(e,{default:()=>i});const o={components:{Child:n(2643).Z},middleware:"guest",scrollToTop:!1,data:function(){return{title:window.config.appName}},mounted:function(){this.$root.$loading.finish()}};const i=(0,n(1900).Z)(o,(function(){var t=this.$createElement;return(this._self._c||t)("Child")}),[],!1,null,"3d384f3e",null).exports}}]);
+//# sourceMappingURL=58ba50642ad788acdf50.js.map

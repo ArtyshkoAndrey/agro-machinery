@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderSection/>
+    <HeaderSection />
   </div>
 </template>
 
@@ -10,7 +10,12 @@ export default {
   name: "Index",
   components: {
     HeaderSection
-  }
+  },
+  metaInfo() {
+    return {
+      title: 'Главная страница'
+    }
+  },
 }
 </script>
 

@@ -1,18 +1,15 @@
 <template>
-  <Child/>
+  <Child />
 </template>
 
 <script>
 import Child from "~/user/components/Child.vue";
 export default {
-  middleware: 'guest',
-  metaInfo() {
-    return {title: 'Главная страница'}
-  },
-  scrollToTop: false,
   components: {
     Child
   },
+  middleware: 'guest',
+  scrollToTop: false,
   data: () => ({
     title: window.config.appName,
   }),
