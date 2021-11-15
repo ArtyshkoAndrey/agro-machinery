@@ -7,12 +7,14 @@ import store from '~/user/store'
 import router from '~/user/router'
 import '~/user/components'
 import 'bootstrap'
+import Iconly from "vue-iconly";
 
 // eslint-disable-next-line no-extend-native
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1)
 }
 
+Vue.use(Iconly);
 Vue.use(Router)
 
 Vue.config.productionTip = false

@@ -16,4 +16,23 @@
   color: $color-dark;
 }
 
+.btn-rounded-angle {
+  border-radius: 8px 0;
+  padding: 9.5px 14.5px;
+
+  @include respond-to(md) {
+    border-radius: 16px 0;
+    padding: 13px 22px;
+  }
+
+  @include respond-to(lg) {
+    border-radius: 24px 0;
+    padding: 17.5px 27px;
+  }
+}
+.btn {
+  outline: none;
+  border: none;
+}
+
 @import 'index-page';
