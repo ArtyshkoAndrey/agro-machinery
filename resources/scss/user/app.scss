@@ -5,3 +5,15 @@
   --vs-scrollbar: #ffffff;
   --vs-scroll: #2c3034;
 }
+
+.color-gray {
+  color: $color-gray;
+}
+.color-orange {
+  color: $color-orange;
+}
+.color-dark {
+  color: $color-dark;
+}
+
+@import 'index-page';

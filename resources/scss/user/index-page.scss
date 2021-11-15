@@ -1,0 +1,49 @@
+@import "colors";
+@import "variables";
+
+#items-description {
+  color: $color-dark;
+  margin-top: 100px;
+
+  h3 {
+    color: $color-orange;
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 14px;
+
+    &.fw-bold {
+      font-size: 16px;
+    }
+  }
+
+  @include respond-to (sm) {
+    margin-top: 174px;
+
+    p {
+      font-size: 16px;
+
+      &.fw-bold {
+        font-size: 18px;
+      }
+    }
+  }
+
+  @include respond-to (lg) {
+    margin-top: 185px;
+
+    h3 {
+      font-size: 25px;
+    }
+    p {
+      font-size: 18px;
+
+      &.fw-bold {
+        font-size: 24px;
+      }
+    }
+  }
+
+
+}

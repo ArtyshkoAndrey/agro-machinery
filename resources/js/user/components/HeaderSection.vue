@@ -7,7 +7,7 @@
       </div>
       <div class="col-12 col-sm-10 col-md-9 col-lg-5">
         <p>
-          {{ $t('HeaderSection.content') }} 
+          {{ $t('HeaderSection.content') }}
         </p>
       </div>
 
