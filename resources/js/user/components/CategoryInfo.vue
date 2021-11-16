@@ -1,6 +1,6 @@
 <template>
   <div class="category-item row align-items-center" :class="$attrs.reverse === '' ? 'category-item-reverse' : null">
-    <div class="col-8 col-md-6 category-item_image">
+    <div class="col-8 col-md-6 col-lg-4 offset-lg-1 category-item_image">
       <div class="bg-gray">
         <div class="col-12 category-item_image_text">
           <span class="category-item_counter">
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="col-10 offset-2 col-md-6 offset-md-0 category-item_info">
+    <div class="col-10 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-1 category-item_info">
       <p class="category-item_info_title">
         Посев и посадка
       </p>

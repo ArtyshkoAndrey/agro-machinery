@@ -3,7 +3,7 @@ import store from '~/user/store'
 import Meta from 'vue-meta'
 import routes from './routes'
 import Router from 'vue-router'
-import { sync } from 'vuex-router-sync'
+import {sync} from 'vuex-router-sync'
 
 Vue.use(Meta)
 Vue.use(Router)
@@ -27,7 +27,7 @@ export default router
  *
  * @return {Router}
  */
-function createRouter () {
+function createRouter() {
   const router = new Router({
     scrollBehavior,
     mode: 'history',
@@ -47,13 +47,13 @@ function createRouter () {
  * @param {Route} from
  * @param {Function} next
  */
-async function beforeEach (to, from, next) {
+async function beforeEach(to, from, next) {
   let components = []
 
   try {
     // Get the matched components and resolve them.
     components = await resolveComponents(
-      router.getMatchedComponents({ ...to })
+      router.getMatchedComponents({...to})
     )
   } catch (error) {
     if (/^Loading( CSS)? chunk (\d)+ failed\./.test(error.message)) {
@@ -92,10 +92,10 @@ async function beforeEach (to, from, next) {
  * @param {Route} from
  * @param {Function} next
  */
-async function afterEach (to, from, next) {
+async function afterEach(to, from, next) {
   await router.app.$nextTick()
 
-  // router.app.$loading.finish()
+  router.app.$loading.finish()
 }
 
 /**
@@ -106,7 +106,7 @@ async function afterEach (to, from, next) {
  * @param {Route} from
  * @param {Function} next
  */
-function callMiddleware (middleware, to, from, next) {
+function callMiddleware(middleware, to, from, next) {
   const stack = middleware.reverse()
 
   const _next = (...args) => {
@@ -119,7 +119,7 @@ function callMiddleware (middleware, to, from, next) {
       return next(...args)
     }
 
-    const { middleware, params } = parseMiddleware(stack.pop())
+    const {middleware, params} = parseMiddleware(stack.pop())
 
     if (typeof middleware === 'function') {
       middleware(to, from, _next, params)
@@ -137,14 +137,14 @@ function callMiddleware (middleware, to, from, next) {
  * @param  {String|Function} middleware
  * @return {Object}
  */
-function parseMiddleware (middleware) {
+function parseMiddleware(middleware) {
   if (typeof middleware === 'function') {
-    return { middleware }
+    return {middleware}
   }
 
   const [name, params] = middleware.split(':')
 
-  return { middleware: name, params }
+  return {middleware: name, params}
 }
 
 /**
@@ -153,7 +153,7 @@ function parseMiddleware (middleware) {
  * @param  {Array} components
  * @return {Array}
  */
-function resolveComponents (components) {
+function resolveComponents(components) {
   return Promise.all(components.map(component => {
     return typeof component === 'function' ? component() : component
   }))
@@ -165,7 +165,7 @@ function resolveComponents (components) {
  * @param  {Array} components
  * @return {Array}
  */
-function getMiddleware (components) {
+function getMiddleware(components) {
   const middleware = [...globalMiddleware]
 
   components.filter(c => c.middleware).forEach(component => {
@@ -189,16 +189,16 @@ function getMiddleware (components) {
  * @param  {Object|undefined} savedPosition
  * @return {Object}
  */
-function scrollBehavior (to, from, savedPosition) {
+function scrollBehavior(to, from, savedPosition) {
   if (savedPosition) {
     return savedPosition
   }
 
   if (to.hash) {
-    return { selector: to.hash }
+    return {selector: to.hash}
   }
 
-  const [component] = router.getMatchedComponents({ ...to }).slice(-1)
+  const [component] = router.getMatchedComponents({...to}).slice(-1)
 
   if (component && component.scrollToTop === false) {
     return {}
@@ -206,7 +206,7 @@ function scrollBehavior (to, from, savedPosition) {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve({ x: 0, y: 0 })
+      resolve({x: 0, y: 0})
     }, 190)
   })
 }
@@ -215,12 +215,12 @@ function scrollBehavior (to, from, savedPosition) {
  * @param  {Object} requireContext
  * @return {Object}
  */
-function resolveMiddleware (requireContext) {
+function resolveMiddleware(requireContext) {
   return requireContext.keys()
     .map(file =>
       [file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file)]
     )
     .reduce((guards, [name, guard]) => (
-      { ...guards, [name]: guard.default }
+      {...guards, [name]: guard.default}
     ), {})
 }

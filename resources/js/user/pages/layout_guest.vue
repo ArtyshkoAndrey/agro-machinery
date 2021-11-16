@@ -14,7 +14,7 @@ export default {
     title: window.config.appName,
   }),
   mounted() {
-    this.$root.$loading.finish()
+
   }
 }
 </script>

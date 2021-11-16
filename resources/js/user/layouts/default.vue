@@ -5,16 +5,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Child from '~/user/components/Child.vue'
+import Child from '~/user/components/Child.vue';
+
 export default {
   name: 'Default',
   components: {
     Child
   },
   data: () => {
-    return {
-    }
+    return {}
   }
 }
 </script>
