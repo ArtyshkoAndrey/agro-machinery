@@ -11,7 +11,7 @@
         </p>
       </div>
 
-      <img class="tractor" src="/images/user/traktor-mobile.svg" alt="traktor">
+      <img class="tractor" src="public/images/user/traktor-mobile.png" alt="traktor">
     </div>
   </div>
 </template>

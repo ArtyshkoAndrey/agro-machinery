@@ -1,8 +1,8 @@
 <template>
-  <div class="category-item row">
-    <div class="col-8">
+  <div class="category-item row align-items-center" :class="$attrs.reverse === '' ? 'category-item-reverse' : null">
+    <div class="col-8 col-md-6 category-item_image">
       <div class="bg-gray">
-        <div class="col-12">
+        <div class="col-12 category-item_image_text">
           <span class="category-item_counter">
             28
           </span>
@@ -11,12 +11,13 @@
           </span>
         </div>
         <div class="col-12">
-          <img alt="track" src="public/images/user/track_1.png">
+          <img v-if="$attrs.reverse !== ''" alt="track" src="public/images/user/track_1.png">
+          <img v-else alt="track" src="public/images/user/track_2.png">
         </div>
       </div>
     </div>
 
-    <div class="col-10 offset-2 category-item_info">
+    <div class="col-10 offset-2 col-md-6 offset-md-0 category-item_info">
       <p class="category-item_info_title">
         Посев и посадка
       </p>

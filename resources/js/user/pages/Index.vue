@@ -23,6 +23,8 @@
 
     <section class="mt-5">
       <category-info />
+
+      <category-info reverse/>
     </section>
   </div>
 </template>
