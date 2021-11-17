@@ -37,19 +37,33 @@ class Kernel extends HttpKernel
    * @var array
    */
   protected $middleware = [
-    TrustProxies::class, HandleCors::class, PreventRequestsDuringMaintenance::class, ValidatePostSize::class, TrimStrings::class, ConvertEmptyStringsToNull::class, SetLocale::class];
+    TrustProxies::class,
+    HandleCors::class,
+    PreventRequestsDuringMaintenance::class,
+    ValidatePostSize::class,
+    TrimStrings::class,
+    ConvertEmptyStringsToNull::class,
+    SetLocale::class
+  ];
 
   /**
    * The application's route middleware groups.
    *
    * @var array
    */
-  protected $middlewareGroups = ['web' => [EncryptCookies::class, AddQueuedCookiesToResponse::class, StartSession::class,
-    ShareErrorsFromSession::class, VerifyCsrfToken::class, SubstituteBindings::class,],
+  protected $middlewareGroups = [
+    'web' => [
+      EncryptCookies::class,
+      AddQueuedCookiesToResponse::class,
+      StartSession::class,
+      ShareErrorsFromSession::class,
+      VerifyCsrfToken::class,
+      SubstituteBindings::class
+    ],
 
     'api' => [
       'throttle:api', SubstituteBindings::class,
-    ]
+    ],
   ];
 
   /**
@@ -59,5 +73,15 @@ class Kernel extends HttpKernel
    *
    * @var array
    */
-  protected $routeMiddleware = ['auth' => Authenticate::class, 'auth.basic' => AuthenticateWithBasicAuth::class, 'cache.headers' => SetCacheHeaders::class, 'can' => Authorize::class, 'guest' => RedirectIfAuthenticated::class, 'password.confirm' => RequirePassword::class, 'signed' => ValidateSignature::class, 'throttle' => ThrottleRequests::class, 'verified' => EnsureEmailIsVerified::class,];
+  protected $routeMiddleware = [
+    'auth' => Authenticate::class,
+    'auth.basic' => AuthenticateWithBasicAuth::class,
+    'cache.headers' => SetCacheHeaders::class,
+    'can' => Authorize::class,
+    'guest' => RedirectIfAuthenticated::class,
+    'password.confirm' => RequirePassword::class,
+    'signed' => ValidateSignature::class,
+    'throttle' => ThrottleRequests::class,
+    'verified' => EnsureEmailIsVerified::class
+  ];
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Users\CategoryController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
@@ -17,7 +18,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => 'auth:api'], function () {
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
   Route::post('logout', [LoginController::class, 'logout']);
 
   Route::get('user', [UserController::class, 'current']);
@@ -26,9 +28,14 @@ Route::group(['middleware' => 'auth:api'], function () {
     'users' => App\Http\Controllers\Auth\Dashboard\UserController::class,
   ]);
 });
+
 Route::group(['middleware' => 'guest:api'], function () {
   Route::post('login', [LoginController::class, 'login']);
 
   Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
   Route::post('password/reset', [ResetPasswordController::class, 'reset']);
+});
+
+Route::group(['prefix' => 'users'], function () {
+  Route::get('categories', [CategoryController::class, 'get']);
 });

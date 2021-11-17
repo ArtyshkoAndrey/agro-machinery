@@ -1,5 +1,5 @@
 <template>
-  <div class="category-item row align-items-center" :class="$attrs.reverse === '' ? 'category-item-reverse' : null">
+  <div class="category-item row align-items-center" :class="reverse ? 'category-item-reverse' : null">
     <div class="col-8 col-md-6 col-lg-4 offset-lg-1 category-item_image">
       <div class="bg-gray">
         <div class="col-12 category-item_image_text">
@@ -7,26 +7,24 @@
             28
           </span>
           <span class="category-item_title">
-            Позиций
+            {{ $t('index.category-item.count') }}
           </span>
         </div>
         <div class="col-12">
-          <img v-if="$attrs.reverse !== ''" alt="track" src="public/images/user/track_1.png">
-          <img v-else alt="track" src="public/images/user/track_2.png">
+          <img alt="track" :src="category.image">
         </div>
       </div>
     </div>
 
     <div class="col-10 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-1 category-item_info">
       <p class="category-item_info_title">
-        Посев и посадка
+        {{ category.name }}
       </p>
       <p>
-        Плуги и другие виды сельскохозяйственной техники изготавливаются на современных заводах с преимущественным
-        использованием роботизированной техники!
+        {{ category.description }}
       </p>
       <Button orange rounded_angle arrow>
-        Каталог
+        {{ $t('button.catalog') }}
       </Button>
     </div>
   </div>
@@ -38,6 +36,16 @@ export default {
   name: "CategoryInfo",
   components: {
     Button
+  },
+  props: {
+    category: {
+      type: Object,
+      required: true,
+    },
+    reverse: {
+      default: false,
+      type: Boolean
+    }
   }
 }
 </script>
