@@ -25,8 +25,42 @@
 
         <section class="mt-5">
           <category-info v-for="(category, i) in categories" :key="category.id" :category="category" :reverse="(i + 1) % 2 === 0" />
+        </section>
 
-<!--          <category-info reverse />-->
+        <section id="perfectly-list" class="mt-5">
+          <div class="row">
+            <div class="col-12 col-lg-4">
+              <div class="row">
+                <div class="col-12 col-md-6                                                                         col-lg-12">
+                  <h3>Работаем на качество, а не на количество</h3>
+                </div>
+                <div class="col-12 col-md-6 col-lg-12 offset-lg-0">
+                  <p>Обратившсть в Agromachinery мы вам гарантируем:</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <ul class="list-unstyled">
+                <li>Постгарантийную поддержку</li>
+                <li>Прозрачность всей сделки на всех её этапах</li>
+                <li>Комфорт и положительные эмоции от работы с нашей компанией.</li>
+              </ul>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <ul class="list-unstyled">
+                <li>Внятную ценовую политику нашей компании и соблюдение установленных сроков исполнения контракта.</li>
+                <li>Профессиональные консультации</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="new-products">
+          <div class="row">
+            <div class="col-lg-3">
+              <product />
+            </div>
+          </div>
         </section>
       </div>
     </transition>
@@ -37,13 +71,15 @@
 import HeaderSection from "~/user/components/HeaderSection";
 import CategoryInfo from "~/user/components/CategoryInfo";
 import Spinner from '~/user/components/Spinner';
+import Product from '~/user/components/Product';
 import axios from "axios";
 export default {
   name: "Index",
   components: {
     HeaderSection,
     CategoryInfo,
-    Spinner
+    Spinner,
+    Product
   },
   metaInfo() {
     return {

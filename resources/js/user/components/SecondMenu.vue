@@ -3,14 +3,41 @@
     <div class="container">
       <div id="navbarTogglerDemo02" class="collapse navbar-collapse">
         <ul class="navbar-nav">
+
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link class="nav-link" to="#">
+              Главная
+            </router-link>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <router-link class="nav-link" to="#">
+              О нас
+            </router-link>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <router-link class="nav-link" to="#">
+              Каталог
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link class="nav-link" to="#">
+              Производители
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link class="nav-link" to="#">
+              Новости
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link class="nav-link" to="#">
+              Контакты
+            </router-link>
           </li>
         </ul>
       </div>
@@ -24,6 +51,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import 'resources/scss/user/_colors.scss';
 
+  li {
+    a.nav-link {
+      color: $color-dark !important;
+      opacity: 1;
+
+      &:hover {
+        color: $color-dark !important;
+      }
+    }
+  }
 </style>

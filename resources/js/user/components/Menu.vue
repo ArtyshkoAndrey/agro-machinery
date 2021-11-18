@@ -11,13 +11,13 @@
           <div class="col-auto brand-info">
             <div class="row">
               <div class="col-auto">
-                <span class="brand-info-title">Пн - Сб  9:00 - 18:00</span>
+                <span class="brand-info-title">{{ $t('Menu.date') }}</span>
 
-                <span class="brand-info-description">Воскрессенье - выходной</span>
+                <span class="brand-info-description">{{ $t('Menu.weekend') }}</span>
               </div>
               <div class="col-auto">
                 <a class="brand-info-title" href="tel:+7 (705) 764-44-44">+7 (705) 764-44-44</a>
-                <span class="brand-info-description">г. Алматы, Кульжинский тракт, 9к</span>
+                <span class="brand-info-description">{{ $t('Menu.place') }}</span>
               </div>
             </div>
           </div>

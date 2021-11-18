@@ -5,6 +5,11 @@
     "title": "AGRO MACHINERY",
     "content": "Our company, engaged in the sale of agricultural machinery in Almaty, Kazakhstan, exists in order to introduce you to the best brands of agricultural machinery that regularly come to us from Turkey."
   },
+  "Menu": {
+    "date": "Mon - Sat 9:00 - 18:00",
+    "weekend": "Sunday is a day off",
+    "place": "Almaty, Kulzhinsky tract, 9 k"
+  },
   "index": {
     "section_2": {
       "title": "Products",

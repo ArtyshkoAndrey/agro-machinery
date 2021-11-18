@@ -181,3 +181,71 @@
 
   }
 }
+
+#perfectly-list {
+  h3 {
+    color: $color-dark;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+  }
+
+  p {
+    color: $color-gray;
+    font-size: 14px;
+    line-height: 16.5px;
+  }
+
+  ul {
+    //list-style-image: url('/public/images/user/mini-logo-list.png') !important;
+    li {
+      font-size: 14px;
+      line-height: 17px;
+      color: $color-dark;
+      min-height: 55px;
+      padding: 0 0 0 75px;
+      list-style: none;
+      background-image: url("/public/images/user/mini-logo-list.png");
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-size: 55px;
+
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @include respond-to(md) {
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 21px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 19px;
+    }
+
+    ul {
+      //list-style-image: url('/public/images/user/mini-logo-list.png') !important;
+      li {
+        font-size: 16px;
+        line-height: 18.96px;
+      }
+    }
+  }
+
+  @include respond-to(lg) {
+    h3 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 38px
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 21px;
+    }
+  }
+}
