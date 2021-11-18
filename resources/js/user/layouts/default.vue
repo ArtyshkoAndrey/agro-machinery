@@ -1,7 +1,7 @@
 <template>
   <div>
     <Menu />
-    <main class="container" style="margin-top: 70px">
+    <main class="container" style="margin-top: 206px">
       <Child />
     </main>
   </div>
