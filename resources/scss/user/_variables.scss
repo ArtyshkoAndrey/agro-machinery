@@ -9,10 +9,12 @@ $container-max-widths: (
 $grid-breakpoints: (
         xs: 0,
         sm: 576px,
-        md: 768px,
+        md: 767px,
         lg: 1200px,
         xl: 1365px,
 );
+
+$font-family-base: 'Rubik', sans-serif;
 
 /// Mixin to manage responsive breakpoints
 /// @author Fulliton

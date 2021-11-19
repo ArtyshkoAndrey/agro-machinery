@@ -32,6 +32,13 @@
       </div>
     </div>
     <SecondMenu />
+    <div id="hr-section-menu-mobile" class="container bg-white">
+      <div class="row">
+        <div class="col-12">
+          <hr class="m-0 p-0">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,6 +66,14 @@ export default {
 
     @include respond-to(md) {
       display: block;
+    }
+  }
+
+  #hr-section-menu-mobile {
+    display: block;
+
+    @include respond-to(md) {
+      display: none;
     }
   }
 

@@ -1,5 +1,7 @@
+//@import "font";
 @import "variables";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
   --vs-scrollbar: #ffffff;
@@ -35,35 +37,6 @@
 }
 .color-dark {
   color: $color-dark;
-}
-
-.btn-rounded-angle {
-  border-radius: 8px 0;
-  padding: 9.5px 14.5px;
-
-  @include respond-to(md) {
-    border-radius: 16px 0;
-    padding: 13px 22px;
-  }
-
-  @include respond-to(lg) {
-    border-radius: 24px 0;
-    padding: 17.5px 27px;
-  }
-}
-.btn {
-  outline: none;
-  border: none;
-
-  font-size: 14px;
-
-  @include respond-to(md) {
-    font-size: 16px;
-  }
-
-  @include respond-to(lg) {
-    font-size: 18px;
-  }
 }
 
 @import 'index-page';

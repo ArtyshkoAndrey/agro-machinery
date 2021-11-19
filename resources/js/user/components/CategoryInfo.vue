@@ -23,7 +23,7 @@
       <p>
         {{ category.description }}
       </p>
-      <Button orange rounded_angle arrow>
+      <Button orange rounded_angle arrow big>
         {{ $t('button.catalog') }}
       </Button>
     </div>

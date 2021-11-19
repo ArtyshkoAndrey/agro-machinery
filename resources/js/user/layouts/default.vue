@@ -1,7 +1,7 @@
 <template>
   <div>
     <Menu />
-    <main class="container" style="margin-top: 206px">
+    <main class="container">
       <Child />
     </main>
   </div>
@@ -22,5 +22,17 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "resources/scss/user/variables";
+  main {
+    margin-top: 80px;
+
+    @include respond-to(md) {
+      margin-top: 220px;
+    }
+
+    @include respond-to(lg) {
+      margin-top: 250px;
+    }
+  }
 </style>

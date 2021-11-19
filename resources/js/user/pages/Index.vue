@@ -55,9 +55,9 @@
           </div>
         </section>
 
-        <section id="new-products">
-          <div class="row">
-            <div class="col-lg-3">
+        <section id="new-products" class="mb-5">
+          <div class="row gx-1 gx-md-5 gx-lg-3 gy-2 gy-md-4">
+            <div v-for="i in 8" :key="i" class="col-6 col-md-6 col-lg-3">
               <product />
             </div>
           </div>
