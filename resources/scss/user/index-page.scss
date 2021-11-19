@@ -270,6 +270,10 @@
       font-size: 16px;
       line-height: 19px;
 
+      span:first-child {
+        word-wrap: normal;
+      }
+
       span.badge {
         color: $color-dark;
         background-color: $color-orange;

@@ -32,24 +32,24 @@
             <div class="col-12 col-lg-4">
               <div class="row">
                 <div class="col-12 col-md-6                                                                         col-lg-12">
-                  <h3>Работаем на качество, а не на количество</h3>
+                  <h3>{{ $t('index.perfectly-list.title') }}</h3>
                 </div>
                 <div class="col-12 col-md-6 col-lg-12 offset-lg-0">
-                  <p>Обратившсть в Agromachinery мы вам гарантируем:</p>
+                  <p>{{ $t('index.perfectly-list.description') }}</p>
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
               <ul class="list-unstyled">
-                <li>Постгарантийную поддержку</li>
-                <li>Прозрачность всей сделки на всех её этапах</li>
-                <li>Комфорт и положительные эмоции от работы с нашей компанией.</li>
+                <li>{{ $t('index.perfectly-list.list.0') }}</li>
+                <li>{{ $t('index.perfectly-list.list.1') }}</li>
+                <li>{{ $t('index.perfectly-list.list.2') }}</li>
               </ul>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
               <ul class="list-unstyled">
-                <li>Внятную ценовую политику нашей компании и соблюдение установленных сроков исполнения контракта.</li>
-                <li>Профессиональные консультации</li>
+                <li>{{ $t('index.perfectly-list.list.3') }}</li>
+                <li>{{ $t('index.perfectly-list.list.4') }}</li>
               </ul>
             </div>
           </div>
@@ -60,10 +60,10 @@
             <div class="col-6 col-md-6 col-lg-4 col-xl-3">
               <div class="card card-for-info-products">
                 <h4>
-                  Новое <span class="badge text-uppercase">New</span>
+                  <span>{{ $t('index.new-products.title') }}</span> <span class="badge text-uppercase">New</span>
                 </h4>
                 <p>
-                  Мы постоянно обновляем катлог нашей продукции и всегда поставляем только актуальную технику и продукцию
+                  {{ $t('index.new-products.description') }}
                 </p>
 
                 <Button class="mt-auto" orange rounded_angle arrow big>
@@ -88,10 +88,10 @@
             <div class="col-6 col-md-6 col-lg-4 col-xl-3">
               <div class="card card-for-info-products">
                 <h4>
-                  Популярное
+                  {{ $t('index.popular-products.title') }}
                 </h4>
                 <p>
-                  Мы постоянно обновляем катлог нашей продукции и всегда поставляем только актуальную технику и продукцию
+                  {{ $t('index.popular-products.description') }}
                 </p>
 
                 <Button class="mt-auto" orange rounded_angle arrow big>

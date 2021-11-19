@@ -18,9 +18,32 @@
     },
     "category-item": {
       "count": "Positions"
+    },
+    "perfectly-list": {
+      "title": "We work for quality, not quantity",
+      "description": "By contacting Agromachinery we guarantee you:",
+      "list": [
+        "Post-warranty support",
+        "Transparency of the entire transaction at all its stages",
+        "Comfort and positive emotions from working with our company",
+        "Clear pricing policy of our company and compliance with the established deadlines for the execution of the contract.",
+        "Professional advice"
+      ]
+    },
+    "new-products": {
+      "title": "New",
+      "description": "We are constantly updating our product catalog and always supply only the latest equipment and products"
+    },
+    "popular-products": {
+      "title": "Popular",
+      "description": "We are constantly updating our product catalog and always supply only the latest equipment and products"
     }
   },
   "button": {
-    "catalog": "Catalog"
+    "catalog": "Catalog",
+    "more": "More"
+  },
+  "Product": {
+    "prefix-cost": "at"
   }
 }

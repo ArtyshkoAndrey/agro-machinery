@@ -15,12 +15,12 @@
           <div class="row">
             <div class="col-12 col-md">
               <span class="product-card-info-cost">
-                от 10 000 000 ₸
+                {{ $t('Product.prefix-cost') }} 10 000 000 ₸
               </span>
             </div>
             <div class=" col-12 col-md-auto">
               <Button dark rounded small hover="orange" class="w-100">
-                Подробнее
+                {{ $t('button.more') }}
               </Button>
             </div>
           </div>
