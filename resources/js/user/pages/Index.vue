@@ -55,9 +55,52 @@
           </div>
         </section>
 
-        <section id="new-products" class="mb-5">
+        <section id="new-products" class="mt-5 mb-3 list-products">
           <div class="row gx-1 gx-md-5 gx-lg-3 gy-2 gy-md-4">
-            <div v-for="i in 8" :key="i" class="col-6 col-md-6 col-lg-3">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3">
+              <div class="card card-for-info-products">
+                <h4>
+                  Новое <span class="badge text-uppercase">New</span>
+                </h4>
+                <p>
+                  Мы постоянно обновляем катлог нашей продукции и всегда поставляем только актуальную технику и продукцию
+                </p>
+
+                <Button class="mt-auto" orange rounded_angle arrow big>
+                  {{ $t('button.catalog') }}
+                </Button>
+              </div>
+            </div>
+
+            <div v-for="i in 7" :key="i" class="col-6 col-md-6 col-lg-4 col-xl-3">
+              <product />
+            </div>
+          </div>
+        </section>
+
+        <section>
+
+        </section>
+
+
+        <section id="popular-products" class="mt-5 mb-3 list-products">
+          <div class="row gx-1 gx-md-5 gx-lg-3 gy-2 gy-md-4">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3">
+              <div class="card card-for-info-products">
+                <h4>
+                  Популярное
+                </h4>
+                <p>
+                  Мы постоянно обновляем катлог нашей продукции и всегда поставляем только актуальную технику и продукцию
+                </p>
+
+                <Button class="mt-auto" orange rounded_angle arrow big>
+                  {{ $t('button.catalog') }}
+                </Button>
+              </div>
+            </div>
+
+            <div v-for="i in 7" :key="i" class="col-6 col-md-6 col-lg-4 col-xl-3">
               <product />
             </div>
           </div>
@@ -68,10 +111,11 @@
 </template>
 
 <script>
-import HeaderSection from "~/user/components/HeaderSection";
-import CategoryInfo from "~/user/components/CategoryInfo";
+import HeaderSection from '~/user/components/HeaderSection';
+import CategoryInfo from '~/user/components/CategoryInfo';
 import Spinner from '~/user/components/Spinner';
 import Product from '~/user/components/Product';
+import Button from '~/user/components/Button';
 import axios from "axios";
 export default {
   name: "Index",
@@ -79,7 +123,8 @@ export default {
     HeaderSection,
     CategoryInfo,
     Spinner,
-    Product
+    Product,
+    Button
   },
   metaInfo() {
     return {

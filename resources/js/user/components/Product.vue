@@ -1,5 +1,6 @@
 <template>
   <div class="card product-card">
+    <span class="badge">Посев и посадка </span>
     <div class="product-card-image">
       <img src="public/images/user/test_product.png" alt="product">
     </div>
@@ -18,7 +19,7 @@
               </span>
             </div>
             <div class=" col-12 col-md-auto">
-              <Button dark rounded small class="w-100">
+              <Button dark rounded small hover="orange" class="w-100">
                 Подробнее
               </Button>
             </div>
@@ -43,28 +44,62 @@ export default {
 <style lang="scss" scoped>
 @import "resources/scss/user/variables";
 .product-card {
+  height: 100%;
   margin: 0;
   padding: 0;
   border: 1px solid #DEDEDE;
   border-radius: 12px;
   background: #ffffff;
+  transition: .25s box-shadow, .3s border-color;
+  position: relative;
+
+  &:hover {
+    box-shadow: -1px 12px 14px #D3D4DA;
+    border-color: transparent;
+  }
+
+  .badge {
+    position: absolute;
+    background-color: $color-orange;
+    color: $color-dark;
+    font-weight: 400;
+
+    border-radius: 4px;
+    padding: 2px 4px;
+    top: 8px;
+    right: 8px;
+    font-size: 10px;
+    line-height: 12px;
+  }
 
   .product-card-image {
     background: #ffffff;
     padding: 0;
+    margin: 0;
     height: 114px;
     border-radius: 12px 12px 0 0;
 
     img {
+      padding: 0;
+      margin: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      border-radius: inherit;
+      border-radius: 12px 12px 0 0;
     }
   }
 
   @include respond-to(md) {
+    .badge {
+      top: 15px;
+      right: 17px;
+      border-radius: 8px;
+      font-size: 18px;
+      line-height: 21px;
+      padding: 4px 8px;
+    }
+
     .product-card-image {
       height: 225px;
     }

@@ -4,8 +4,9 @@
             ($attrs.rounded === '' ? 'btn-rounded ' : '') +
             ($attrs.orange === '' ? 'btn-orange ' : '') +
             ($attrs.dark === '' ? 'btn-dark ' : '') +
-            ($attrs.big === '' ? 'btn-bid ' : '') +
-            ($attrs.small === '' ? 'btn-small ' : '')"
+            ($attrs.big === '' ? 'btn-big ' : '') +
+            ($attrs.small === '' ? 'btn-small ' : '') +
+            ($attrs.hover === 'orange' ? 'btn-hover-orange' : '') "
 
           @click="redirect"
   >
@@ -56,6 +57,16 @@ export default {
   }
 }
 
+.btn-orange {
+  background-color: $color-orange!important;
+  color: $color-dark!important;
+}
+
+.btn-dark {
+  background-color: $color-dark!important;
+  color: #ffffff!important;
+}
+
 .btn {
   outline: none;
   border: none;
@@ -83,15 +94,14 @@ export default {
       font-size: 16px;
     }
   }
-}
 
-.btn-orange {
-  background-color: $color-orange!important;
-  color: $color-dark!important;
-}
+  &.btn-hover-orange {
+    transition: .5s background-color, .4s color;
 
-.btn-dark {
-  background-color: $color-dark!important;
-  color: #ffffff!important;
+    &:hover {
+      background-color: $color-orange!important;
+      color: $color-dark !important;
+    }
+  }
 }
 </style>
