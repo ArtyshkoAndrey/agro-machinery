@@ -10,8 +10,6 @@
   "require": {
     "php": "^7.4",
     "astrotomic/laravel-translatable": "^11.9",
-    "barryvdh/laravel-dompdf": "^0.9.0",
-    "codedge/laravel-fpdf": "^1.8",
     "doctrine/dbal": "^3.1",
     "fideloper/proxy": "^4.4",
     "fruitcake/laravel-cors": "^2.0",
@@ -22,11 +20,13 @@
     "laravel/socialite": "^5.0",
     "laravel/tinker": "^2.5",
     "laravel/ui": "^3.3",
-    "tymon/jwt-auth": "^1.0.1"
+    "tymon/jwt-auth": "^1.0.1",
+    "league/glide-laravel": "^1.0",
+    "intervention/image": "^2.5"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.9",
-    "roave/security-advisories": "dev-latest",
+    "roave/security-advisories":  "dev-latest",
     "facade/ignition": "^2.5",
     "fakerphp/faker": "^1.9.1",
     "laravel/sail": "^1.10",

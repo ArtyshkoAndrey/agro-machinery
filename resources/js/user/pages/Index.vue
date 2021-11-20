@@ -56,8 +56,8 @@
         </section>
 
         <section id="new-products" class="mt-5 mb-3 list-products">
-          <div class="row gx-1 gx-md-5 gx-lg-3 gy-2 gy-md-4">
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3">
+          <div class="row gx-1 gx-sm-2 gx-md-5 gx-lg-3 gy-2 gy-md-4">
+            <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
               <div class="card card-for-info-products">
                 <h4>
                   <span>{{ $t('index.new-products.title') }}</span> <span class="badge text-uppercase">New</span>
@@ -72,7 +72,7 @@
               </div>
             </div>
 
-            <div v-for="i in 7" :key="i" class="col-6 col-md-6 col-lg-4 col-xl-3">
+            <div v-for="i in 7" :key="i" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
               <product />
             </div>
           </div>
@@ -84,8 +84,8 @@
 
 
         <section id="popular-products" class="mt-5 mb-3 list-products">
-          <div class="row gx-1 gx-md-5 gx-lg-3 gy-2 gy-md-4">
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3">
+          <div class="row gx-1 gx-sm-2 gx-md-5 gx-lg-3 gy-2 gy-md-4">
+            <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
               <div class="card card-for-info-products">
                 <h4>
                   {{ $t('index.popular-products.title') }}
@@ -100,7 +100,7 @@
               </div>
             </div>
 
-            <div v-for="i in 7" :key="i" class="col-6 col-md-6 col-lg-4 col-xl-3">
+            <div v-for="i in 7" :key="i" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
               <product />
             </div>
           </div>

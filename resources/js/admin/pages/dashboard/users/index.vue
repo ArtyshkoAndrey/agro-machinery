@@ -32,6 +32,7 @@
 </template>
 
 <script>
+
 import axios from 'axios'
 import Loader from '~/admin/components/Loader.vue'
 import HeaderFilterInfo from '~/admin/components/HeaderFilterInfo.vue'
@@ -40,6 +41,7 @@ import EditItemsModal from "~/admin/components/EditItemsModal";
 import Vue from "vue";
 import i18n from "~/admin/plugins/i18n";
 import {mapGetters} from "vuex";
+
 export default {
   name: 'Index',
   components: {
@@ -70,7 +72,7 @@ export default {
     await this.busCreateUser.$on('save', this.store)
 
     await this.$root.$loading.set(50)
-    await axios.get('/api/users', {
+    await axios.get('/api/admin/users', {
       params: {
         per_page: this.viewLength,
       }
@@ -94,7 +96,7 @@ export default {
      * @param {string} settings.search
      */
     get (settings) {
-      axios.get('/api/users', {
+      axios.get('/api/admin/users', {
         params: {
           per_page: this.viewLength,
           page: settings.page,
@@ -190,7 +192,7 @@ export default {
      */
     update (params) {
 
-      axios.put('/api/users/' + params.id, {
+      axios.put('/api/admin/users/' + params.id, {
         name: params.name,
         email: params.email,
         password: params.password
@@ -226,7 +228,7 @@ export default {
      * @var {string} params.name
      */
     store (params) {
-      axios.post('/api/users/', {
+      axios.post('/api/admin/users/', {
         name: params.name,
         email: params.email,
         password: params.password

@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
 
   Route::apiResources([
     'users' => App\Http\Controllers\Auth\Dashboard\UserController::class,
+    'products' => App\Http\Controllers\Auth\Dashboard\ProductController::class,
   ]);
 });
 

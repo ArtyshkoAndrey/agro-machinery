@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Support\Carbon;
+use App\Traits\Models\HasImage;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,11 +42,14 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @method static Builder|Category whereUpdatedAt($value)
  * @method static Builder|Category withTranslation()
  * @mixin Eloquent
+ * @property-read Collection|Image[] $images
+ * @property-read int|null           $images_count
  */
 class Category extends Model implements TranslatableContract
 {
   use HasFactory;
   use Translatable;
+  use HasImage;
 
   public array $translatedAttributes = [
     'name',

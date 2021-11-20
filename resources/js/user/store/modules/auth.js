@@ -69,11 +69,5 @@ export const actions = {
     } catch (e) { }
 
     commit(types.LOGOUT)
-  },
-
-  async fetchOauthUrl (ctx, { provider }) {
-    const { data } = await axios.post(`/api/oauth/${provider}`)
-
-    return data.url
   }
 }

@@ -2,7 +2,7 @@
   <div class="card product-card">
     <span class="badge">Посев и посадка </span>
     <div class="product-card-image">
-      <img src="public/images/user/test_product.png" alt="product">
+      <img src="image/image/test_product.png?w=300&h=auto3&fit=crop&fm=webp" alt="product">
     </div>
     <div class="product-card-info">
       <div class="row">

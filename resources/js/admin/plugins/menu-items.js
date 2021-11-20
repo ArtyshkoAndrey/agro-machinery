@@ -19,103 +19,25 @@ class Item {
 }
 
 const items = new Items()
-items.add(
-  'menu.invoice.title',
-  'dashboard.invoice.index',
-  '/invoice/index',
-  {
-    type: 'solid',
-    name: 'home'
-  }
-)
-
-items.add(
-  'menu.resorts.title',
-  'dashboard.resorts.index',
-  '/resorts/index',
-  {
-    type: 'regular',
-    name: 'home-circle'
-  }
-)
-items.add(
-  'menu.airports.title',
-  'dashboard.airports.index',
-  '/airports/index',
-  {
-    type: 'solid',
-    name: 'plane-alt'
-  }
-)
-
-items.add(
-  'menu.hotels.title',
-  'dashboard.hotels.index',
-  '/hotels/index',
-  {
-    type: 'solid',
-    name: 'building-house'
-  }
-)
-
-items.add(
-  'menu.room_types.title',
-  'dashboard.room_types.index',
-  '/room_types/index',
-  {
-    type: 'regular',
-    name: 'hotel'
-  }
-)
-
-items.add(
-  'menu.companies.title',
-  'dashboard.companies.index',
-  '/companies/index',
-  {
-    type: 'regular',
-    name: 'diamond'
-  }
-)
-
-items.add(
-  'menu.samples.title',
-  'dashboard.samples.index',
-  '/samples/index',
-  {
-    type: 'solid',
-    name: 'compass'
-  }
-)
-
-items.add(
-  'menu.transports.title',
-  'dashboard.transports.index',
-  '/transports/index',
-  {
-    type: 'solid',
-    name: 'car'
-  }
-)
 
 items.add(
   'menu.users.title',
   'dashboard.users.index',
-  '/users/index',
+  '/admin/users/index',
   {
     type: 'solid',
     name: 'user'
   }
 )
 
-// items.add(
-//   'Создать',
-//   'create',
-//   '/create',
-//   {
-//     type: 'solid',
-//     name: 'plus-square'
-//   }
-// )
+items.add(
+  'menu.products.title',
+  'dashboard.products.index',
+  '/admin/products/index',
+  {
+    type: 'solid',
+    name: 'user'
+  }
+)
 
 export default items

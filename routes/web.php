@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Spa\SpaController;
 
 /*
@@ -13,10 +14,9 @@ use App\Http\Controllers\Spa\SpaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/image/{path}', [ImageController::class, 'show'])->where('path', '.*');
 Route::get('/admin', [SpaController::class, 'admin']);
 Route::group(['prefix' => 'admin'], function () {
-//  Route::get('/', [SpaController::class, 'admin']);
   Route::get('{path}', [SpaController::class, 'admin'])->where('path', '(.*)')->name('admin');
 });
 Route::get('{path}', [SpaController::class, 'index'])->where('path', '(.*)')->name('index');
