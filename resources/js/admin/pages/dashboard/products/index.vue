@@ -16,7 +16,9 @@
       <div v-for="item in products.data" :key="item.id" class="col-12">
         <ItemCardOneField :item="item"
                           :fields="inputs"
-                          @update="update"
+                          :hideUpdate="true"
+                          title-router
+                          @title-route="redirectEdit(item.id)"
                           @destroy="deleteItem"
         />
       </div>
@@ -155,12 +157,12 @@ export default {
 
     },
 
-    update () {
-
+    redirectEdit (id) {
+      this.$router.push({name: 'dashboard.products.edit', params: { id: id } })
     },
 
     redirectStore () {
-
+      this.$router.push({name: 'dashboard.products.store'})
     }
   }
 }

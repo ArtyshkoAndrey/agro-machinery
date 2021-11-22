@@ -33,6 +33,12 @@ export default [
           {path: '', redirect: {name: 'dashboard.products.index'}},
           {
             path: 'index', name: 'dashboard.products.index', component: page('dashboard/products/index.vue')
+          },
+          {
+            path: 'store', name: 'dashboard.products.store', component: page('dashboard/products/store.vue')
+          },
+          {
+            path: 'edit/:id', name: 'dashboard.products.edit', component: page('dashboard/products/edit.vue')
           }
         ]
       },

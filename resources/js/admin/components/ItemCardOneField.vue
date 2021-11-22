@@ -19,7 +19,7 @@
 
           <div class="col-auto ms-auto">
             <div class="row gx-0">
-              <div class="col">
+              <div v-if="hideUpdate === false" class="col">
                 <vs-button
                   icon
                   circle
@@ -67,6 +67,10 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    hideUpdate: {
+      type: Boolean,
+      default: false
     },
     fields: {
       type: Array,

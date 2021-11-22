@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
 /**
@@ -84,5 +85,10 @@ class Product extends Model implements TranslatableContract
   public function category(): BelongsTo
   {
     return $this->belongsTo(Category::class, 'category_id', 'id');
+  }
+
+  public function suitable (): BelongsToMany
+  {
+    return $this->belongsToMany(self::class, 'suitable_products', 'product_id', 'suite_id');
   }
 }

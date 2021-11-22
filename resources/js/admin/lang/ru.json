@@ -7,39 +7,17 @@
     },
     "loading": "Загрузка..."
   },
+
   "comment_menu": "Items in menu",
   "menu": {
-    "invoice": {
-      "title": "Заявки"
-    },
-    "resorts": {
-      "title": "Курорты"
-    },
-    "airports": {
-      "title": "Аэропорты"
-    },
-    "hotels": {
-      "title": "Отели"
-    },
-    "room_types": {
-      "title": "Типы комнат"
-    },
-    "companies": {
-      "title": "Компании"
-    },
-    "samples": {
-      "title": "Шаблоны"
-    },
-    "project": {
-      "name": "Название компании"
-    },
-    "transports": {
-      "title": "Транспорт"
+    "products": {
+      "title": "Товары"
     },
     "users": {
       "title": "Пользователи"
     }
   },
+
   "comment_header_filter": "Header Filter components",
   "header_filter": {
     "length_label": "Показать по",
@@ -47,181 +25,7 @@
     "create_button": "Создать",
     "search_placeholder": "Поиск"
   },
-  "comment_invoice": "Invoice pages",
-  "invoice": {
-    "history": "История",
-    "index": {
-      "title": "Список заявок",
-      "filter_title": "Заявки",
-      "table": {
-        "titles": {
-          "company": "Компания",
-          "client": "Клиент",
-          "transfer": "Трансфер"
-        },
-        "arrival_time": "Прибытие",
-        "departure_time": "Отбытие"
-      }
-    },
-    "show": {
-      "title": {
-        "info_client": "Информация о клиенте",
-        "info_hotels": "Данные отеля",
-        "info_hotel": "Данные отелей",
-        "hotline": "Хотлайн",
-        "cost": "Цена",
-        "transfer": "Трансфер",
-        "schedule": "Расписание"
-      },
-      "hotel": "Отель",
-      "room": "Комната",
-      "count": "Кол-во",
-      "adults": "Взрослые",
-      "children": "Дети",
-      "check_in": "Чек ин",
-      "check_out": "Чек аут",
-      "number_booking": "Номер брони",
-      "transport": "Транспорт",
-      "from": "Откуда",
-      "where": "Куда",
-      "count_sits": "Кол-во мест",
-      "arrival_time": "Время прилёта",
-      "departure_time": "Время отлёта",
-      "flight_code": "Код рейса",
-      "gid": "Гид",
-      "day": "День"
-    },
-    "create": {
-      "words": {
-        "step": "Шаг",
-        "in": "из"
-      },
-      "step_1": {
-        "title": "Компания"
-      },
-      "step_2": {
-        "title": "Данные пользователя"
-      },
-      "step_3": {
-        "title": "Данные отелей",
-        "date_title": "Время проживания"
-      },
-      "step_4": {
-        "title": "Трансфер"
-      },
-      "step_5": {
-        "title": "Программа",
-        "template": {
-          "title": "Выберите шаблон",
-          "done": "Готово"
-        }
-      },
-      "step_6": {
-        "title": "Хотлайн"
-      }
-    },
-    "buttons": {
-      "next": "Далее",
-      "add_hotel": "Добавить отель",
-      "choose_template": "Добавить из шаблона",
-      "create_new_template": "Создать новый"
-    },
-    "inputs": {
-      "company_name": "Название компании",
-      "company_ref": "Reference",
-      "user": {
-        "name": "Имя клиента",
-        "nationality": "Национальность"
-      },
-      "hotel_name": "Наименование отеля",
-      "room_type": "Тип комнаты",
-      "countable": "Кол-во",
-      "extra_bed": "Extra bed",
-      "adults": "Взрослые",
-      "children": "Дети",
-      "bb": "BB",
-      "check_in": "Чек ин",
-      "check_out": "Чек аут",
-      "booking_number": "Номер бронирования",
-      "arrival_time": "Время прилёта",
-      "arrival_flight_code": "Код полёта",
-      "departure_time": "Время отлёта",
-      "departure_flight_code": "Код полёта",
-      "driver_number": "Номер водителя",
-      "driver_name": "Имя водителя",
-      "passengers": "Пассажиры",
-      "airport": "Аэропорт",
-      "gid": "Гид",
-      "transport": "Транспорт",
-      "hotline": {
-        "cost": "Стоимость",
-        "phone": "Номер телефона"
-      }
-    },
-    "errors": {
-      "company": "Необходимо выбрать компанию",
-      "user": {
-        "name": "Необходимо ввести имя клиента",
-        "nationality": "Необходимо ввести национальность клиента"
-      },
-      "validateInputs": {
-        "title": "Ошибка введённых данных",
-        "text": "Вы ввели не все данные чтобы перейти на следующий шаг"
-      }
-    }
-  },
-  "comment_resorts": "Resorts pages",
-  "resorts": {
-    "index": {
-      "title": "Список курортов",
-      "filter_title": "Курорты"
-    },
-    "edit-modal": {
-      "title": "Редактирование курорта"
-    },
-    "create-modal": {
-      "title": "Создание курорта"
-    }
-  },
-  "comment_transport": "Transport pages",
-  "transports": {
-    "index": {
-      "title": "Список транспортов",
-      "filter_title": "Транспорт"
-    },
-    "edit-modal": {
-      "title": "Редактирование транспорта"
-    },
-    "create-modal": {
-      "title": "Создание транспорта"
-    }
-  },
-  "comment_airports": "Airports pages",
-  "airports": {
-    "index": {
-      "title": "Список Аэропортов",
-      "filter_title": "Аэропорты"
-    },
-    "edit-modal": {
-      "title": "Редактирование аэропорта"
-    },
-    "create-modal": {
-      "title": "Добавление аэропорта"
-    }
-  },
-  "comment_room_types": "Room Types pages",
-  "room_types": {
-    "index": {
-      "title": "Список типов комнат",
-      "filter_title": "Типы комнат"
-    },
-    "edit-modal": {
-      "title": "Тип комнаты "
-    },
-    "create-modal": {
-      "title": "Добавление нового типа комнаты"
-    }
-  },
+
   "comment_users": "Users pages",
   "users": {
     "index": {
@@ -235,52 +39,33 @@
       "title": "Добавить пользователя"
     }
   },
-  "comment_companies": "Companies pages",
-  "companies": {
+
+  "comment_products": "Products page",
+  "products": {
     "index": {
-      "title": "Список компаний",
-      "filter_title": "Компании"
+      "title": "Список пользователетй",
+      "filter_title": "Товары"
     },
     "edit-modal": {
-      "title": "Компания "
+      "title": "Товар "
     },
     "create-modal": {
-      "title": "Добавление новой компании"
+      "title": "Добавить товар"
+    },
+    "store": {
+      "title": "Создание нового проекта"
+    },
+    "inputs": {
+      "name": "Название",
+      "description": "Описание",
+      "cost": "Цена",
+      "new": "Новый",
+      "popular": "Популярный",
+      "suitable": "Схожние товары",
+      "category": "Категория"
     }
   },
-  "comment_hotels": "Companies pages",
-  "hotels": {
-    "index": {
-      "title": "Список отелей",
-      "filter_title": "Отели"
-    },
-    "edit-modal": {
-      "title": "Отель "
-    },
-    "create-modal": {
-      "title": "Добавление нового отеля"
-    }
-  },
-  "comment_samples": "Companies pages",
-  "samples": {
-    "index": {
-      "title": "Список шаблонов",
-      "filter_title": "Шаблоны"
-    },
-    "edit": {
-      "title": "Редактирование шаблона",
-      "day": "День {number}",
-      "free_day": "Free",
-      "half_day": "Half day",
-      "add_day": "Добавить день"
-    },
-    "edit-modal": {
-      "title": "Шаблон "
-    },
-    "create-modal": {
-      "title": "Добавление нового шаблона"
-    }
-  },
+
   "login": {
     "title": "Вход в аккаунт сотрудника"
   },
@@ -290,6 +75,7 @@
   "reset_password": {
     "title": "Востановление пароля сотрудника"
   },
+
   "comment_auth": "Buttons and label in auth routes",
   "auth": {
     "login": "Вход",
@@ -317,6 +103,7 @@
       }
     }
   },
+
   "comment_notification": "Translate Notify Text",
   "notification": {
     "delete": {
@@ -344,6 +131,7 @@
       "title": "Пароль успешно изменён"
     }
   },
+
   "form": {
     "save": "Сохранить",
     "cancel": "Отмена",

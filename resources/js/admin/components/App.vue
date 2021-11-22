@@ -46,15 +46,6 @@ export default {
       titleTemplate: `%s · ${appName}`
     }
   },
-  mounted () {
-    this.$loading = this.$refs.loading
-    console.warn(store.state.theme.dark)
-    if (this.theme) {
-      this.$vs.setTheme('dark')
-    } else {
-      this.$vs.setTheme('light')
-    }
-  },
   watch: {
     theme: function (newVal) {
       if (newVal) {
@@ -62,6 +53,15 @@ export default {
       } else {
         this.$vs.setTheme('light')
       }
+    }
+  },
+  mounted () {
+    this.$loading = this.$refs.loading
+    console.warn(store.state.theme.dark)
+    if (this.theme) {
+      this.$vs.setTheme('dark')
+    } else {
+      this.$vs.setTheme('light')
     }
   },
   methods: {

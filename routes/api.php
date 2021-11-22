@@ -7,26 +7,18 @@ use App\Http\Controllers\Users\CategoryController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
   Route::post('logout', [LoginController::class, 'logout']);
 
   Route::get('user', [UserController::class, 'current']);
 
+  Route::post('products/image/upload', [\App\Http\Controllers\Auth\Dashboard\ProductController::class, 'upload']);
+  Route::delete('products/image/remove/{id}', [\App\Http\Controllers\Auth\Dashboard\ProductController::class, 'remove']);
+
   Route::apiResources([
     'users' => App\Http\Controllers\Auth\Dashboard\UserController::class,
     'products' => App\Http\Controllers\Auth\Dashboard\ProductController::class,
+    'categories' => App\Http\Controllers\Auth\Dashboard\CategoryController::class,
   ]);
 });
 

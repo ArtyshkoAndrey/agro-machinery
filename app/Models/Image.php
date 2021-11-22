@@ -12,7 +12,10 @@ use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Intervention\Image\ImageManagerStatic as Image2;
 
 /**
  * App\Models\Image
@@ -60,22 +63,72 @@ class Image extends Model
     'name',
     'path',
     'order',
+    'size'
   ];
 
   /**
    * @var string[]
    */
   protected $appends = [
-    'path',
+    'uri',
   ];
 
-  /**
-   * @param string $value
-   *
-   * @return array|string|string[]
-   */
-  public function getUriAttribute(string $value)
+  public static function upload($request, &$uploadTo = null, $attr_name = 'image'): array
   {
-    return str_replace('storage', 'image', $value);
+    ini_set('memory_limit','256M');
+    if ($request->hasFile($attr_name)) {
+      $files = $request->file($attr_name);
+      if (!is_array($files)) {
+        $files = [$files];
+      }
+
+      $images = [];
+      if ($uploadTo) {
+        if ($uploadTo->images()->count() === 0) {
+          $order = 1;
+        } else {
+          $order = $uploadTo->images->last()->order + 1;
+        }
+      } else {
+        $order = 1;
+      }
+
+      foreach ($files as $file) {
+        $path = date('Y/m/d') . '/' . $file->hashName();
+        \Log::alert($path);
+        $image = new Image();
+
+        $img = Image2::make($file->getRealPath());
+        $img->resize(1000, null, function ($constraint) {
+          $constraint->aspectRatio();
+        });
+        $img->save(public_path('storage/' . $path));
+
+        $image->size = $img->filesize();
+
+        $image->name = $file->getClientOriginalName();
+        $image->path = 'storage/' . $path;
+        $image->order = $order ?? 0;
+        $image->save();
+        $images[] = $image;
+        $order++;
+      }
+      if ($uploadTo) {
+        $uploadTo->images()->saveMany($images);
+        $uploadTo->save();
+      }
+      return $images;
+    }
+
+    return [];
+  }
+
+  /**
+   *
+   * @return Application|UrlGenerator|string
+   */
+  public function getUriAttribute()
+  {
+    return url(str_replace('storage', 'image', $this->path));
   }
 }

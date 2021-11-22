@@ -19,21 +19,20 @@ class Item {
 }
 
 const items = new Items()
+items.add(
+  'menu.products.title',
+  'dashboard.products.index',
+  '/admin/products/index',
+  {
+    type: 'solid',
+    name: 'box'
+  }
+)
 
 items.add(
   'menu.users.title',
   'dashboard.users.index',
   '/admin/users/index',
-  {
-    type: 'solid',
-    name: 'user'
-  }
-)
-
-items.add(
-  'menu.products.title',
-  'dashboard.products.index',
-  '/admin/products/index',
   {
     type: 'solid',
     name: 'user'
