@@ -20411,11 +20411,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Verta extends \Hekmatinasser\Verta\Verta {}
-
-  /**
-   * @method static upload(\Illuminate\Http\Request $request, mixed $model)
-   */
-  class Image extends \Intervention\Image\Facades\Image {}
+            class Image extends \Intervention\Image\Facades\Image {}
             class Socialite extends \Laravel\Socialite\Facades\Socialite {}
             class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
             class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}

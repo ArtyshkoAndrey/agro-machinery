@@ -58,6 +58,8 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @method static Builder|Product withTrashed()
  * @method static Builder|Product withoutTrashed()
  * @mixin Eloquent
+ * @property-read Collection|Product[] $suitable
+ * @property-read int|null $suitable_count
  */
 class Product extends Model implements TranslatableContract
 {

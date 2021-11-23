@@ -8,27 +8,30 @@
 
 namespace App\Models;
 
+use Log;
+use File;
 use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Intervention\Image\ImageManagerStatic as Image2;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * App\Models\Image
  *
- * @property int                             $id
- * @property string                          $name
- * @property string                          $path
- * @property int                             $order
- * @property string|null                     $model_type
- * @property int|null                        $model_id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read array|string|string[]      $uri
+ * @property int                        $id
+ * @property string                     $name
+ * @property string                     $path
+ * @property int                        $order
+ * @property double                     $size
+ * @property string|null                $model_type
+ * @property int|null                   $model_id
+ * @property Carbon|null                $created_at
+ * @property Carbon|null                $updated_at
+ * @property-read array|string|string[] $uri
  * @method static Builder|Image newModelQuery()
  * @method static Builder|Image newQuery()
  * @method static Builder|Image query()
@@ -63,7 +66,7 @@ class Image extends Model
     'name',
     'path',
     'order',
-    'size'
+    'size',
   ];
 
   /**
@@ -75,7 +78,7 @@ class Image extends Model
 
   public static function upload($request, &$uploadTo = null, $attr_name = 'image'): array
   {
-    ini_set('memory_limit','256M');
+    ini_set('memory_limit', '256M');
     if ($request->hasFile($attr_name)) {
       $files = $request->file($attr_name);
       if (!is_array($files)) {
