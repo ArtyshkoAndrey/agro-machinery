@@ -17,7 +17,6 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  *
  * @property int                                   $id
  * @property int                                   $to_index
- * @property string                                $image
  * @property Carbon|null                           $created_at
  * @property Carbon|null                           $updated_at
  * @property-read CategoryTranslation|null         $translation
@@ -57,11 +56,14 @@ class Category extends Model implements TranslatableContract
   ];
 
   protected $fillable = [
-    'image',
     'to_index',
   ];
 
   protected $casts = [
     'to_index' => 'boolean'
+  ];
+
+  protected $with = [
+    'image'
   ];
 }
