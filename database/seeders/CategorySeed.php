@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use File;
 use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
@@ -29,6 +30,7 @@ class CategorySeed extends Seeder
     $dir = 'storage/' . date('Y/m/d') . '/';
 
     if(Category::all()->count() === 0) {
+      File::isDirectory(public_path($dir)) or File::makeDirectory(public_path($dir), 0777, true, true);
       $dir .= 'track_1.png';
       \File::copy(public_path('images/user/track_1.png') ,  public_path($dir));
 
