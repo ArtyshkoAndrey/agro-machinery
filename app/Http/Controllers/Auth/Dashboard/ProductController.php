@@ -118,13 +118,46 @@ class ProductController extends Controller
    * @param Request $request
    * @param Product $product
    *
-   * @return void
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function update(Request $request, Product $product): void
+  public function update(Request $request, Product $product): \Illuminate\Http\JsonResponse
   {
     $request->validate([
-      'name' => 'required|string',
-      'password' => 'nullable|string',
+      'ru.name' => 'required|string',
+      'ru.description' => 'required|string',
+
+      'en.name' => 'required|string',
+      'en.description' => 'required|string',
+
+      'cost' => 'required|integer|min:0',
+      'category_id' => 'required|exists:categories,id',
+
+      'suitable' => 'sometimes|array',
+      'suitable.*' => 'sometimes|exists:products,id',
+
+      'images' => 'required|array',
+      'images.*.id' => 'required|exists:images,id',
+
+      'new' => 'required|boolean',
+      'popular' => 'required|boolean'
+    ]);
+
+    $product->update($request->except(
+      ['images', 'category_id', 'suitable']
+    ));
+
+    $data = $request->all();
+
+    $product->category()->associate($data['category_id']);
+
+    $product->save();
+
+    $product->suitable()->sync($data['suitable']);
+
+    $product->save();
+
+    return JsonResponse::success([
+      'product' => $product
     ]);
   }
 

@@ -1,21 +1,21 @@
 <template>
   <div class="card product-card">
-    <span class="badge">Посев и посадка </span>
+    <span class="badge">{{ item.category.name }}</span>
     <div class="product-card-image">
-      <img src="image/image/test_product.png?w=300&h=auto3&fit=crop&fm=webp" alt="product">
+      <img :src="item.image.uri + '?w=300&h=auto3&fit=crop&fm=webp'" alt="product">
     </div>
     <div class="product-card-info">
       <div class="row">
         <div class="col-12">
           <p class="product-card-info-name">
-            Техника для посева кукурузы для полей более 120 Га
+            {{ item.name }}
           </p>
         </div>
         <div class="col-12">
           <div class="row">
             <div class="col-12 col-md">
               <span class="product-card-info-cost">
-                {{ $t('Product.prefix-cost') }} 10 000 000 ₸
+                {{ $t('Product.prefix-cost') }} {{ $cost(item.cost) }} ₸
               </span>
             </div>
             <div class=" col-12 col-md-auto">
@@ -37,6 +37,13 @@ export default {
   name: "Product",
   components: {
     Button
+  },
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    item: {
+      type: Object,
+      required: false,
+    }
   }
 }
 </script>

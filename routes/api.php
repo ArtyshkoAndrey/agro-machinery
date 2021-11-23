@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Users\ProductController;
 use App\Http\Controllers\Users\CategoryController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -31,4 +32,5 @@ Route::group(['middleware' => 'guest:api'], function () {
 
 Route::group(['prefix' => 'users'], function () {
   Route::get('categories', [CategoryController::class, 'get']);
+  Route::get('products', [ProductController::class, 'get']);
 });

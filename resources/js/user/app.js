@@ -15,6 +15,10 @@ import Swal from 'sweetalert2'
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1)
 }
+Vue.prototype.$cost = function (number) {
+  return new Intl.NumberFormat('ru-RU').format(Math.ceil(number))
+};
+
 Vue.prototype.$Swal = Swal
 Vue.use(Iconly);
 Vue.use(Router)

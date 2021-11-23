@@ -72,8 +72,8 @@
               </div>
             </div>
 
-            <div v-for="i in 7" :key="i" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
-              <product />
+            <div v-for="product in new_products" :key="product.id" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
+              <product :item="product" />
             </div>
           </div>
         </section>
@@ -100,8 +100,8 @@
               </div>
             </div>
 
-            <div v-for="i in 7" :key="i" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
-              <product />
+            <div v-for="product in popular_products" :key="product.id" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
+              <product :item="product" />
             </div>
           </div>
         </section>
@@ -133,11 +133,16 @@ export default {
   },
   data: () => ({
     loading: true,
-    categories: []
+    categories: [],
+    popular_products: [],
+    new_products: []
   }),
   async mounted () {
-    this.$root.$loading.set(30);
+    await this.$root.$loading.set(30);
     await this.getCategories()
+    await this.$root.$loading.set(50);
+    await this.getProducts()
+    await this.$root.$loading.finish();
   },
   methods: {
     async getCategories () {
@@ -149,9 +154,33 @@ export default {
       })
       .then(response => {
         this.categories = response.data.payload.categories
-        this.$root.$loading.finish()
-        this.loading = false
       })
+    },
+    async getProducts () {
+      axios.get('/api/users/products', {
+        params: {
+          new: true,
+          has_image: true,
+          max_count: 7,
+          has_category: true
+        }
+      })
+        .then(response => {
+          this.new_products = response.data.payload.products
+        })
+
+      axios.get('/api/users/products', {
+        params: {
+          popular: true,
+          has_image: true,
+          max_count: 7,
+          has_category: true
+        }
+      })
+        .then(response => {
+          this.popular_products = response.data.payload.products
+          this.loading = false
+        })
     }
   }
 }

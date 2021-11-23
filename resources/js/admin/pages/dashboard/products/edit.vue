@@ -380,8 +380,6 @@ export default {
   },
   async mounted () {
 
-    await this.$root.$loading.finish()
-
     await getProduct(this.id)
       .then(product => {
         let ru = product.translations.find(e => e.locale === 'ru')
@@ -396,6 +394,8 @@ export default {
         this.form.cost = product.cost
         this.form.category_id = product.category.id
         this.form.suitable = product.suitable.map(value => value.id)
+        this.form.new = product.new
+        this.form.popular = product.popular
 
         this.form.images = product.images
       })
