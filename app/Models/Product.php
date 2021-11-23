@@ -65,7 +65,6 @@ class Product extends Model implements TranslatableContract
 {
   use HasFactory;
   use Translatable;
-  use SoftDeletes;
   use HasImage;
 
   public array $translatedAttributes = [
