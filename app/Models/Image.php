@@ -94,20 +94,24 @@ class Image extends Model
       }
 
       foreach ($files as $file) {
-        $path = date('Y/m/d') . '/' . $file->hashName();
-        \Log::alert($path);
+        $dir = 'storage/' . date('Y/m/d') . '/';
+        $path = $dir . $file->hashName();
+
+        File::isDirectory(public_path($dir)) or File::makeDirectory(public_path($dir), 0777, true, true);
+
+        Log::alert($dir);
         $image = new Image();
 
         $img = Image2::make($file->getRealPath());
         $img->resize(1000, null, function ($constraint) {
           $constraint->aspectRatio();
         });
-        $img->save(public_path('storage/' . $path));
+        $img->save(public_path($path));
 
         $image->size = $img->filesize();
 
         $image->name = $file->getClientOriginalName();
-        $image->path = 'storage/' . $path;
+        $image->path = $path;
         $image->order = $order ?? 0;
         $image->save();
         $images[] = $image;
