@@ -11,7 +11,7 @@
           </span>
         </div>
         <div class="col-12">
-          <img alt="track" :src="category.image">
+          <img alt="track" :src="category.image.uri + '?w=500&h=auto&fit=crop&fm=webp'">
         </div>
       </div>
     </div>

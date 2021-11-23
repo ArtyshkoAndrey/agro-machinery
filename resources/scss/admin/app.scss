@@ -167,10 +167,16 @@ body[vs-theme="dark"] {
 }
 
 .dz-preview {
-  width: 200px!important;
-  height: 200px!important;
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 12px !important;
+  .dz-details {
+    border-radius: 12px !important;
+  }
   .dz-image {
+    border-radius: 12px !important;
     img  {
+      border-radius: 12px !important;
       object-fit: cover;
       width: 100%;
       height: 100%;
