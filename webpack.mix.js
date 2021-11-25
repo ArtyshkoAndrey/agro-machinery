@@ -1,9 +1,14 @@
+// eslint-disable-next-line no-undef
 const path = require('path')
+// eslint-disable-next-line no-undef
 const fs = require('fs-extra')
+// eslint-disable-next-line no-undef
 const mix = require('laravel-mix')
+// eslint-disable-next-line no-undef
 require('laravel-mix-versionhash')
 
 
+// eslint-disable-next-line no-undef
 const publicDir = path.resolve(__dirname, './public')
 
 fs.removeSync(path.join(publicDir, 'dist'))
@@ -33,11 +38,13 @@ mix.webpackConfig({
   resolve: {
     extensions: ['.js', '.json', '.vue'],
     alias: {
+      // eslint-disable-next-line no-undef
       '~': path.join(__dirname, './resources/js')
     }
   },
   output: {
     chunkFilename: 'dist/js/[chunkhash].js',
+    // eslint-disable-next-line no-undef
     path: path.resolve(__dirname, './public')
   }
 })
@@ -48,12 +55,4 @@ mix.then(() => {
   }
 })
 
-mix.browserSync('http://localhost')
-
-function publishAseets() {
-  const publicDir = path.resolve(__dirname, './public')
-
-  fs.removeSync(path.join(publicDir, 'dist'))
-  fs.copySync(path.join(publicDir, 'build', 'dist'), path.join(publicDir, 'dist'))
-  fs.removeSync(path.join(publicDir, 'build'))
-}
+mix.browserSync('http://agro-machinery')

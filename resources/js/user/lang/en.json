@@ -10,6 +10,13 @@
     "weekend": "Sunday is a day off",
     "place": "Almaty, Kulzhinsky tract, 9 k"
   },
+  "SecondMenu": {
+    "index": "Index",
+    "about": "About",
+    "catalog": "Catalog",
+    "news": "News",
+    "contacts": "Contacts"
+  },
   "index": {
     "section_2": {
       "title": "Products",
@@ -33,6 +40,13 @@
     "new-products": {
       "title": "New",
       "description": "We are constantly updating our product catalog and always supply only the latest equipment and products"
+    },
+    "tyrkesh-companies": {
+      "title": "Turkish companies we work with"
+    },
+    "map": {
+      "title": "Any other questions?",
+      "manager": "Our managers are always in touch"
     },
     "popular-products": {
       "title": "Popular",

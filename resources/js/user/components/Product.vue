@@ -1,6 +1,6 @@
 <template>
   <div class="card product-card">
-    <span class="badge">{{ item.category.name }}</span>
+    <span class="badge">{{ item.category.translations.find(e => e.locale === locale).name }}</span>
     <div class="product-card-image">
       <img :src="item.image.uri + '?w=300&h=auto3&fit=crop&fm=webp'" alt="product">
     </div>
@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-12">
           <p class="product-card-info-name">
-            {{ item.name }}
+            {{ item.translations.find(e => e.locale === locale).name }}
           </p>
         </div>
         <div class="col-12">
@@ -32,6 +32,7 @@
 
 <script>
 import Button from '~/user/components/Button'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "Product",
@@ -44,6 +45,11 @@ export default {
       type: Object,
       required: false,
     }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'lang/locale',
+    })
   }
 }
 </script>

@@ -18,10 +18,10 @@
 
     <div class="col-10 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-1 category-item_info">
       <p class="category-item_info_title">
-        {{ category.name }}
+        {{ category.translations.find(e => e.locale === locale).name }}
       </p>
       <p>
-        {{ category.description }}
+        {{ category.translations.find(e => e.locale === locale).description }}
       </p>
       <Button orange rounded_angle arrow big>
         {{ $t('button.catalog') }}
@@ -31,7 +31,9 @@
 </template>
 
 <script>
-import Button from "~/user/components/Button";
+import Button from "~/user/components/Button"
+import { mapGetters } from 'vuex'
+
 export default {
   name: "CategoryInfo",
   components: {
@@ -46,6 +48,11 @@ export default {
       default: false,
       type: Boolean
     }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'lang/locale',
+    })
   }
 }
 </script>

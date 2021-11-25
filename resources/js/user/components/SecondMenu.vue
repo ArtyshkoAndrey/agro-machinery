@@ -9,23 +9,23 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div id="navbarTogglerDemo02" class="collapse navbar-collapse">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav w-100">
 
           <li class="nav-item">
             <router-link class="nav-link" to="index">
-              Главная
+              {{ $t('SecondMenu.index') }}
             </router-link>
           </li>
 
           <li class="nav-item">
             <router-link class="nav-link" to="#">
-              О нас
+              {{ $t('SecondMenu.about') }}
             </router-link>
           </li>
 
           <li class="nav-item">
             <router-link class="nav-link" to="#">
-              Каталог
+              {{ $t('SecondMenu.catalog') }}
             </router-link>
           </li>
 
@@ -37,14 +37,20 @@
 
           <li class="nav-item">
             <router-link class="nav-link" to="#">
-              Новости
+              {{ $t('SecondMenu.news') }}
             </router-link>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item me-lg-auto">
             <router-link class="nav-link" to="#">
-              Контакты
+              {{ $t('SecondMenu.contacts') }}
             </router-link>
+          </li>
+
+          <li class="nav-item ms-lg-auto mt-5 mt-md-0">
+            <button class="nav-link bg-transparent border-0" form @click="setLocale(tempLocale)">
+              {{ locales[$i18n.locale] }}
+            </button>
           </li>
         </ul>
       </div>
@@ -55,6 +61,9 @@
 <script>
 import * as $ from 'jquery';
 import * as bootstrap from 'bootstrap'
+import { mapGetters } from 'vuex'
+import { loadMessages } from '~/user/plugins/i18n'
+
 export default {
   name: "SecondMenu",
   data: () => ({
@@ -64,6 +73,15 @@ export default {
     collapse: null,
     flagWidth: false
   }),
+  computed: {
+    ...mapGetters({
+      locale: 'lang/locale',
+      locales: 'lang/locales'
+    }),
+    tempLocale () {
+      return this.locale === 'ru' ? 'en' : 'ru'
+    }
+  },
   mounted() {
     this.setInitialListeners()
     this.setInitialToggler()
@@ -122,6 +140,12 @@ export default {
     },
     getUpdateWidth () {
       this.flagWidth = window.innerWidth < 768;
+    },
+    setLocale (locale) {
+      if (this.$i18n.locale !== locale) {
+        loadMessages(locale)
+        this.$store.dispatch('lang/setLocale', { locale })
+      }
     }
   }
 }
