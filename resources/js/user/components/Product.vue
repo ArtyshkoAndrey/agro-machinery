@@ -5,13 +5,13 @@
       <img :src="item.image.uri + '?w=300&h=auto3&fit=crop&fm=webp'" alt="product">
     </div>
     <div class="product-card-info">
-      <div class="row">
+      <div class="row h-100">
         <div class="col-12">
           <p class="product-card-info-name">
             {{ item.translations.find(e => e.locale === locale).name }}
           </p>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-auto">
           <div class="row">
             <div class="col-12 col-md">
               <span class="product-card-info-cost">
@@ -120,6 +120,7 @@ export default {
 
   .product-card-info {
     padding: 8px;
+    height: 100%;
 
     .product-card-info-name {
       font-size: 12px;

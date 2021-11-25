@@ -185,6 +185,12 @@ export default {
       title: 'Главная страница'
     }
   },
+  beforeRouteLeave (to, from, next) {
+    this.loading = true
+    setTimeout(() => {
+      next()
+    }, 500)
+  },
   data: () => ({
     loading: true,
     categories: [],
