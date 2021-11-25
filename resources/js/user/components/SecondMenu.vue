@@ -24,7 +24,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link class="nav-link" to="#">
+            <router-link class="nav-link" to="catalog">
               {{ $t('SecondMenu.catalog') }}
             </router-link>
           </li>

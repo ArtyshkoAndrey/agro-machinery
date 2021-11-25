@@ -348,7 +348,6 @@ export default {
           })
 
           self.form.images.forEach(image => {
-            console.log(image.uri)
             let mockFile = {
               name: image.name,
               size: image.size,

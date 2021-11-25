@@ -15,6 +15,9 @@ $grid-breakpoints: (
 );
 
 $font-family-base: 'Rubik', sans-serif;
+$breadcrumb-item-padding-x: 0.1rem;
+$breadcrumb-active-color: $color-orange;
+$breadcrumb-divider-color: $color-gray;
 
 /// Mixin to manage responsive breakpoints
 /// @author Fulliton

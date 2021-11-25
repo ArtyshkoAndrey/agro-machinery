@@ -9,6 +9,7 @@ export default [
     children: [
       {path: '', redirect: {name: 'index'}},
       {path: 'index', name: 'index', component: page('Index.vue')},
+      {path: 'catalog', name: 'catalog', component: page('Catalog.vue')},
       {path: 'test', name: 'test', component: page('Index_2.vue')},
     ]
   },

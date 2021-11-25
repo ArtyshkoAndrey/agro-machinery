@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     redirect () {
-      this.$router.push({name: 'test'})
+      this.$router.push({name: this.$attrs.route_link})
     }
   }
 }
