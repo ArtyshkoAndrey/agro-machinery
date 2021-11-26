@@ -20,6 +20,13 @@ class CategoryController extends Controller
   {
     $categories = Category::query();
 
+    if ($category = $request->get('category', null)) {
+      $categories = $categories->findOrFail($category);
+    }
+
+    if ($only_owner = $request->boolean('only_owner', false)) {
+      $categories = $categories->doesntHave('parents');
+    }
 
     if ($to_index = $request->get('to_index', null)) {
       $categories = $categories->where('to_index', $to_index);
@@ -29,7 +36,17 @@ class CategoryController extends Controller
       $categories = $categories->take($max_count);
     }
 
-    $categories = $categories->get();
+    if($category === null) {
+      $categories = $categories->get();
+    }
+
+    if ($request->boolean('has_parent', false)) {
+      $categories = $categories->load(['parents']);
+    }
+
+    if ($request->boolean('has_child', false)) {
+      $categories = $categories->load(['child']);
+    }
 
     return JsonResponse::success(['categories' => $categories]);
   }

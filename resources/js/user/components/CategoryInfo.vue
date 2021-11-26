@@ -23,7 +23,7 @@
       <p>
         {{ category.translations.find(e => e.locale === locale).description }}
       </p>
-      <Button orange rounded_angle arrow big route_link="catalog">
+      <Button orange rounded_angle arrow big route_link="catalog" :query="{category: category.id}">
         {{ $t('button.catalog') }}
       </Button>
     </div>

@@ -66,7 +66,7 @@
                   {{ $t('index.new-products.description') }}
                 </p>
 
-                <Button class="mt-auto" orange rounded_angle arrow big>
+                <Button class="mt-auto" orange rounded_angle arrow big route_link="catalog">
                   {{ $t('button.catalog') }}
                 </Button>
               </div>

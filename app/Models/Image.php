@@ -44,6 +44,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|Image wherePath($value)
  * @method static Builder|Image whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static Builder|Image whereSize($value)
  */
 class Image extends Model
 {

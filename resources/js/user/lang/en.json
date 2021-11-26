@@ -11,7 +11,7 @@
     "place": "Almaty, Kulzhinsky tract, 9 k"
   },
   "SecondMenu": {
-    "index": "Index",
+    "index": "Home",
     "about": "About",
     "catalog": "Catalog",
     "news": "News",
@@ -51,6 +51,12 @@
     "popular-products": {
       "title": "Popular",
       "description": "We are constantly updating our product catalog and always supply only the latest equipment and products"
+    }
+  },
+  "catalog": {
+    "breadcrumb": {
+      "index": "Home",
+      "catalog": "Catalog"
     }
   },
   "button": {

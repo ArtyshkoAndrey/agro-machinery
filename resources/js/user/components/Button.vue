@@ -19,6 +19,13 @@
 <script>
 export default {
   name: "Button",
+  props: {
+    query: {
+      type: Object,
+      required: false,
+      default: function () { return {} },
+    }
+  },
   computed: {
   },
   created() {
@@ -26,7 +33,10 @@ export default {
   },
   methods: {
     redirect () {
-      this.$router.push({name: this.$attrs.route_link})
+      this.$router.push({
+        name: this.$attrs.route_link,
+        query: this.query
+      })
     }
   }
 }
@@ -43,7 +53,7 @@ export default {
     border-radius: 16px 0;
     padding: 13px 22px;
   }
-  
+
   @include respond-to(lg) {
     border-radius: 24px 0;
     padding: 17.5px 27px;
