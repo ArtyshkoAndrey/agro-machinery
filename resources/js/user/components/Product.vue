@@ -93,10 +93,11 @@ export default {
     border-radius: 12px 12px 0 0;
 
     img {
+      display: block;
+      height: inherit;
+      width: 100%;
       padding: 0;
       margin: 0;
-      width: 100%;
-      height: 100%;
       object-fit: cover;
       object-position: center;
       border-radius: 12px 12px 0 0;
