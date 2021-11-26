@@ -9,7 +9,7 @@
               {{ category.translations.find(e => e.locale === locale).name }}
             </h1>
             <h1 v-else>
-              {{ 'Каталог' }}
+              {{ $t('catalog.breadcrumb.catalog') }}
             </h1>
 
             <nav aria-label="breadcrumb mt-3">
