@@ -41,7 +41,9 @@ class CategoryController extends Controller
     }
 
     if ($request->boolean('has_parent', false)) {
+      $categories = $categories->append(['parent']);
       $categories = $categories->load(['parents']);
+
     }
 
     if ($request->boolean('has_child', false)) {

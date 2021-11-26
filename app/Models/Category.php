@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Error;
 use Eloquent;
 use Illuminate\Support\Carbon;
 use App\Traits\Models\HasImage;
@@ -89,6 +90,40 @@ class Category extends Model implements TranslatableContract
       'child_category_id',
       'category_id'
     );
+  }
+
+  /**
+   * Return all Parents
+   *
+   * @return array
+   */
+  public function getParentAttribute(): array
+  {
+    $parents = [];
+    $this->getParents($parents, $this);
+    return $parents;
+  }
+
+  /**
+   * Find all recursion Parent in category
+   *
+   * @param array    $parents
+   * @param Category $c
+   *
+   * @return void
+   */
+  public function getParents(array &$parents, Category $c) {
+    try {
+      $childCategory = $c;
+      while ($category = $childCategory->parents()->first()) {
+//        $parents->push($category->toArray());
+        array_unshift($parents, $category->toArray());
+        $childCategory = $category;
+      }
+//      $parents = $parents->reverse();
+    } catch (Error $exception) {
+
+    }
   }
 
   /**

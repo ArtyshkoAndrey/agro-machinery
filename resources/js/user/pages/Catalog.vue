@@ -28,6 +28,13 @@
                   {{ $t('catalog.breadcrumb.catalog') }}
                 </li>
 
+                <li v-for="parent in category_parents" :key="parent.id" class="breadcrumb-item">
+                  <router-link :to="{ path: 'catalog', query: { category: parent.id }}">
+                    {{ parent.translations.find(e => e.locale === locale).name }}
+                  </router-link>
+                </li>
+
+
                 <li v-if="category_id" aria-current="page" class="breadcrumb-item active">
                   {{ category.translations.find(e => e.locale === locale).name }}
                 </li>
@@ -53,7 +60,7 @@
           </div>
         </transition>
         <div class="row catalog-list-products gx-1 gx-sm-2 gx-md-5 gx-lg-3 gy-2 gy-md-4">
-          <div v-for="product in popular_products" :key="product.id" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
+          <div v-for="product in products" :key="product.id" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
             <product :item="product" />
           </div>
         </div>
@@ -81,17 +88,18 @@ export default {
     }, 500)
   },
   async beforeRouteUpdate(to, from, next) {
-    this.loading = true
+    await this.setLoading(true)
     next()
     await this.getCategories()
     await this.getProducts()
-    this.loading = false
+    await this.setLoading(false)
   },
   data: () => ({
     loading: true,
     category: null,
     category_child: [],
-    popular_products: [],
+    products: [],
+    category_parents: []
   }),
   computed: {
     ...mapGetters({
@@ -106,7 +114,7 @@ export default {
     await this.getCategories()
     await this.getProducts()
     await this.$root.$loading.finish();
-
+    await this.setLoading(false)
   },
   methods: {
     getCategories() {
@@ -122,9 +130,12 @@ export default {
           if (this.category_id) {
             this.category = response.data.payload.categories
             this.category_child = response.data.payload.categories.child
+            this.category_parents = response.data.payload.categories.parent
           } else {
             this.category_child = response.data.payload.categories
           }
+
+          console.warn(this.category)
         })
         .catch(e => {
           this.$router.push({ path: "catalog" })
@@ -136,17 +147,22 @@ export default {
         })
     },
     getProducts() {
-      axios.get('/api/users/products', {
+      axios.get('/api/users/catalog', {
         params: {
           has_image: true,
-          max_count: 7,
+          where_category: this.category_id,
           has_category: true
         }
       })
         .then(response => {
-          this.popular_products = response.data.payload.products
-          this.loading = false
+          this.products = response.data.payload.products
         })
+    },
+    async setLoading (status) {
+      return new Promise((resolve) => {
+        this.loading = status
+        resolve()
+      })
     }
   }
 }
