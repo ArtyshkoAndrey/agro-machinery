@@ -253,33 +253,36 @@ export default {
       })
     },
     infiniteHandler ($state) {
-      axios.get('/api/users/catalog', {
-        params: {
-          has_image: true,
-          max_products: this.max_products,
-          where_category: this.category_id,
-          has_category: true,
-          where_manufacturers: this.manufacturers_id,
-          page: this.currentPage
-        }
-      })
-        .then(response => {
-          response.data.payload.products.data.forEach(e => {
-            this.products.push(e)
-          })
-
-          this.lastPage = response.data.payload.products.last_page
-          // this.currentPage = response.data.payload.products.current_page
-          this.currentPage = this.currentPage + 1;
-          if (this.currentPage > this.lastPage) {
-            $state.complete();
+      setTimeout(() => {
+        axios.get('/api/users/catalog', {
+          params: {
+            has_image: true,
+            max_products: this.max_products,
+            where_category: this.category_id,
+            has_category: true,
+            where_manufacturers: this.manufacturers_id,
+            page: this.currentPage
           }
-          else {
-            $state.loaded();
-          }
-
-
         })
+          .then(response => {
+            response.data.payload.products.data.forEach(e => {
+              this.products.push(e)
+            })
+
+            this.lastPage = response.data.payload.products.last_page
+            // this.currentPage = response.data.payload.products.current_page
+            this.currentPage = this.currentPage + 1;
+            if (this.currentPage > this.lastPage) {
+              $state.complete();
+            }
+            else {
+              $state.loaded();
+            }
+
+
+          })
+      }, 1000)
+
     }
   }
 }
