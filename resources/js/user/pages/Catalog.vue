@@ -68,6 +68,7 @@
             <div class="row">
               <div v-for="(manufacturer, index) in manufacturers" :key="index" class="col-auto mt-2">
                 <button :class="manufacturer.active ? 'active' : ''"
+                        style="white-space: nowrap;"
                         class="btn btn-manufacturers"
                         @click="setActiveManufacturer(manufacturer)"
                 >
