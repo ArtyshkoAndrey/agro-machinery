@@ -7,6 +7,7 @@ use App\Http\Controllers\Users\ProductController;
 use App\Http\Controllers\Users\CatalogController;
 use App\Http\Controllers\Users\CategoryController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Users\ManufacturerController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
@@ -36,4 +37,5 @@ Route::group(['prefix' => 'users'], function () {
   Route::get('products', [ProductController::class, 'get']);
 
   Route::get('catalog', [CatalogController::class, 'get']);
+  Route::get('manufacturers', [ManufacturerController::class, 'get']);
 });

@@ -33,6 +33,12 @@ class CatalogController extends Controller
       $products = $products->with(['category']);
     }
 
+    if ($manufacturers = $request->get('where_manufacturers', null)) {
+      $products = $products->whereHas('manufacturer', function (Builder $q) use ($manufacturers) {
+        $q->whereIn('id', $manufacturers);
+      });
+    }
+
     if ($category = $request->get('where_category', null)) {
       $category = Category::findOrFail($category);
       $ids = [];

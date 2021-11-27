@@ -87,6 +87,10 @@ class Product extends Model implements TranslatableContract
   {
     return $this->belongsTo(Category::class, 'category_id', 'id');
   }
+  public function manufacturer(): BelongsTo
+  {
+    return $this->belongsTo(Manufacturer::class, 'manufacturer_id', 'id');
+  }
 
   public function suitable (): BelongsToMany
   {

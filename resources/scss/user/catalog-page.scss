@@ -19,6 +19,15 @@
     line-height: 16px;
   }
 
+  .breadcrumb-item {
+    word-wrap: break-word !important;
+    width: fit-content;
+    > a {
+      white-space: normal;
+      width: fit-content;
+    }
+  }
+
   .category-description {
     color: $color-gray;
     font-size: 14px;
@@ -68,7 +77,7 @@
     }
 
     .catalog-list-products {
-      margin-top: 50px;
+      margin-top: 30px;
       margin-bottom: 50px;
     }
   }
@@ -102,7 +111,7 @@
     }
 
     .catalog-list-products {
-      margin-top: 100px;
+      margin-top: 50px;
       margin-bottom: 50px;
     }
   }
