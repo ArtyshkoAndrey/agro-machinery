@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth\Dashboard;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Manufacturer;
 use Illuminate\Http\Response;
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -76,6 +77,7 @@ class ProductController extends Controller
     $data = $request->all();
 
     $product->category()->associate($data['category_id']);
+    $product->manufacturer()->associate(Manufacturer::first()->id);
 
     $product->save();
     $order = 1;
@@ -149,6 +151,7 @@ class ProductController extends Controller
     $data = $request->all();
 
     $product->category()->associate($data['category_id']);
+    $product->manufacturer()->associate(Manufacturer::first()->id);
 
     $product->save();
 

@@ -83,6 +83,11 @@
             <product :item="product"/>
           </div>
         </div>
+
+        <infinite-loading
+          :identifier="infiniteId"
+          @infinite="infiniteHandler"
+        />
       </section>
     </transition>
   </div>
@@ -93,12 +98,14 @@ import Spinner from '~/user/components/Spinner'
 import Product from '~/user/components/Product'
 import axios from 'axios'
 import {mapGetters} from 'vuex'
+import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
   name: "Catalog",
   components: {
     Spinner,
-    Product
+    Product,
+    InfiniteLoading
   },
   beforeRouteLeave(to, from, next) {
     this.loading = true
@@ -108,6 +115,7 @@ export default {
   },
   async beforeRouteUpdate(to, from, next) {
     await this.setLoading(true)
+    this.infiniteId += 1;
     next()
     await this.getCategories()
     await this.getProducts()
@@ -119,7 +127,11 @@ export default {
     category_child: [],
     products: [],
     category_parents: [],
-    manufacturers: []
+    manufacturers: [],
+    currentPage: 1,
+    lastPage: 0,
+    infiniteId: +new Date(),
+    max_products: 8
   }),
   computed: {
     ...mapGetters({
@@ -183,16 +195,26 @@ export default {
         })
     },
     getProducts() {
+      this.products = []
+      this.currentPage = 1
+      this.lastPage = 0
       axios.get('/api/users/catalog', {
         params: {
           has_image: true,
+          max_products: this.max_products,
+          page: this.currentPage,
           where_category: this.category_id,
           has_category: true,
           where_manufacturers: this.manufacturers_id
         }
       })
         .then(response => {
-          this.products = response.data.payload.products
+          response.data.payload.products.data.forEach(e => {
+            this.products.push(e)
+          })
+
+          this.lastPage = response.data.payload.products.last_page
+          this.currentPage = response.data.payload.products.current_page + 1
         })
     },
     getManufacturers() {
@@ -224,6 +246,35 @@ export default {
         this.loading = status
         resolve()
       })
+    },
+    infiniteHandler ($state) {
+      axios.get('/api/users/catalog', {
+        params: {
+          has_image: true,
+          max_products: this.max_products,
+          where_category: this.category_id,
+          has_category: true,
+          where_manufacturers: this.manufacturers_id,
+          page: this.currentPage
+        }
+      })
+        .then(response => {
+          response.data.payload.products.data.forEach(e => {
+            this.products.push(e)
+          })
+
+          this.lastPage = response.data.payload.products.last_page
+          // this.currentPage = response.data.payload.products.current_page
+          this.currentPage = this.currentPage + 1;
+          if (this.currentPage > this.lastPage) {
+            $state.complete();
+          }
+          else {
+            $state.loaded();
+          }
+
+
+        })
     }
   }
 }

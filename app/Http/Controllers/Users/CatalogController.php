@@ -15,6 +15,8 @@ class CatalogController extends Controller
   {
     $products = Product::query();
 
+
+
     if ($new = $request->boolean('new', null)) {
       $products = $products->where('new', $new);
     }
@@ -59,7 +61,12 @@ class CatalogController extends Controller
       });
     }
 
-    $products = $products->get();
+    if ($max = $request->get('max_products', null)) {
+        $products = $products->paginate($max);
+    } else {
+      $products = $products->get();
+    }
+
 //    dd($products->toArray());
     return JsonResponse::success(['products' => $products]);
   }
