@@ -232,11 +232,16 @@ export default {
           })
         })
     },
-    setActiveManufacturer(manufacturer) {
+    async setActiveManufacturer(manufacturer) {
       // if(manufacturer.active !== undefined) {
       manufacturer.active = !manufacturer.active
 
-      this.getProducts()
+      await this.setLoading(true)
+      this.infiniteId += 1;
+
+      await this.getProducts()
+      await this.setLoading(false)
+
       // } else {
       //   manufacturer.active = true
       // }
