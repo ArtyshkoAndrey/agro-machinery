@@ -12,7 +12,7 @@
         <ul class="navbar-nav w-100">
 
           <li class="nav-item">
-            <router-link class="nav-link" to="index">
+            <router-link class="nav-link" :to="{name: 'index'}">
               {{ $t('SecondMenu.index') }}
             </router-link>
           </li>
@@ -24,7 +24,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link class="nav-link" to="catalog">
+            <router-link class="nav-link" :to="{name: 'catalog'}">
               {{ $t('SecondMenu.catalog') }}
             </router-link>
           </li>

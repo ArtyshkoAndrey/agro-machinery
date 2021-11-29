@@ -19,7 +19,7 @@
               </span>
             </div>
             <div class=" col-12 col-md-auto">
-              <Button dark rounded small hover="orange" class="w-100">
+              <Button dark rounded small hover="orange" class="w-100" route_link="product" :params="{id: item.id}">
                 {{ $t('button.more') }}
               </Button>
             </div>

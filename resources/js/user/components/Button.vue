@@ -24,6 +24,11 @@ export default {
       type: Object,
       required: false,
       default: function () { return {} },
+    },
+    params: {
+      type: Object,
+      required: false,
+      default: function () { return {} },
     }
   },
   computed: {
@@ -35,6 +40,7 @@ export default {
     redirect () {
       this.$router.push({
         name: this.$attrs.route_link,
+        params: this.params,
         query: this.query
       })
     }

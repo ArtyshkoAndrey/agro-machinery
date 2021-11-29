@@ -38,4 +38,6 @@ Route::group(['prefix' => 'users'], function () {
 
   Route::get('catalog', [CatalogController::class, 'get']);
   Route::get('manufacturers', [ManufacturerController::class, 'get']);
+
+  Route::get('product/{product}', [ProductController::class, 'find']);
 });

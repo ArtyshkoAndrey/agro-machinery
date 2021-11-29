@@ -64,6 +64,7 @@
     "more": "Подробнее"
   },
   "Product": {
-    "prefix-cost": "от"
+    "prefix-cost": "от",
+    "buy": "Добавить в корзину"
   }
 }

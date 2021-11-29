@@ -4,8 +4,8 @@
       <div class="container">
         <div class="row justify-content-between w-100">
           <div class="col-auto">
-            <router-link class="navbar-brand" to="index">
-              <img src="public/images/user/logo.png" alt="logo">
+            <router-link class="navbar-brand" :to="{name: 'index'}">
+              <img src="/public/images/user/logo.png" alt="logo">
             </router-link>
           </div>
           <div class="col-auto brand-info">

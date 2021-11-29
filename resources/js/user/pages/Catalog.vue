@@ -15,12 +15,12 @@
             <nav aria-label="breadcrumb mt-3">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <router-link class="" to="index">
+                  <router-link class="" :to="{name: 'index'}">
                     {{ $t('catalog.breadcrumb.index') }}
                   </router-link>
                 </li>
                 <li v-if="category_id" class="breadcrumb-item">
-                  <router-link class="" to="catalog">
+                  <router-link class="" :to="{name: 'catalog'}">
                     {{ $t('catalog.breadcrumb.catalog') }}
                   </router-link>
                 </li>
@@ -29,7 +29,7 @@
                 </li>
 
                 <li v-for="parent in category_parents" :key="parent.id" class="breadcrumb-item">
-                  <router-link :to="{ path: 'catalog', query: { category: parent.id }}" class="">
+                  <router-link :to="{ name: 'catalog', query: { category: parent.id }}" class="">
                     {{ parent.translations ? parent.translations.find(e => e.locale === locale).name : parent.name }}
                   </router-link>
                 </li>

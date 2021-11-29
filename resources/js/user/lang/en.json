@@ -64,6 +64,7 @@
     "more": "More"
   },
   "Product": {
-    "prefix-cost": "at"
+    "prefix-cost": "at",
+    "buy": "Add to Cart"
   }
 }

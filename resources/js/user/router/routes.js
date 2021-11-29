@@ -10,6 +10,7 @@ export default [
       {path: '', redirect: {name: 'index'}},
       {path: 'index', name: 'index', component: page('Index.vue')},
       {path: 'catalog', name: 'catalog', component: page('Catalog.vue')},
+      {path: 'product/:id', name: 'product', component: page('Product.vue')},
       {path: 'test', name: 'test', component: page('Index_2.vue')},
     ]
   },

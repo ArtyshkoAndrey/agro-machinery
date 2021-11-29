@@ -52,4 +52,13 @@ class ProductController extends Controller
 
     return JsonResponse::success(['products' => $products]);
   }
+
+  public function find(Product $product): \Illuminate\Http\JsonResponse
+  {
+    $product->load(['images', 'category.parents', 'image', 'suitable', 'suitable.category', 'suitable.image']);
+
+    return JsonResponse::success([
+      'product' => $product
+    ]);
+  }
 }
