@@ -53,8 +53,14 @@
                       'image',
                       'quickbars',
                       'codesample',
-                      'help'
+                      'help',
+                      'paste'
                     ],
+                    paste_auto_cleanup_on_paste : true,
+                    paste_remove_styles: true,
+                    paste_remove_styles_if_webkit: true,
+                    paste_strip_class_attributes: 'all',
+                    paste_remove_spans : true,
                     content_css: 'dark',
                     skin: 'oxide-dark',
                     quickbars_insert_toolbar: 'quicktable image media codesample',
@@ -114,8 +120,14 @@
                       'image',
                       'quickbars',
                       'codesample',
-                      'help'
+                      'help',
+                      'paste'
                     ],
+                    paste_auto_cleanup_on_paste : true,
+                    paste_remove_styles: true,
+                    paste_remove_styles_if_webkit: true,
+                    paste_strip_class_attributes: 'all',
+                    paste_remove_spans : true,
                     content_css: 'dark',
                     skin: 'oxide-dark',
                     quickbars_insert_toolbar: 'quicktable image media codesample',

@@ -15,12 +15,12 @@
             <nav aria-label="breadcrumb mt-3">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <router-link class="" :to="{name: 'index'}">
+                  <router-link :to="{name: 'index'}" class="">
                     {{ $t('catalog.breadcrumb.index') }}
                   </router-link>
                 </li>
                 <li v-if="category_id" class="breadcrumb-item">
-                  <router-link class="" :to="{name: 'catalog'}">
+                  <router-link :to="{name: 'catalog'}" class="">
                     {{ $t('catalog.breadcrumb.catalog') }}
                   </router-link>
                 </li>
@@ -68,8 +68,8 @@
             <div class="row">
               <div v-for="(manufacturer, index) in manufacturers" :key="index" class="col-auto mt-2">
                 <button :class="manufacturer.active ? 'active' : ''"
-                        style="white-space: nowrap;"
                         class="btn btn-manufacturers"
+                        style="white-space: nowrap;"
                         @click="setActiveManufacturer(manufacturer)"
                 >
                   {{ manufacturer.name }}
@@ -122,6 +122,7 @@ export default {
     await this.getProducts()
     await this.setLoading(false)
   },
+  scrollToTop: false,
   data: () => ({
     loading: true,
     category: null,
@@ -253,7 +254,7 @@ export default {
         resolve()
       })
     },
-    infiniteHandler ($state) {
+    infiniteHandler($state) {
       setTimeout(() => {
         axios.get('/api/users/catalog', {
           params: {
@@ -275,8 +276,7 @@ export default {
             this.currentPage = this.currentPage + 1;
             if (this.currentPage > this.lastPage) {
               $state.complete();
-            }
-            else {
+            } else {
               $state.loaded();
             }
 

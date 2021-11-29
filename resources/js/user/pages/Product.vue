@@ -17,7 +17,7 @@
                 <img v-if="loaderImage === false"
                      :key="1"
                      :src="image"
-                     class="w-100 h-100"
+                     class="w-100 h-100 img-zooming"
                      style="object-fit: cover"
                 >
                 <img v-else :key="2"
@@ -81,10 +81,35 @@
                   </div>
                 </div>
               </div>
+
+              <div v-if="product.attributes.length > 0" class="col-12 d-none d-md-block">
+                <div class="row attributes-row">
+                  <div class="col-auto">
+                    <h3>Характеристики</h3>
+                  </div>
+
+                  <div class="col-12">
+                    <hr>
+                  </div>
+
+                  <div v-for="attr in product.attributes" :key="attr.id" class="col-12 attribute">
+                    <div class="row">
+                      <div class="col-lg-5 col-md-6 attribute-name">
+                        {{ attr.translations.find(e => e.locale === locale).name }}
+                      </div>
+                      <div class="col attribute-value">
+                        {{ attr.pivot.value }}
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="row mt-5">
+        <div v-if="product.suitable.length > 0" class="row mt-5">
           <div class="col-12">
             <h2>Сопутствующие товары</h2>
           </div>
@@ -96,6 +121,7 @@
             </div>
           </div>
         </div>
+
       </section>
     </transition>
   </div>
@@ -107,6 +133,7 @@ import axios from 'axios';
 import Spinner from "../components/Spinner";
 import * as $ from 'jquery';
 import Item from "~/user/components/Product";
+import Zooming from 'zooming';
 
 export default {
   name: "Product",
@@ -120,6 +147,13 @@ export default {
       next()
     }, 500)
   },
+  async beforeRouteUpdate(to, from, next) {
+    await this.setLoading(true)
+    next()
+    await this.getProduct()
+    await this.setLoading(false)
+  },
+  scrollToTop: false,
   data: () => ({
     loading: true,
     loaderImage: true,
@@ -155,8 +189,9 @@ export default {
           console.log($('#img-slider').width())
           $('#img-slider').height($('#img-slider').width())
         })
-      }, 1000)
-    }, 500)
+
+      }, 500)
+    }, 1000)
     await this.$root.$loading.finish();
   },
   methods: {
@@ -228,6 +263,22 @@ export default {
       myImage.onload = () => {
         this.image = myImage.src
         this.loaderImage = false
+
+        setTimeout(() => {
+          new Zooming({
+            onBeforeOpen: () => {
+              $('body').css('overflow','hidden')
+              $('hidden-overflow').css('overflow', 'auto')
+            },
+            onBeforeClose: () => {
+              $('body').css('overflow','auto')
+              $('hidden-overflow').css('overflow', 'hidden')
+            },
+            scaleBase: 1,
+            scaleExtra: 1.5,
+            scrollThreshold: 99999
+          }).listen('.img-zooming')
+        }, 1000)
       }
     }
   }
@@ -239,6 +290,13 @@ export default {
 
 #img-slider {
   position: relative;
+
+  img {
+    object-fit: cover;
+    object-position: center;
+
+    z-index: 9;
+  }
 
   > div {
     height: 100%;
@@ -254,7 +312,7 @@ export default {
     border-radius: 11px;
     position: absolute;
     transition: .3s;
-    z-index: 100;
+    z-index: 10;
     height: 36px;
 
     svg {
@@ -400,5 +458,44 @@ nav {
     width: auto;
     padding: 10px 20px;
   }
+}
+
+.attributes-row {
+  margin-top: 40px;
+
+  @include respond-to(lg) {
+    margin-top: 80px;
+  }
+
+  .attribute {
+    margin-top: 16px;
+  }
+
+  hr {
+    margin: 0;
+  }
+
+  h3 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: $color-dark;
+  }
+
+  .attribute-name {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: $color-gray;
+  }
+
+  .attribute-value {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: $color-dark;
+  }
+
+
 }
 </style>

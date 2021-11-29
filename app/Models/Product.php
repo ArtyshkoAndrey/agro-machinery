@@ -96,4 +96,11 @@ class Product extends Model implements TranslatableContract
   {
     return $this->belongsToMany(self::class, 'suitable_products', 'product_id', 'suite_id');
   }
+
+  public function attributes (): BelongsToMany
+  {
+    return $this
+      ->belongsToMany(Attribute::class, 'product_attributes')
+      ->withPivot('value');
+  }
 }
