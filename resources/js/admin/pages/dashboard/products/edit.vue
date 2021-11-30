@@ -54,7 +54,6 @@
                       'quickbars',
                       'codesample',
                       'help',
-                      'paste'
                     ],
                     paste_auto_cleanup_on_paste : true,
                     paste_remove_styles: true,
@@ -121,7 +120,6 @@
                       'quickbars',
                       'codesample',
                       'help',
-                      'paste'
                     ],
                     paste_auto_cleanup_on_paste : true,
                     paste_remove_styles: true,

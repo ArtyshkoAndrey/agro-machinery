@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[134],{8134:(t,e,s)=>{s.r(e),s.d(e,{default:()=>a});const n={name:"Auth",middleware:"auth"};const a=(0,s(1900).Z)(n,(function(){var t=this.$createElement,e=this._self._c||t;return e("transition",{attrs:{name:"fade",mode:"out-in"}},[e("router-view",{staticClass:"mb-5 pb-5"})],1)}),[],!1,null,"51385b04",null).exports}}]);
+//# sourceMappingURL=2446aa3c70d49e310077.js.map

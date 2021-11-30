@@ -40,4 +40,5 @@ Route::group(['prefix' => 'users'], function () {
   Route::get('manufacturers', [ManufacturerController::class, 'get']);
 
   Route::get('product/{product}', [ProductController::class, 'find']);
+  Route::post('cart', [ProductController::class, 'cart']);
 });

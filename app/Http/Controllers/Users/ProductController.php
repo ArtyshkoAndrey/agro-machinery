@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -19,7 +18,7 @@ class ProductController extends Controller
    */
   public function get(Request $request): \Illuminate\Http\JsonResponse
   {
-    $products= Product::query();
+    $products = Product::query();
 
 
     if ($new = $request->boolean('new', null)) {
@@ -62,11 +61,28 @@ class ProductController extends Controller
       'suitable',
       'suitable.category',
       'suitable.image',
-      'attributes'
+      'attributes',
     ]);
 
     return JsonResponse::success([
-      'product' => $product
+      'product' => $product,
+    ]);
+  }
+
+  public function cart(Request $request): \Illuminate\Http\JsonResponse
+  {
+    $request->validate([
+      'ids' => 'array|min:0',
+      'ids.*' => 'integer|exists:products,id',
+    ]);
+
+    $products = Product::with([
+      'image',
+    ])->whereIn('id', $request->get('ids', []))
+      ->get();
+
+    return JsonResponse::success([
+      'products' => $products,
     ]);
   }
 }

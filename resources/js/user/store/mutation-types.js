@@ -8,3 +8,9 @@ export const UPDATE_USER = 'UPDATE_USER'
 
 // lang.js
 export const SET_LOCALE = 'SET_LOCALE'
+
+// cart.js
+export const ADD_PRODUCT = 'ADD'
+export const REMOVE_PRODUCT = 'REMOVE'
+export const FETCH_PRODUCTS_DB = 'FETCH_PRODUCTS_DB'
+export const RESPONSE_PRODUCTS = 'RESPONSE_PRODUCTS'

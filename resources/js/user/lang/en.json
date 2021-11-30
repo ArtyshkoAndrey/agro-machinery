@@ -65,6 +65,18 @@
   },
   "Product": {
     "prefix-cost": "at",
-    "buy": "Add to Cart"
+    "buy": "Add to Cart",
+    "specifications": "Specifications",
+    "suitable": "Similar products"
+  },
+  "vuex": {
+    "cart": {
+      "product_deleted": "One of the products has been deleted",
+      "confirm": "Ok"
+    }
+  },
+  "Cart": {
+    "title": "Cart",
+    "total": "Total amount"
   }
 }

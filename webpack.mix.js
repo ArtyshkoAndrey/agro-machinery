@@ -55,4 +55,4 @@ mix.then(() => {
   }
 })
 
-mix.browserSync('http://localhost/')
+mix.browserSync('http://agro-machinery/')

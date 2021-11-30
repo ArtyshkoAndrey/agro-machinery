@@ -74,7 +74,7 @@
                     <span>{{ $t('Product.prefix-cost') }} {{ $cost(product.cost) }} ₸</span>
                   </div>
                   <div class="col-12 col-sm">
-                    <button class="btn btn-cart">
+                    <button class="btn btn-cart" :disabled="include(product.id)" @click="add(product.id)">
                       {{ $t('Product.buy') }}
                       <iconly name="buy" type="outline" />
                     </button>
@@ -85,7 +85,7 @@
               <div v-if="product.attributes.length > 0" class="col-12 d-none d-md-block">
                 <div class="row attributes-row">
                   <div class="col-auto">
-                    <h3>Характеристики</h3>
+                    <h3>{{ $t('Product.specifications') }}</h3>
                   </div>
 
                   <div class="col-12">
@@ -102,8 +102,6 @@
                       </div>
                     </div>
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -111,7 +109,7 @@
         </div>
         <div v-if="product.suitable.length > 0" class="row mt-5">
           <div class="col-12">
-            <h2>Сопутствующие товары</h2>
+            <h2>{{ $t('Product.suitable') }}</h2>
           </div>
           <div class="col-12 mt-3">
             <div class="row catalog-list-products gx-1 gx-sm-2 gx-md-5 gx-lg-3 gy-2 gy-md-4">
@@ -128,7 +126,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import axios from 'axios';
 import Spinner from "../components/Spinner";
 import * as $ from 'jquery';
@@ -159,38 +157,42 @@ export default {
     loaderImage: true,
     product: {},
     images: [],
-    image: ''
+    image: '',
+    zooming: new Zooming({
+              onBeforeOpen: () => {
+                $('body').css('overflow','hidden')
+                $('hidden-overflow').css('overflow', 'auto')
+              },
+              onBeforeClose: () => {
+                $('body').css('overflow','auto')
+                $('hidden-overflow').css('overflow', 'hidden')
+              },
+              scaleBase: 1,
+              scaleExtra: 1.5,
+              scrollThreshold: 99999
+            })
   }),
   computed: {
     ...mapGetters({
       locale: 'lang/locale',
+      include: 'cart/include'
     }),
-    id() {
+    id () {
       return this.$route.params.id
-    },
-    image1() {
-      if (this.images)
-        return this.images.find(e => e.show)
-
-      return undefined
     }
   },
   async mounted() {
     await this.$root.$loading.set(30)
     await this.getProduct()
     await this.$root.$loading.set(50)
+
     await setTimeout(() => {
-      this.loading = false
-      setTimeout(() => {
+      console.log($('#img-slider').width())
+      $('#img-slider').height($('#img-slider').width())
+      $(window).resize(function () {
         console.log($('#img-slider').width())
         $('#img-slider').height($('#img-slider').width())
-
-        $(window).resize(function () {
-          console.log($('#img-slider').width())
-          $('#img-slider').height($('#img-slider').width())
-        })
-
-      }, 500)
+      })
     }, 1000)
     await this.$root.$loading.finish();
   },
@@ -236,9 +238,8 @@ export default {
             this.product.image.show = true
             this.images.push(this.product.image)
           }
-
-
           this.setImage(this.images[0].uri)
+          this.setLoading(false)
         })
         .catch(e => {
           this.$router.push({name: "index"})
@@ -253,6 +254,10 @@ export default {
       return new Promise((resolve) => {
         this.loading = status
         resolve()
+
+        console.log($('#img-slider').width())
+
+        $('#img-slider').height($('#img-slider').width())
       })
     },
     setImage(uri) {
@@ -265,22 +270,13 @@ export default {
         this.loaderImage = false
 
         setTimeout(() => {
-          new Zooming({
-            onBeforeOpen: () => {
-              $('body').css('overflow','hidden')
-              $('hidden-overflow').css('overflow', 'auto')
-            },
-            onBeforeClose: () => {
-              $('body').css('overflow','auto')
-              $('hidden-overflow').css('overflow', 'hidden')
-            },
-            scaleBase: 1,
-            scaleExtra: 1.5,
-            scrollThreshold: 99999
-          }).listen('.img-zooming')
+          this.zooming.listen('.img-zooming')
         }, 1000)
       }
-    }
+    },
+    ...mapActions({
+      add: 'cart/add'
+    })
   }
 }
 </script>
@@ -452,6 +448,13 @@ nav {
   &:hover {
     background: $color-dark;
     color: #FFFFFF;
+  }
+
+  &:disabled {
+    background: $color-dark;
+    opacity: 1;
+    color: #FFFFFF;
+    cursor: default;
   }
 
   @include respond-to(sm) {

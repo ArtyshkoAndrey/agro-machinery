@@ -4,20 +4,28 @@
     <main class="container">
       <Child />
     </main>
+
+    <Cart />
   </div>
 </template>
 
 <script>
-import Child from '~/user/components/Child.vue';
-import Menu from '~/user/components/Menu.vue';
+import Child from '~/user/components/Child';
+import Menu from '~/user/components/Menu';
+import Cart from '~/user/components/Cart';
+
 export default {
   name: 'Default',
   components: {
     Child,
-    Menu
+    Menu,
+    Cart
   },
   data: () => {
     return {}
+  },
+  mounted() {
+    this.$store.dispatch('cart/fetchProducts')
   }
 }
 </script>

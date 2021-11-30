@@ -55,7 +55,7 @@ export default {
 <style lang="scss" scoped>
   @import 'resources/scss/user/variables';
   @import 'resources/scss/user/colors';
-  
+
   hr {
     background: #D3D3D3;
     opacity: 1;
@@ -79,7 +79,7 @@ export default {
 
   #menu {
     min-width: 100%;
-    z-index: 12;
+    z-index: 13;
     top: 0;
     left: 0;
     position: fixed;
