@@ -56,7 +56,7 @@
         </section>
 
         <section id="new-products" class="mt-5 list-products">
-          <div class="row gx-1 gx-sm-2 gx-md-5 gx-lg-3 gy-2 gy-md-4">
+          <div class="row gx-1 gx-sm-2 gx-md-4 gx-lg-3 gy-2 gy-md-4">
             <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
               <div class="card card-for-info-products">
                 <h4>
@@ -81,21 +81,27 @@
         <section id="tyrkesh-companies" class="mt-5">
           <div class="row m-0">
             <div class="col-12 col-sm-12 col-md-12 col-lg-5 p-0">
+
               <div class="row justify-content-md-between m-0 align-items-center orange-info-text">
                 <div class="col-11 col-md-6 col-lg-11 p-0">
                   <h4>{{ $t('index.tyrkesh-companies.title') }}</h4>
                 </div>
                 <div class="col-12 col-md-4 col-lg-12 p-0">
-                  <Button class="w-auto ms-0 ms-md-auto ms-lg-0 d-block" dark big rounded_angle arrow>
+                  <Button class="w-auto ms-0 ms-md-auto ms-lg-0 d-block" dark big rounded_angle arrow route_link="catalog">
                     {{ $t('button.catalog') }}
                   </Button>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-7 offset-md-0 offset-lg-0 align-self-center p-0">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-7 offset-md-0 offset-lg-0 d-flex align-content-lg-stretch p-0 position-relative">
+              <img src="/public/images/user/three-angle.svg"
+                   alt="three-angle.svg"
+                   class="d-none d-lg-block"
+                   style="position: absolute; height: 100%; width: auto; left:0; top:0;"
+              >
               <div class="row m-md-0 tyrkesh-companies-row">
-                <div v-for="i in 6" :key="i" class="col-6 col-sm-4 col-md-4 tyrkesh-companies-col-image">
-                  <img src="public/images/user/companies/celiker.png" class="w-100 h-auto" alt="company">
+                <div v-for="image in companies_image" :key="image" class="col-6 col-sm-4 col-md-4 tyrkesh-companies-col-image">
+                  <img :src="'public/images/user/companies/' + image" class="w-100 h-auto" :alt="image">
                 </div>
               </div>
             </div>
@@ -104,7 +110,7 @@
 
 
         <section id="popular-products" class="mt-5 mb-5 list-products">
-          <div class="row gx-1 gx-sm-2 gx-md-5 gx-lg-3 gy-2 gy-md-4">
+          <div class="row gx-1 gx-sm-2 gx-md-4 gx-lg-3 gy-2 gy-md-4">
             <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
               <div class="card card-for-info-products">
                 <h4>
@@ -114,7 +120,7 @@
                   {{ $t('index.popular-products.description') }}
                 </p>
 
-                <Button class="mt-auto" orange rounded_angle arrow big>
+                <Button class="mt-auto" orange rounded_angle arrow big route_link="catalog">
                   {{ $t('button.catalog') }}
                 </Button>
               </div>
@@ -195,7 +201,15 @@ export default {
     loading: true,
     categories: [],
     popular_products: [],
-    new_products: []
+    new_products: [],
+    companies_image: [
+      'celiker.png',
+      'ozenis.png',
+      'surmak.png',
+      'sakalak.png',
+      'enka.png',
+      'toscano.png'
+    ]
   }),
   async mounted () {
     await this.$root.$loading.set(30);

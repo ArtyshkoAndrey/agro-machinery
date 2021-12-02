@@ -112,7 +112,7 @@
             <h2>{{ $t('Product.suitable') }}</h2>
           </div>
           <div class="col-12 mt-3">
-            <div class="row catalog-list-products gx-1 gx-sm-2 gx-md-5 gx-lg-3 gy-2 gy-md-4">
+            <div class="row catalog-list-products gx-1 gx-sm-2 gx-md-4 gx-lg-3 gy-2 gy-md-4">
               <div v-for="suitable in product.suitable" :key="suitable.id" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
                 <item :item="suitable" />
               </div>

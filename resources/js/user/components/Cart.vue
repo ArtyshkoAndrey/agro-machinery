@@ -51,8 +51,8 @@ export default {
     border-radius: 100%;
     background: $color-orange;
     border: 0;
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
     z-index: 12;
 
     margin-right: 10px;
@@ -60,25 +60,46 @@ export default {
     @include respond-to(md) {
       margin-right: 0;
       bottom: 80px;
+
+      height: 70px;
+      width: 70px;
     }
 
     .badge {
       position: absolute;
-      top: -10px;
-      right: -10px;
+      top: -5px;
+      right: -1px;
       border-radius: 100%;
       background: $color-dark;
       color: #FFFFFF;
       text-align: center;
-
       font-weight: normal;
-      font-size: 18px;
-      line-height: 21px;
+      font-size: 12px;
+      line-height: 12px;
+
+      @include respond-to(md) {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        border-radius: 100%;
+        background: $color-dark;
+        color: #FFFFFF;
+        text-align: center;
+
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 18px;
+      }
     }
 
     svg {
-      height: 32px;
-      width: 32px;
+      height: 22px;
+      width: 22px;
+
+      @include respond-to(md) {
+        height: 32px;
+        width: 32px;
+      }
     }
   }
 }

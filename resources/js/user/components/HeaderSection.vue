@@ -11,6 +11,15 @@
         </p>
       </div>
 
+      <div class="catalog-link d-flex flex-row flex-nowrap mx-0 p-0 align-items-center">
+        <hr>
+        <router-link :to="{name: 'catalog'}" class="d-flex align-self-end">
+          <span>{{ $t('HeaderSection.catalog') }}</span>
+
+          <iconly name="arrow-right2" type="outline" />
+        </router-link>
+      </div>
+
       <img class="tractor" src="public/images/user/traktor-mobile.png" alt="traktor">
     </div>
   </div>
@@ -27,12 +36,12 @@ export default {
   .bg-images {
     width: 100%;
     background-color: #1A1819;
-    background-image: url("/images/user/vector-header.svg");
+    background-image: url("/public/images/user/vector-header.svg");
 
     background-size: contain;
     background-position: 11px 80%;
     background-repeat: no-repeat;
-    padding: 24px 24px 200px;
+    padding: 24px 24px 180px;
 
     position: relative;
     border-radius: 16px 0;
@@ -48,7 +57,7 @@ export default {
       color: #F4B12F;
       font-size: 12px;
       font-weight: normal;
-      margin-bottom: 0px;
+      margin-bottom: 0;
     }
     h1 {
       font-size: 18px;
@@ -58,9 +67,25 @@ export default {
 
     img.tractor {
       position: absolute;
-      bottom: -50px;
-      width: 86%;
-      left: 7%;
+      bottom: -52px;
+      width: 92%;
+      left: 5%;
+    }
+
+    @media screen and (min-width: 360px) {
+      img.tractor {
+        bottom: -84px;
+        width: 92%;
+        left: 9%;
+      }
+    }
+
+    @media screen and (min-width: 400px) {
+      img.tractor {
+        bottom: -69px;
+        width: 80%;
+        left: 17%;
+      }
     }
 
     @media screen and (min-width: 414px) {
@@ -75,9 +100,17 @@ export default {
       background-position: 63px 105%;
 
       img.tractor {
-        bottom: -110px;
+        bottom: -71px;
         width: 69%;
-        left: 20%;
+        left: 26%;
+      }
+    }
+
+    @media screen and (min-width:   540px) {
+      img.tractor {
+        bottom: -86px;
+        width: 69%;
+        left: 29%;
       }
     }
 
@@ -104,7 +137,7 @@ export default {
     }
 
     @include respond-to(md) {
-      padding: 77px 41px 200px;
+      padding: 77px 41px 184px;
       border-radius: 48px 0;
 
       p {
@@ -117,40 +150,40 @@ export default {
         font-size: 24px;
       }
       img.tractor {
-        bottom: -115px;
-        width: 66%;
-        left: 35%;
+        bottom: -108px;
+        width: 69%;
+        left: 33%;
       }
     }
 
     @include respond-to(lg) {
-      padding: 99px 77px 130px;
+      padding: 71px 77px 190px;
       border-radius: 70px 0;
 
       background-size: 93%;
-      background-position: 300% 0;
+      background-position: 300% 100%;
 
       p {
         margin-top: 15px;
         font-size: 18px;
       }
       h1 {
-        margin-top: 0px;
+        margin-top: 0;
         font-size: 52px;
       }
       h2 {
         font-size: 24px;
       }
       img.tractor {
-        bottom: -30px;
+        bottom: -38px;
         width: 64%;
-        left: 35%;
+        left: 41%;
       }
     }
 
     @include respond-to(xl) {
-      background-size: 74%;
-      background-position: 103%;
+      background-size: 76%;
+      background-position: 108% 152%;
 
       img.tractor {
         bottom: -51px;
@@ -159,4 +192,80 @@ export default {
       }
     }
   }
+
+  .catalog-link {
+    position: absolute;
+    top: unset;
+    margin-top: 15px;
+
+    left: 0;
+
+    > * {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    a {
+      display: flex;
+      margin-left: 7px;
+    }
+    a, a > svg {
+      text-decoration: none;
+      color: $color-orange;
+      font-weight: 500;
+
+      font-size: 14px;
+      line-height: 17px;
+    }
+    a > svg {
+      margin-left: 4px;
+    }
+
+    hr {
+      margin: 0;
+      padding: 0;
+      background: $color-orange;
+      width: 48px;
+      height: 1px;
+      opacity: 1;
+      display: flex;
+    }
+
+    @include respond-to(md) {
+      margin-top: 32px;
+      a {
+        margin-left: 13px;
+      }
+      a, a > svg {
+        font-size: 18px;
+        line-height: 21px;
+      }
+      a > svg {
+        margin-left: 11px;
+      }
+      hr {
+        width: 56px;
+      }
+
+    }
+
+    @include respond-to(lg) {
+      margin-top: 104px;
+      a, a > svg {
+        font-size: 18px;
+        line-height: 21px;
+      }
+
+      hr {
+        width: 200px;
+      }
+    }
+
+    @include respond-to(xl) {
+
+      hr {
+        width: 246px;
+      }
+    }
+  }
+
 </style>

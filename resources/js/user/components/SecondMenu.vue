@@ -4,10 +4,19 @@
       <button class="navbar-toggler"
               type="button"
               id="toggles-menu"
-
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <router-link class="navbar-brand d-block d-md-none me-auto ms-2" :to="{name: 'index'}">
+        <img src="/public/images/user/Vector.svg" alt="logo">
+      </router-link>
+      <div class="d-flex time-mobile">
+        <p class="mb-0 d-block d-md-none">
+          +7 (705) 764-44-44
+          <br>
+          {{ $t('Menu.date') }}
+        </p>
+      </div>
       <div id="navbarTogglerDemo02" class="collapse navbar-collapse">
         <ul class="navbar-nav w-100">
 
@@ -17,11 +26,11 @@
             </router-link>
           </li>
 
-          <li class="nav-item">
-            <router-link class="nav-link" to="#">
-              {{ $t('SecondMenu.about') }}
-            </router-link>
-          </li>
+<!--          <li class="nav-item">-->
+<!--            <router-link class="nav-link" to="#">-->
+<!--              {{ $t('SecondMenu.about') }}-->
+<!--            </router-link>-->
+<!--          </li>-->
 
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'catalog'}">
@@ -35,17 +44,17 @@
             </router-link>
           </li>
 
-          <li class="nav-item">
-            <router-link class="nav-link" to="#">
-              {{ $t('SecondMenu.news') }}
-            </router-link>
-          </li>
+<!--          <li class="nav-item">-->
+<!--            <router-link class="nav-link" to="#">-->
+<!--              {{ $t('SecondMenu.news') }}-->
+<!--            </router-link>-->
+<!--          </li>-->
 
-          <li class="nav-item me-lg-auto">
-            <router-link class="nav-link" to="#">
-              {{ $t('SecondMenu.contacts') }}
-            </router-link>
-          </li>
+<!--          <li class="nav-item me-lg-auto">-->
+<!--            <router-link class="nav-link" to="#">-->
+<!--              {{ $t('SecondMenu.contacts') }}-->
+<!--            </router-link>-->
+<!--          </li>-->
 
           <li class="nav-item ms-lg-auto mt-5 mt-md-0">
             <button class="nav-link bg-transparent border-0" form @click="setLocale(tempLocale)">
@@ -157,6 +166,13 @@ export default {
 
 
   #second-menu {
+
+    .time-mobile {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      color: $color-dark;
+    }
     .container {
       //border-bottom: 1px solid #D3D3D3;
       //border-width: medium;

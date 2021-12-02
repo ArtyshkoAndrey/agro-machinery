@@ -55,3 +55,14 @@
 
 @import 'index-page';
 @import 'catalog-page';
+
+button, button:focus, button:active, button:hover {
+  outline: none;
+  > *, * {
+    outline: none;
+  }
+}
+
+button:focus {
+  box-shadow: none!important;
+}
