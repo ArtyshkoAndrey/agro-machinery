@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Users\OrderController;
 use App\Http\Controllers\Users\ProductController;
 use App\Http\Controllers\Users\CatalogController;
 use App\Http\Controllers\Users\CategoryController;
@@ -41,4 +42,5 @@ Route::group(['prefix' => 'users'], function () {
 
   Route::get('product/{product}', [ProductController::class, 'find']);
   Route::post('cart', [ProductController::class, 'cart']);
+  Route::post('order', [OrderController::class, 'create']);
 });

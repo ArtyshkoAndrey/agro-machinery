@@ -42,6 +42,7 @@
                     </div>
                   </div>
                 </div>
+                <hr>
               </div>
             </div>
 
@@ -56,6 +57,59 @@
               </div>
             </div>
           </div>
+          <div class="col-lg-5 col-md-12">
+            <div class="row">
+              <div class="col-12">
+                <h1>Ваши контакты</h1>
+                <p>
+                  Оставьте свои контакты и мы отправим коммерческое предложение по вашим товарам
+                </p>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <form>
+                <div class="mb-3">
+                  <input v-model="form.name"
+                         type="text"
+                         class="form-control "
+                         :class="form.errors.has('name') ? 'is-invalid' : '' "
+                         placeholder="Как вас зовут?"
+                  >
+                  <div v-if="form.errors.has('name')" id="validationCheckName" class="invalid-feedback">
+                    {{ form.errors.get('name') }}
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <input v-model="form.email"
+                         type="email"
+                         class="form-control "
+                         :class="form.errors.has('email') ? 'is-invalid' : '' "
+                         placeholder="E-mail"
+                  >
+                  <div v-if="form.errors.has('email')" id="validationCheckEmail" class="invalid-feedback">
+                    {{ form.errors.get('email') }}
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <input v-model="form.phone"
+                         type="phone"
+                         class="form-control "
+                         :class="form.errors.has('phone') ? 'is-invalid' : '' "
+                         placeholder="+7 (___) ___-__-__"
+                  >
+                  <div v-if="form.errors.has('phone')" id="validationCheckPhone" class="invalid-feedback">
+                    {{ form.errors.get('phone') }}
+                  </div>
+                </div>
+                <button type="button" :disabled="form.busy || products_count < 1" class="btn" form @click="createOrder">
+                  <span v-show="form.busy" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"/>
+                  <span v-show="form.busy" class="visually-hidden">Loading...</span>
+                  Получить коммерческое предложение
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
     </transition>
@@ -67,6 +121,7 @@ import axios from 'axios';
 import Spinner from "../components/Spinner";
 import { mapGetters, mapActions } from "vuex";
 import * as $ from 'jquery';
+import Form from "vform";
 
 export default {
   name: "Cart",
@@ -78,11 +133,17 @@ export default {
     next()
   },
   data: () => ({
-    loading: true
+    loading: true,
+    form: new Form({
+      name: '',
+      email: '',
+      phone: ''
+    })
   }),
   computed: {
     ...mapGetters({
       products: 'cart/response_products',
+      products_count: 'cart/products_count',
       locale: 'lang/locale'
     })
   },
@@ -116,6 +177,15 @@ export default {
         resolve()
       })
     },
+    createOrder () {
+      this.form.post('/api/users/order')
+      .then(r => {
+        console.warn(r.data)
+      })
+      .catch(e => {
+        console.warn(e.response.data)
+      })
+    }
   }
 }
 </script>
@@ -137,13 +207,29 @@ export default {
       margin-bottom: 32px;
     }
   }
+  p {
+    color: $color-gray;
+
+    font-size: 18px;
+    line-height: 21px;
+
+    width: 100%;
+
+    @include respond-to(md) {
+      width: 80%;
+    }
+  }
   .product {
 
     margin-top: 24px;
-    margin-right: calc(var(--bs-gutter-x) * 0.5);
-    margin-left: calc(var(--bs-gutter-x) * 0.5);
-    padding: 0 0 24px;
-    border-bottom: 1px solid #D3D3D3;
+
+
+    hr {
+      background: #D3D3D3;
+      opacity: 1;
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
 
     img {
       border-radius: 12px;
@@ -220,6 +306,48 @@ export default {
       font-weight: 500;
       font-size: 32px;
       line-height: 38px;
+    }
+  }
+
+  form {
+    button {
+      color: $color-dark;
+      background: $color-orange;
+      font-weight: normal;
+      width: 100%;
+
+      font-size: 14px;
+      line-height: 17px;
+      padding: 14px 13px;
+      border-radius: 16px 0;
+      transition: 0.3s;
+
+      @include respond-to(md) {
+        font-size: 18px;
+        line-height: 21px;
+        padding: 20px;
+      }
+
+      &:hover, &.loading, &:disabled {
+        color: #FFFFFF;
+        background: $color-dark;
+      }
+
+
+    }
+
+    input {
+      padding: 20px 16px;
+      border: 1px solid #B3B3B3;
+      border-radius: 8px;
+
+      font-size: 16px;
+      line-height: 19px;
+
+      @include respond-to(md) {
+        font-size: 18px;
+        line-height: 21px;
+      }
     }
   }
 </style>
