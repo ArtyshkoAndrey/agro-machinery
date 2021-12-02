@@ -9,7 +9,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -33,6 +32,12 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @property-read ProductTranslation|null         $translation
  * @property-read Collection|ProductTranslation[] $translations
  * @property-read int|null                        $translations_count
+ * @property-read Collection|Product[]            $suitable
+ * @property-read int|null                        $suitable_count
+ * @property int                                  $manufacturer_id
+ * @property-read Collection|Attribute[]          $attributes
+ * @property-read int|null                        $attributes_count
+ * @property-read Manufacturer                    $manufacturer
  * @method static \Illuminate\Database\Eloquent\Builder|Product listsTranslations(string $translationField)
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
@@ -57,9 +62,8 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @method static \Illuminate\Database\Eloquent\Builder|Product withTranslation()
  * @method static Builder|Product withTrashed()
  * @method static Builder|Product withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereManufacturerId($value)
  * @mixin Eloquent
- * @property-read Collection|Product[] $suitable
- * @property-read int|null $suitable_count
  */
 class Product extends Model implements TranslatableContract
 {
@@ -87,17 +91,18 @@ class Product extends Model implements TranslatableContract
   {
     return $this->belongsTo(Category::class, 'category_id', 'id');
   }
+
   public function manufacturer(): BelongsTo
   {
     return $this->belongsTo(Manufacturer::class, 'manufacturer_id', 'id');
   }
 
-  public function suitable (): BelongsToMany
+  public function suitable(): BelongsToMany
   {
     return $this->belongsToMany(self::class, 'suitable_products', 'product_id', 'suite_id');
   }
 
-  public function attributes (): BelongsToMany
+  public function attributes(): BelongsToMany
   {
     return $this
       ->belongsToMany(Attribute::class, 'product_attributes')

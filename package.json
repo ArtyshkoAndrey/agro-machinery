@@ -47,6 +47,7 @@
     "boxicons": "^2.0.9",
     "fs-extra": "^10.0.0",
     "jquery": "^3.6.0",
+    "jquery-mask-plugin": "^1.14.16",
     "js-cookie": "^3.0.1",
     "laravel-mix-versionhash": "^2.0.1",
     "moment": "^2.29.1",

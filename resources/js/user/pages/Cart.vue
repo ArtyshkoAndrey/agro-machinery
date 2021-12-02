@@ -53,7 +53,7 @@
             </div>
             <div class="row justify-content-end">
               <div class="col-auto">
-                <span class="cost">~ 20 000 000 ₸ </span>
+                <span class="cost">~ {{ $cost(cost) }} ₸</span>
               </div>
             </div>
           </div>
@@ -93,6 +93,7 @@
                 </div>
                 <div class="mb-3">
                   <input v-model="form.phone"
+                         id="phone"
                          type="phone"
                          class="form-control "
                          :class="form.errors.has('phone') ? 'is-invalid' : '' "
@@ -117,10 +118,10 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Spinner from "../components/Spinner";
 import { mapGetters, mapActions } from "vuex";
 import * as $ from 'jquery';
+require('jquery-mask-plugin');
 import Form from "vform";
 
 export default {
@@ -137,18 +138,24 @@ export default {
     form: new Form({
       name: '',
       email: '',
-      phone: ''
+      phone: '',
+      products: [],
+      cost: 0
     })
   }),
   computed: {
     ...mapGetters({
       products: 'cart/response_products',
+      ids: 'cart/products',
+      cost: 'cart/cost',
       products_count: 'cart/products_count',
       locale: 'lang/locale'
     })
   },
-  async beforeMount() {
-    await this.setLoading(true)
+  beforeMount() {
+    this.setLoading(true)
+    this.form.products = this.ids
+    this.form.cost = this.cost
   },
   mounted() {
     this.$root.$loading.set(50)
@@ -158,12 +165,13 @@ export default {
     this.$nextTick(function () {
       setTimeout(() => {
         let img = $('.product img')
-        console.log($('.product img'))
         img.height(img.width())
 
         $(window).resize(() => {
           img.height(img.width())
         })
+
+        $('#phone').mask("+7 (999) 999 99-99");
       }, 1000)
     })
   },
@@ -185,6 +193,12 @@ export default {
       .catch(e => {
         console.warn(e.response.data)
       })
+    }
+  },
+  // eslint-disable-next-line vue/order-in-components
+  watch: {
+    cost: function (newVal) {
+      this.form.cost = newVal
     }
   }
 }

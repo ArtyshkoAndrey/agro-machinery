@@ -34,6 +34,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @property-read int|null                         $parents_count
  * @property-read Collection|Product[]             $products
  * @property-read int|null                         $products_count
+ * @property-read array                            $parent
  * @method static Builder|Category listsTranslations(string $translationField)
  * @method static Builder|Category newModelQuery()
  * @method static Builder|Category newQuery()
@@ -78,21 +79,6 @@ class Category extends Model implements TranslatableContract
   ];
 
   /**
-   * Parent Categories
-   *
-   * @return BelongsToMany
-   */
-  public function parents(): BelongsToMany
-  {
-    return $this->belongsToMany(
-      Category::class,
-      'category_categories',
-      'child_category_id',
-      'category_id'
-    );
-  }
-
-  /**
    * Return all Parents
    *
    * @return array
@@ -112,7 +98,8 @@ class Category extends Model implements TranslatableContract
    *
    * @return void
    */
-  public function getParents(array &$parents, Category $c) {
+  public function getParents(array &$parents, Category $c)
+  {
     try {
       $childCategory = $c;
       while ($category = $childCategory->parents()->first()) {
@@ -124,6 +111,21 @@ class Category extends Model implements TranslatableContract
     } catch (Error $exception) {
 
     }
+  }
+
+  /**
+   * Parent Categories
+   *
+   * @return BelongsToMany
+   */
+  public function parents(): BelongsToMany
+  {
+    return $this->belongsToMany(
+      Category::class,
+      'category_categories',
+      'child_category_id',
+      'category_id'
+    );
   }
 
   /**

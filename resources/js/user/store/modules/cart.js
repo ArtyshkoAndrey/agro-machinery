@@ -16,7 +16,8 @@ export const getters = {
   include: state => id => {
     return state.products.includes(Number(id))
   },
-  products_count: state => state.products.length
+  products_count: state => state.products.length,
+  cost: state => state.response_products.length > 0 ? state.response_products.map(i=>i.cost).reduce((a, b)=> a + b) : 0
 }
 
 // mutations
