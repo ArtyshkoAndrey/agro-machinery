@@ -79,5 +79,8 @@
   "Cart": {
     "title": "Cart",
     "total": "Total amount"
+  },
+  "create-order": {
+    "title": "Your order has been accepted and is being processed"
   }
 }

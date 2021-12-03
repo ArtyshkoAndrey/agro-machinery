@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Users;
 
+use Mail;
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Helpers\JsonResponse;
+use App\Mail\CreateOrderForUser;
+use App\Mail\CreateOrderForAdmin;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -23,6 +27,14 @@ class OrderController extends Controller
 
     $order->products()->sync($request->get('products'));
     $order->save();
+
+    Mail::to($order->email)->send(new CreateOrderForUser($order));
+
+    $users = User::all();
+
+    foreach ($users as $user) {
+      Mail::to($user->email)->send(new CreateOrderForAdmin($order, $user));
+    }
 
     return JsonResponse::success([
       'order' => $order

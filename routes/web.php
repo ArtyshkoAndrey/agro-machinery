@@ -14,6 +14,7 @@ use App\Http\Controllers\Spa\SpaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('email/email-create-order-for-user', [SpaController::class, 'email']);
 Route::get('/image/{path}', [ImageController::class, 'show'])->where('path', '.*');
 Route::get('/admin', [SpaController::class, 'admin']);
 Route::group(['prefix' => 'admin'], function () {

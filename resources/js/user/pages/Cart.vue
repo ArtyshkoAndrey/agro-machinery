@@ -177,7 +177,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      remove: 'cart/remove'
+      remove: 'cart/remove',
+      clear: 'cart/clear'
     }),
     async setLoading(status) {
       return new Promise((resolve) => {
@@ -189,6 +190,13 @@ export default {
       this.form.post('/api/users/order')
       .then(r => {
         console.warn(r.data)
+        this.clear()
+        this.$Swal.fire({
+          icon: 'success',
+          title: this.$t('create-order.title'),
+          showConfirmButton: true,
+          timer: 3000
+        })
       })
       .catch(e => {
         console.warn(e.response.data)

@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Image;
+use App\Models\Order;
 use App\Observers\ImageObserver;
+use App\Observers\OrderObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -29,5 +31,6 @@ class EventServiceProvider extends ServiceProvider
   public function boot(): void
   {
     Image::observe(ImageObserver::class);
+    Order::observe(OrderObserver::class);
   }
 }

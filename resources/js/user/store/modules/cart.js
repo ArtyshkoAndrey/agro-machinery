@@ -3,6 +3,7 @@ import axios from "axios";
 import * as types from '../mutation-types'
 import * as _ from 'lodash'
 import i18n from '~/user/plugins/i18n'
+import {CLEAR_PRODUCTS} from "../mutation-types";
 
 export const state = {
   products: Cookies.get('products') ? Cookies.get('products').split(',').map(e => Number(e)) : [],
@@ -38,6 +39,11 @@ export const mutations = {
   },
   [types.RESPONSE_PRODUCTS]  (state, products) {
     state.response_products = products
+  },
+  [types.CLEAR_PRODUCTS]  (state) {
+    state.response_products = []
+    state.products = []
+    Cookies.set('products', state.products, 365)
   }
 }
 
@@ -52,6 +58,10 @@ export const actions = {
 
   remove ({ commit }, payload) {
     commit(types.REMOVE_PRODUCT, Number(payload))
+  },
+
+  clear({ commit }) {
+    commit(types.CLEAR_PRODUCTS)
   },
 
   fetchProducts ({ commit, state }) {
