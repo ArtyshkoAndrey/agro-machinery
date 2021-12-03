@@ -167,7 +167,6 @@ export default {
     myDropdown.addEventListener('hidden.bs.dropdown', function () {
       console.log('hide')
     })
-    console.log(dropdownList[0].toggle())
 
     this.getCategories()
     this.getManufacturers()
