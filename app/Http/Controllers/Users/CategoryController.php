@@ -36,7 +36,7 @@ class CategoryController extends Controller
       $categories = $categories->take($max_count);
     }
 
-    if($category === null) {
+    if ($category === null) {
       $categories = $categories->get();
     }
 
@@ -51,5 +51,20 @@ class CategoryController extends Controller
     }
 
     return JsonResponse::success(['categories' => $categories]);
+  }
+
+  public function menu(Request $request): \Illuminate\Http\JsonResponse
+  {
+    $categories = Category::query();
+
+    $categories = $categories->doesntHave('parents');
+
+    $categories = $categories->get();
+
+    $categories = $categories->append(['countProducts']);
+
+    return JsonResponse::success([
+      'categories' => $categories,
+    ]);
   }
 }

@@ -35,6 +35,7 @@ Route::group(['middleware' => 'guest:api'], function () {
 
 Route::group(['prefix' => 'users'], function () {
   Route::get('categories', [CategoryController::class, 'get']);
+  Route::get('categories/menu', [CategoryController::class, 'menu']);
   Route::get('products', [ProductController::class, 'get']);
 
   Route::get('catalog', [CatalogController::class, 'get']);

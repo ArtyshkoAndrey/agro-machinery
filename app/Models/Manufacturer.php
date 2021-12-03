@@ -39,7 +39,7 @@ class Manufacturer extends Model
     'name',
   ];
 
-  public function products_count(): int
+  public function getProductsCountAttribute(): int
   {
     return $this->products()->count();
   }

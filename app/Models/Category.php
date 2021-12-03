@@ -98,7 +98,7 @@ class Category extends Model implements TranslatableContract
    *
    * @return void
    */
-  public function getParents(array &$parents, Category $c)
+  public function getParents(array &$parents, Category $c): void
   {
     try {
       $childCategory = $c;
@@ -121,7 +121,7 @@ class Category extends Model implements TranslatableContract
   public function parents(): BelongsToMany
   {
     return $this->belongsToMany(
-      Category::class,
+      __CLASS__,
       'category_categories',
       'child_category_id',
       'category_id'
@@ -143,6 +143,10 @@ class Category extends Model implements TranslatableContract
   public function countProducts()
   {
     return $this->products->count() + $this->child()->withCount('products')->get()->sum('products_count');
+  }
+  public function getCountProductsAttribute ()
+  {
+    return $this->countProducts();
   }
 
   /**

@@ -7,7 +7,7 @@ import store from '~/user/store'
 import router from '~/user/router'
 import '~/user/components'
 import * as $ from 'jquery';
-import 'bootstrap/dist/js/bootstrap'
+// import 'bootstrap/dist/js/bootstrap'
 import Iconly from "vue-iconly";
 import Swal from 'sweetalert2'
 
