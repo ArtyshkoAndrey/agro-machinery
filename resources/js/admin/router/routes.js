@@ -26,6 +26,34 @@ export default [
         ]
       },
       {
+        path: 'admin/attributes',
+        component: {render: (c) => c('router-view')},
+        alias: 'dashboard.attributes.index',
+        children: [
+          {path: '', redirect: {name: 'dashboard.attributes.index'}},
+          {
+            path: 'index', name: 'dashboard.attributes.index', component: page('dashboard/attributes/index.vue')
+          },
+          {
+            path: 'edit/:id', name: 'dashboard.attributes.edit', component: page('dashboard/attributes/edit.vue')
+          },
+          {
+            path: 'store', name: 'dashboard.attributes.store', component: page('dashboard/attributes/store.vue')
+          }
+        ]
+      },
+      {
+        path: 'admin/manufacturers',
+        component: {render: (c) => c('router-view')},
+        alias: 'dashboard.manufacturers.index',
+        children: [
+          {path: '', redirect: {name: 'dashboard.manufacturers.index'}},
+          {
+            path: 'index', name: 'dashboard.manufacturers.index', component: page('dashboard/manufacturers/index.vue')
+          }
+        ]
+      },
+      {
         path: 'admin/products',
         component: {render: (c) => c('router-view')},
         alias: 'dashboard.products.index',

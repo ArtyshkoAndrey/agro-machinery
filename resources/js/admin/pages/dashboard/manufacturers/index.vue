@@ -3,28 +3,28 @@
 
   <div v-else>
     <HeaderFilterInfo ref="filter"
-                      :values="users"
+                      :values="manufacturers"
                       :view-length="viewLength"
-                      :title="$t('users.index.filter_title')"
+                      :title="$t('manufacturers.index.filter_title')"
                       :filter="filter"
-                      @create="busCreateUser.$emit('openModal')"
+                      @create="busCreateManufacturer.$emit('openModal')"
                       @get="get"
                       @setViewLength="setViewLength"
     />
 
     <div class="row gy-3 mt-3">
-      <div v-for="item in users.data" :key="item.id" class="col-12">
+      <div v-for="item in manufacturers.data" :key="item.id" class="col-12">
         <ItemCardOneField :item="item"
                           :fields="inputs"
-                          :update-modal-title="'users.edit-modal.title'"
+                          :update-modal-title="'manufacturers.edit-modal.title'"
                           @update="update"
                           @destroy="deleteItem"
         />
       </div>
     </div>
 
-    <EditItemsModal :bus="busCreateUser"
-                    :title="'users.create-modal.title'"
+    <EditItemsModal :bus="busCreateManufacturer"
+                    :title="'manufacturers.create-modal.title'"
                     :fields="inputs"
                     :inputs="{}"
     />
@@ -51,13 +51,12 @@ export default {
     EditItemsModal
   },
   data: () => ({
-    title: i18n.t('users.index.title'),
     viewLength: 10,
-    users: {},
+    manufacturers: {},
     filter: new Vue(),
-    busCreateUser: new Vue(),
+    busCreateManufacturer: new Vue(),
     inputs: [
-      'id', 'name', 'email', 'password'
+      'id', 'name'
     ]
   }),
   computed: {
@@ -65,21 +64,18 @@ export default {
       user: 'auth/user'
     }),
   },
-  metaInfo: {
-    title: i18n.t('users.index.title'),
-  },
   async mounted () {
-    await this.busCreateUser.$on('save', this.store)
+    await this.busCreateManufacturer.$on('save', this.store)
 
     await this.$root.$loading.set(50)
-    await axios.get('/api/admin/users', {
+    await axios.get('/api/admin/manufacturers', {
       params: {
         per_page: this.viewLength,
       }
     })
     .then(r => {
       console.log(r.data)
-      this.users = r.data.payload.users
+      this.manufacturers = r.data.payload.manufacturers
       this.$root.$loading.finish()
     })
     .catch(e => {
@@ -96,7 +92,7 @@ export default {
      * @param {string} settings.search
      */
     get (settings) {
-      axios.get('/api/admin/users', {
+      axios.get('/api/admin/manufacturers', {
         params: {
           per_page: this.viewLength,
           page: settings.page,
@@ -107,11 +103,11 @@ export default {
          * @var {object} r
          * @var {object} r.data
          * @var {object} r.data.payload
-         * @var {array} r.data.payload.users
+         * @var {array} r.data.payload.manufacturers
          */
       .then(r => {
-        this.users = r.data.payload.users
-        this.filter.$emit('updateData', r.data.payload.users)
+        this.manufacturers = r.data.payload.manufacturers
+        this.filter.$emit('updateData', r.data.payload.manufacturers)
         console.log('new data', r.data)
       })
 
@@ -133,24 +129,12 @@ export default {
      */
     deleteItem (id) {
 
-      if (id === this.user.id) {
-        this.$vs.notification({
-          duration: 2000,
-          sticky: true,
-          position: 'top-right',
-          color: 'danger',
-          title: this.$t('notification.delete.danger.title'),
-          text: this.$t('notification.delete.danger.user-delete')
-        })
-
-        return false
-      }
-      axios.delete('/api/admin/users/' + id)
+      axios.delete('/api/admin/manufacturers/' + id)
         /**
          * @var {object} r
          * @var {object} r.data
          * @var {object} r.data.payload
-         * @var {object} r.data.payload.user
+         * @var {object} r.data.payload.manufacturer
          */
       .then(r => {
         this.$vs.notification({
@@ -158,8 +142,8 @@ export default {
           sticky: true,
           position: 'top-right',
           color: 'success',
-          title: this.$t('notification.delete.success.title', {name: r.data.payload.user.name}),
-          text: this.$t('notification.delete.success.text', {name: r.data.payload.user.name})
+          title: this.$t('notification.delete.success.title', {name: r.data.payload.manufacturer.name}),
+          text: this.$t('notification.delete.success.text', {name: r.data.payload.manufacturer.name})
         })
         this.get({
           page: this.$refs.filter.page,
@@ -192,10 +176,8 @@ export default {
      */
     update (params) {
 
-      axios.put('/api/admin/users/' + params.id, {
+      axios.put('/api/admin/manufacturers/' + params.id, {
         name: params.name,
-        email: params.email,
-        password: params.password
       })
       .then(r => {
         if(r.data.success) {
@@ -228,10 +210,8 @@ export default {
      * @var {string} params.name
      */
     store (params) {
-      axios.post('/api/admin/users/', {
-        name: params.name,
-        email: params.email,
-        password: params.password
+      axios.post('/api/admin/manufacturers/', {
+        name: params.name
       })
       .then(r => {
         if (r.data.success) {

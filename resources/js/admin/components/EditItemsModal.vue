@@ -72,6 +72,15 @@ export default {
     loading: false,
     error: {}
   }),
+  computed: {
+    translateTitle () {
+      if (this.title === '') {
+        return this.$t('form.title.edit')
+      }
+
+      return this.$t(this.title)
+    }
+  },
   mounted() {
 
     this.data = this.inputs
@@ -81,15 +90,6 @@ export default {
 
     // Listen parent to open Modal
     this.bus.$on('openModal', this.openModal)
-  },
-  computed: {
-    translateTitle () {
-      if (this.title === '') {
-        return this.$t('form.title.edit')
-      }
-
-      return this.$t(this.title)
-    }
   },
   methods: {
     /**

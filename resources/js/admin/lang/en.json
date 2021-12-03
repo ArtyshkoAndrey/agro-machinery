@@ -12,11 +12,16 @@
     "products": {
       "title": "Products"
     },
+    "attributes": {
+      "title": "Specifications"
+    },
+    "manufacturers": {
+      "title": "Manufacturers"
+    },
     "users": {
       "title": "Users"
     }
   },
-
   "comment_header_filter": "Header Filter components",
   "header_filter": {
     "length_label": "Show by",
@@ -24,7 +29,6 @@
     "create_button": "Create",
     "search_placeholder": "Search"
   },
-
   "comment_users": "Users pages",
   "users": {
     "index": {
@@ -38,6 +42,37 @@
       "title": "Adding a new user"
     }
   },
+  "comment_attributes": "Attributes pages",
+  "attributes": {
+    "index": {
+      "title": "List of Specifications",
+      "filter_title": "Specifications"
+    },
+    "store": {
+      "title": "Create new Specification"
+    },
+    "edit": {
+      "title": "Editing characteristics"
+    },
+    "inputs": {
+      "name": "Name"
+    }
+  },
+
+  "comment_manufacturers": "manufacturers pages",
+  "manufacturers": {
+    "index": {
+      "title": "List of manufacturers",
+      "filter_title": "Manufacturers"
+    },
+    "edit-modal": {
+      "title": "Manufacturer "
+    },
+    "create-modal": {
+      "title": "Add a manufacturer"
+    }
+  },
+
   "comment_products": "Products page",
   "products": {
     "index": {
@@ -63,7 +98,6 @@
       "category": "Category"
     }
   },
-
   "login": {
     "title": "Logging in to an employee's account"
   },
@@ -73,7 +107,6 @@
   "password_reset": {
     "title": "Employee Password Recovery"
   },
-
   "comment_auth": "Buttons and label in auth routes",
   "auth": {
     "login": "Login",
@@ -101,18 +134,37 @@
       }
     }
   },
-
   "comment_notification": "Translate Notify Text",
   "notification": {
     "delete": {
       "success": {
-        "title": "{name} successfully deleted",
+        "title": "{name} Successfully deleted",
         "text": "You have successfully deleted '{name}' from the database, no return possible"
       },
       "danger": {
         "title": "Deleted error",
         "text": "The server was unable to delete the selected data. Contact the administrator, or refresh the pages",
         "user-delete": "You can't delete the sub yourself"
+      }
+    },
+    "update": {
+      "success": {
+        "title": "Successfully updated",
+        "text": "You have successfully updated the data"
+      },
+      "danger": {
+        "title": "Update error",
+        "text": "The server could not update the selected data. Contact the administrator, or refresh the page"
+      }
+    },
+    "store": {
+      "success": {
+        "title": "Successfully created",
+        "text": "You have successfully added new data"
+      },
+      "danger": {
+        "title": "Error when creating",
+        "text": "The server could not process the selected data. Contact the administrator, or refresh the page"
       }
     },
     "get": {
@@ -129,7 +181,6 @@
       "title": "Password changed"
     }
   },
-
   "form": {
     "save": "Save",
     "cancel": "Cancel",

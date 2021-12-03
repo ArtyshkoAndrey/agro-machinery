@@ -33,7 +33,7 @@
 <!--          </li>-->
 
           <li class="nav-item dropdown">
-            <a id="dropdownMenuButton1" href="#" type="button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <a id="dropdownMenuButton1" href="#" type="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               {{ $t('SecondMenu.catalog') }}
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -51,30 +51,12 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a id="dropdownMenuButton2" href="#" type="button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <a id="dropdownMenuButton2" href="#" type="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               {{ $t('SecondMenu.manufacturers') }}
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
               <div class="container">
                 <div class="row gy-2 gy-md-4">
-                  <div v-for="manufacturer in manufacturers" :key="manufacturer.id" class="col-md-6 category-item-menu">
-                    <router-link :to="{name: 'catalog', query: { category: manufacturer.id }}">
-                      {{ manufacturer.name }}
-                      <span class="badge bg-secondary">{{ manufacturer.products_count }}</span>
-                    </router-link>
-                  </div>
-                  <div v-for="manufacturer in manufacturers" :key="manufacturer.id" class="col-md-6 category-item-menu">
-                    <router-link :to="{name: 'catalog', query: { category: manufacturer.id }}">
-                      {{ manufacturer.name }}
-                      <span class="badge bg-secondary">{{ manufacturer.products_count }}</span>
-                    </router-link>
-                  </div>
-                  <div v-for="manufacturer in manufacturers" :key="manufacturer.id" class="col-md-6 category-item-menu">
-                    <router-link :to="{name: 'catalog', query: { category: manufacturer.id }}">
-                      {{ manufacturer.name }}
-                      <span class="badge bg-secondary">{{ manufacturer.products_count }}</span>
-                    </router-link>
-                  </div>
                   <div v-for="manufacturer in manufacturers" :key="manufacturer.id" class="col-md-6 category-item-menu">
                     <router-link :to="{name: 'catalog', query: { category: manufacturer.id }}">
                       {{ manufacturer.name }}

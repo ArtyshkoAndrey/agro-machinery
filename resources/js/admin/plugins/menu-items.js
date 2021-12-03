@@ -30,6 +30,26 @@ items.add(
 )
 
 items.add(
+  'menu.attributes.title',
+  'dashboard.attributes.index',
+  '/admin/attributes/index',
+  {
+    type: 'solid',
+    name: 'purchase-tag-alt'
+  }
+)
+
+items.add(
+  'menu.manufacturers.title',
+  'dashboard.manufacturers.index',
+  '/admin/manufacturers/index',
+  {
+    type: 'solid',
+    name: 'purchase-tag-alt'
+  }
+)
+
+items.add(
   'menu.users.title',
   'dashboard.users.index',
   '/admin/users/index',
