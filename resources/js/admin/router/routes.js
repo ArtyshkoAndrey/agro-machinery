@@ -54,6 +54,23 @@ export default [
         ]
       },
       {
+        path: 'admin/categories',
+        component: {render: (c) => c('router-view')},
+        alias: 'dashboard.categories.index',
+        children: [
+          {path: '', redirect: {name: 'dashboard.categories.index'}},
+          {
+            path: 'index', name: 'dashboard.categories.index', component: page('dashboard/categories/index.vue')
+          },
+          {
+            path: 'edit/:id', name: 'dashboard.categories.edit', component: page('dashboard/categories/edit.vue')
+          },
+          {
+            path: 'store', name: 'dashboard.categories.store', component: page('dashboard/categories/store.vue')
+          }
+        ]
+      },
+      {
         path: 'admin/products',
         component: {render: (c) => c('router-view')},
         alias: 'dashboard.products.index',

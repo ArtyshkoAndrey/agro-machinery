@@ -35,7 +35,7 @@ items.add(
   '/admin/attributes/index',
   {
     type: 'solid',
-    name: 'purchase-tag-alt'
+    name: 'poll'
   }
 )
 
@@ -46,6 +46,16 @@ items.add(
   {
     type: 'solid',
     name: 'purchase-tag-alt'
+  }
+)
+
+items.add(
+  'menu.categories.title',
+  'dashboard.categories.index',
+  '/admin/categories/index',
+  {
+    type: 'regular',
+    name: 'package'
   }
 )
 

@@ -16,6 +16,9 @@
     "attributes": {
       "title": "Характеристики"
     },
+    "categories": {
+      "title": "Категории"
+    },
     "manufacturers": {
       "title": "Производители"
     },
@@ -74,6 +77,24 @@
     },
     "create-modal": {
       "title": "Добавить производителя"
+    }
+  },
+
+  "categories": {
+    "index": {
+      "title": "Список категорий",
+      "title_category": "Список категорий в "
+    },
+    "create-modal": {
+      "title": "Создание категории"
+    },
+    "update-modal": {
+      "title": "Обновление категории"
+    },
+    "inputs": {
+      "name": "Название",
+      "description": "Описание",
+      "parent": "Родительская категория"
     }
   },
 
@@ -214,5 +235,7 @@
     "title": {
       "edit": "Update item"
     }
-  }
+  },
+  "no_items": "Нет данных",
+  "back": "Назад"
 }

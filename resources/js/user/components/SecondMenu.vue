@@ -242,10 +242,19 @@ export default {
   #second-menu {
 
     @include respond-up(md) {
+      .navbar-collapse {
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+      }
       #navbarTogglerDemo02 {
         > .navbar-nav {
           height: calc(100vh - 58px);
           overflow: auto;
+
+          li > a, li > button {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem
+          }
         }
       }
     }

@@ -18,6 +18,9 @@
     "manufacturers": {
       "title": "Manufacturers"
     },
+    "categories": {
+      "title": "Categories"
+    },
     "users": {
       "title": "Users"
     }
@@ -70,6 +73,24 @@
     },
     "create-modal": {
       "title": "Add a manufacturer"
+    }
+  },
+
+  "categories": {
+    "index": {
+      "title": "List of categories",
+      "title_category": "List of categories in  "
+    },
+    "create-modal": {
+      "title": "Create Category"
+    },
+    "update-modal": {
+      "title": "Update Category"
+    },
+    "inputs": {
+      "name": "Name",
+      "description": "Description",
+      "parent": "Parent category"
     }
   },
 
@@ -206,5 +227,7 @@
     "title": {
       "edit": "Обновить "
     }
-  }
+  },
+  "no_items": "No data available",
+  "back": "Back"
 }
