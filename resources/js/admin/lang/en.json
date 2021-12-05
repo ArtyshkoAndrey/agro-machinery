@@ -90,7 +90,8 @@
     "inputs": {
       "name": "Name",
       "description": "Description",
-      "parent": "Parent category"
+      "parent": "Parent category",
+      "withoutParent": "Without Parent"
     },
     "breadcrumb": {
       "index": "Categories"

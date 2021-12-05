@@ -22,8 +22,8 @@
         </vs-input>
 
         <vs-select
-          class="mt-2"
           v-model="form.category_id"
+          class="mt-2"
           :placeholder="$t('categories.inputs.parent')"
           filter
         >
@@ -31,6 +31,12 @@
             {{ form.errors.get('category_id') }}
           </template>
 
+          <vs-option :label="''"
+                     :value="''"
+                     key="nullable"
+          >
+            {{ $t('categories.inputs.withoutParent') }}
+          </vs-option>
           <vs-option v-for="category in categories"
                      :key="category.id"
                      :label="category.translations.find(e => e.locale === locale).name"
@@ -248,6 +254,9 @@ export default {
       console.log(this.id)
       this.form.category_id = this.id
     }
+  },
+  destroyed() {
+    this.bus.$off('open')
   },
   methods: {
     removePDF (name) {

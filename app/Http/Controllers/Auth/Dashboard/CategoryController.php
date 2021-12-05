@@ -86,6 +86,42 @@ class CategoryController extends Controller
     ]);
   }
 
+  public function update(Request $request, Category $category)
+  {
+    $request->validate([
+      'ru.name' => 'required|string',
+      'en.name' => 'required|string',
+      'ru.description' => 'required|string',
+      'en.description' => 'required|string',
+      'image' => 'required|exists:images,id',
+      'file' => 'nullable|string',
+      'category_id' => 'nullable|exists:categories,id',
+    ]);
+
+    $category->update($request->except(['category_id', 'image']));
+    $category->save();
+
+    if (($category->image->id ?? 0 )!== $request->get('image')) {
+      $image = Image::find($request->get('image'));
+      $image->order = 1;
+      $image->save();
+      $category->images()->saveMany([$image]);
+    }
+
+    if ($category->parents()->where('id', ))
+
+    if ($c_id = $request->get('category_id', null)) {
+      if (($category->parents()->first()->id ?? 0) !== $c_id) {
+        $category->parents()->detach();
+        $category->parents()->attach($c_id);
+      }
+    }
+
+    return JsonResponse::success([
+      'category' => $category,
+    ]);
+  }
+
   public function destroy(Category $category): \Illuminate\Http\JsonResponse
   {
     $c = $category->toArray();

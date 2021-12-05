@@ -180,7 +180,7 @@ export default {
     await next()
     await this.get()
   },
-  async mounted() {
+  async created() {
     await this.get()
   },
   methods: {

@@ -68,6 +68,7 @@ class Category extends Model implements TranslatableContract
 
   protected $fillable = [
     'to_index',
+    'file'
   ];
 
   protected $casts = [
@@ -76,6 +77,10 @@ class Category extends Model implements TranslatableContract
 
   protected $with = [
     'image',
+  ];
+
+  protected $appends = [
+    'fileUrl'
   ];
 
   /**
@@ -88,6 +93,15 @@ class Category extends Model implements TranslatableContract
     $parents = [];
     $this->getParents($parents, $this);
     return $parents;
+  }
+
+  public function getFileUrlAttribute(): ?string
+  {
+    if ($this->file) {
+      return asset('storage/pdf/' . $this->file);
+    }
+
+    return null;
   }
 
   /**

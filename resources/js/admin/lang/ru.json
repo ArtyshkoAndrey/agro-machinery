@@ -94,7 +94,8 @@
     "inputs": {
       "name": "Название",
       "description": "Описание",
-      "parent": "Родительская категория"
+      "parent": "Родительская категория",
+      "withoutParent": "Без родителя"
     },
     "breadcrumb": {
       "index": "Категории"

@@ -31,6 +31,12 @@
             {{ form.errors.get('category_id') }}
           </template>
 
+          <vs-option :label="''"
+                     :value="''"
+                     key="nullable"
+          >
+            {{ $t('categories.inputs.withoutParent') }}
+          </vs-option>
           <vs-option v-for="category in categories"
                      :key="category.id"
                      :label="category.translations.find(e => e.locale === locale).name"
@@ -62,7 +68,7 @@
       </div>
       <div class="col-12 col-md-6 mt-3">
         <h4 class="ps-2">PDF</h4>
-        <vue-dropzone id="dropzonePDF" :options="dropzoneOptionsPDF" :use-custom-slot="true">
+        <vue-dropzone id="dropzonePDF" ref="pdfDropZone" :options="dropzoneOptionsPDF" :use-custom-slot="true">
           <div class="dropzone-custom-content">
             <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
             <div class="subtitle">...or click to select a file from your computer</div>
@@ -71,7 +77,7 @@
       </div>
       <div class="col-12 col-md-6 mt-3">
         <h4 class="ps-2">Photo</h4>
-        <vue-dropzone id="dropzonePhoto" :options="dropzoneOptionsPhoto" :use-custom-slot="true">
+        <vue-dropzone id="dropzonePhoto" ref="photoDropZone" :options="dropzoneOptionsPhoto" :use-custom-slot="true">
           <div class="dropzone-custom-content">
             <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
             <div class="subtitle">...or click to select a file from your computer</div>
@@ -83,7 +89,7 @@
     <template #footer>
       <div class="row justify-content-center">
         <div class="col-12 col-md-auto">
-          <vs-button block size="large" @click="store">
+          <vs-button block size="large" @click="update">
             {{ $t('form.save') }}
           </vs-button>
         </div>
@@ -138,9 +144,11 @@ export default {
       },
       category_id: '',
       file: null,
-      image: null
+      image: null,
+      id: null
     }),
-    categories: []
+    categories: [],
+    responseCategories: []
   }),
   computed: {
     ...mapGetters({
@@ -168,18 +176,25 @@ export default {
             alert(message);
             return 0;
           });
+          this.on('addedfile', function (file) {
+            if (file.serverName) {
+              file.previewElement.dataset.name = file.serverName
+            }
+          })
           this.on('success', function (file, response) {
             console.log(response)
             self.form.file = response.payload.name
             file.previewElement.dataset.name = self.form.file
           })
           this.on("removedfile", function (file) {
-            if (file.previewElement.dataset.name === self.form.file) {
-              self.removePDF(self.form.file)
-              self.form.file = null
-            } else {
-              alert(Error)
-              return 0;
+            if (self.$refs.pdfDropZone.dropzone.disabled !== true) {
+              if (file.previewElement.dataset.name === self.form.file) {
+                self.removePDF(self.form.file)
+                self.form.file = null
+              } else {
+                alert(Error)
+                return 0;
+              }
             }
           })
         }
@@ -205,29 +220,37 @@ export default {
             alert(message);
             return 0;
           });
+          this.on('addedfile', function (file) {
+            if (file.serverID) {
+              file.previewElement.dataset.id = file.serverID
+            }
+          })
           this.on('success', function (file, response) {
-            console.log(response)
-            let image = response.payload.images.pop();
-            console.log(image)
-            self.form.image = image.id
-            file.previewElement.dataset.id = image.id
+            if (response.payload.images) {
+              let image = response.payload.images.pop();
+              console.log(image)
+              self.form.image = image.id
+              file.previewElement.dataset.id = image.id
+            }
           })
           this.on("removedfile", function (file) {
-            console.log(file.previewElement.dataset.id, self.form.image)
-            if (Number(file.previewElement.dataset.id) === self.form.image) {
-              removeImage(self.form.image)
-                .then(r => {
-                  console.log(r)
-                  this.form.image = null
-                })
-                .catch(e => {
-                  console.log(e)
-                })
+            if (self.$refs.photoDropZone.dropzone.disabled !== true) {
+              console.log(file.previewElement.dataset.id, self.form.image)
+              if (Number(file.previewElement.dataset.id) === self.form.image) {
+                removeImage(self.form.image)
+                  .then(r => {
+                    console.log(r)
+                    this.form.image = null
+                  })
+                  .catch(e => {
+                    console.log(e)
+                  })
+              }
             }
           })
         }
       }
-    }
+    },
   },
   watch: {
     locale: function (newVal) {
@@ -236,8 +259,12 @@ export default {
       })
     }
   },
+  destroyed() {
+    this.bus.$off('open')
+  },
   mounted() {
     this.bus.$on('open', (id) => {
+      this.categories = this.responseCategories.filter(e => e.id !== id)
       this.active = true
       this.loading = true
 
@@ -254,51 +281,78 @@ export default {
             },
             image: category.image ? category.image.id : null,
             category_id: category.parents ? category.parents[0] ? category.parents[0].id : '' : '',
+            id: id
           })
 
-          this.loading = false
+
+          setTimeout(() => {
+            console.log(this.$refs)
+            if (category.image) {
+              let file = {
+                size: category.image.size,
+                name: category.image.name,
+                serverID: category.image.id,
+              };
+
+              let url = category.image.uri;
+              this.$refs.photoDropZone.manuallyAddFile(file, url);
+            }
+
+            if (category.file !== null && category.file !== '') {
+              let file = {
+                size: 0,
+                name: category.file,
+                serverName: category.file
+              };
+
+              let url = category.fileUrl;
+              this.$refs.pdfDropZone.manuallyAddFile(file, url);
+            }
+
+            this.loading = false
+          }, 500)
+
         })
-      .catch(() => {
-        this.$vs.notification({
-          duration: 4000,
-          sticky: true,
-          position: 'top-right',
-          color: 'danger',
-          title: this.$t('notification.get.danger.title'),
-          text: this.$t('notification.get.danger.text'),
+        .catch((e) => {
+          this.$vs.notification({
+            duration: 4000,
+            sticky: true,
+            position: 'top-right',
+            color: 'danger',
+            title: this.$t('notification.get.danger.title'),
+            text: this.$t('notification.get.danger.text'),
+          })
+
+          console.log(e)
+
+          this.active = false
+
         })
 
-        this.active = false
-        this.loading = false
-      })
 
     })
 
+
     getCategories()
       .then(r => {
-        this.categories = r
+        this.responseCategories = r
       })
-
-    if (this.id) {
-      console.log(this.id)
-      this.form.category_id = this.id
-    }
   },
   methods: {
     removePDF(name) {
       axios.delete('/api/admin/categories/pdf/' + name)
     },
-    store() {
-      this.form.post('/api/admin/categories/')
+    update() {
+      this.loading = true
+      this.form.put('/api/admin/categories/' + this.form.id)
         .then(r => {
-          console.log(r)
           this.$vs.notification({
             duration: 2000,
             sticky: true,
             position: 'top-right',
             color: 'success',
-            title: this.$t('notification.store.success.title'),
-            text: this.$t('notification.store.success.text'),
+            title: this.$t('notification.update.success.title'),
+            text: this.$t('notification.update.success.text'),
           })
 
           this.form = new Form({
@@ -312,12 +366,12 @@ export default {
             },
             category_id: '',
             file: null,
-            image: null
+            image: null,
+            id: null
           })
-
-          this.$parent.get()
           this.active = false
-
+          this.loading = false
+          this.$parent.get()
         })
     }
   }
@@ -325,9 +379,17 @@ export default {
 }
 </script>
 
-<style>
-.vs-dialog {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+<style lang="scss">
+  .vs-dialog {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .dz-image {
+    > img  {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+  }
 </style>
