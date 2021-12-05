@@ -91,6 +91,9 @@
       "name": "Name",
       "description": "Description",
       "parent": "Parent category"
+    },
+    "breadcrumb": {
+      "index": "Categories"
     }
   },
 

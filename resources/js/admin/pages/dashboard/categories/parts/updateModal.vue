@@ -1,5 +1,5 @@
 <template>
-  <vs-dialog v-model="active" full-screen overflow-hidden>
+  <vs-dialog v-model="active" :loading="loading" full-screen overflow-hidden>
     <template #header>
       <h4 class="not-margin">
         {{ $t('categories.create-modal.title') }}
@@ -22,9 +22,9 @@
         </vs-input>
 
         <vs-select
-          class="mt-2"
           v-model="form.category_id"
           :placeholder="$t('categories.inputs.parent')"
+          class="mt-2"
           filter
         >
           <template v-if="form.errors.has('category_id')" #message-danger>
@@ -93,19 +93,20 @@
 </template>
 
 <script>
-import { getCategories } from "~/admin/api/categories";
+import {getCategories} from "~/admin/api/categories";
 import Vue from "vue";
 import Form from "vform";
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 
 
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import axios from "axios";
 import { removeImage } from "~/admin/api/images"
+import { getCategory } from "~/admin/api/categories"
 
 export default {
-  name: "CreateModal",
+  name: "UpdateModal",
   components: {
     vueDropzone: vue2Dropzone
   },
@@ -125,6 +126,7 @@ export default {
   },
   data: () => ({
     active: false,
+    loading: false,
     form: new Form({
       ru: {
         name: '',
@@ -146,7 +148,7 @@ export default {
       token: 'auth/token'
     }),
 
-    dropzoneOptionsPDF () {
+    dropzoneOptionsPDF() {
       let self = this
       return {
         paramName: "pdf",
@@ -183,7 +185,7 @@ export default {
         }
       }
     },
-    dropzoneOptionsPhoto () {
+    dropzoneOptionsPhoto() {
       let self = this
       return {
         paramName: "image",
@@ -211,16 +213,16 @@ export default {
             file.previewElement.dataset.id = image.id
           })
           this.on("removedfile", function (file) {
-            console.log(file.previewElement.dataset.id , self.form.image)
-              if (Number(file.previewElement.dataset.id)=== self.form.image) {
-                removeImage(self.form.image)
-                  .then(r => {
-                    console.log(r)
-                    this.form.image = null
-                  })
-                  .catch(e => {
-                    console.log(e)
-                  })
+            console.log(file.previewElement.dataset.id, self.form.image)
+            if (Number(file.previewElement.dataset.id) === self.form.image) {
+              removeImage(self.form.image)
+                .then(r => {
+                  console.log(r)
+                  this.form.image = null
+                })
+                .catch(e => {
+                  console.log(e)
+                })
             }
           })
         }
@@ -235,8 +237,41 @@ export default {
     }
   },
   mounted() {
-    this.bus.$on('open', () => {
+    this.bus.$on('open', (id) => {
       this.active = true
+      this.loading = true
+
+      getCategory(id)
+        .then(category => {
+          this.form = new Form({
+            ru: {
+              name: category.translations.find(el => el.locale === 'ru').name,
+              description: category.translations.find(el => el.locale === 'ru').description
+            },
+            en: {
+              name: category.translations.find(el => el.locale === 'en').name,
+              description: category.translations.find(el => el.locale === 'en').description
+            },
+            image: category.image ? category.image.id : null,
+            category_id: category.parents ? category.parents[0] ? category.parents[0].id : '' : '',
+          })
+
+          this.loading = false
+        })
+      .catch(() => {
+        this.$vs.notification({
+          duration: 4000,
+          sticky: true,
+          position: 'top-right',
+          color: 'danger',
+          title: this.$t('notification.get.danger.title'),
+          text: this.$t('notification.get.danger.text'),
+        })
+
+        this.active = false
+        this.loading = false
+      })
+
     })
 
     getCategories()
@@ -250,40 +285,40 @@ export default {
     }
   },
   methods: {
-    removePDF (name) {
+    removePDF(name) {
       axios.delete('/api/admin/categories/pdf/' + name)
     },
-    store () {
+    store() {
       this.form.post('/api/admin/categories/')
-      .then(r => {
-        console.log(r)
-        this.$vs.notification({
-          duration: 2000,
-          sticky: true,
-          position: 'top-right',
-          color: 'success',
-          title: this.$t('notification.store.success.title'),
-          text: this.$t('notification.store.success.text'),
+        .then(r => {
+          console.log(r)
+          this.$vs.notification({
+            duration: 2000,
+            sticky: true,
+            position: 'top-right',
+            color: 'success',
+            title: this.$t('notification.store.success.title'),
+            text: this.$t('notification.store.success.text'),
+          })
+
+          this.form = new Form({
+            ru: {
+              name: '',
+              description: ''
+            },
+            en: {
+              name: '',
+              description: ''
+            },
+            category_id: '',
+            file: null,
+            image: null
+          })
+
+          this.$parent.get()
+          this.active = false
+
         })
-
-        this.form = new Form({
-          ru: {
-            name: '',
-            description: ''
-          },
-          en: {
-            name: '',
-            description: ''
-          },
-          category_id: '',
-          file: null,
-          image: null
-        })
-
-        this.$parent.get()
-        this.active = false
-
-      })
     }
   }
 
@@ -291,8 +326,8 @@ export default {
 </script>
 
 <style>
-  .vs-dialog {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+.vs-dialog {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 </style>

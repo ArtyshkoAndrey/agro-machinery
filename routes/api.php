@@ -16,12 +16,13 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
 
   Route::get('user', [UserController::class, 'current']);
 
-  Route::post('products/image/upload', [\App\Http\Controllers\Auth\Dashboard\ProductController::class, 'upload']);
-  Route::delete('products/image/remove/{id}', [\App\Http\Controllers\Auth\Dashboard\ProductController::class, 'remove']);
+  Route::post('image/upload', [\App\Http\Controllers\Auth\Dashboard\ImageController::class, 'upload']);
+  Route::delete('image/remove/{id}', [\App\Http\Controllers\Auth\Dashboard\ImageController::class, 'remove']);
+
+
 
   Route::post('categories/pdf/upload', [\App\Http\Controllers\Auth\Dashboard\CategoryController::class, 'pdfUpload']);
   Route::delete('categories/pdf/{name}', [\App\Http\Controllers\Auth\Dashboard\CategoryController::class, 'pdfDelete']);
-  Route::post('categories/image/upload', [\App\Http\Controllers\Auth\Dashboard\CategoryController::class, 'upload']);
 
 
   Route::apiResources([

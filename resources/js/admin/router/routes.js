@@ -12,8 +12,9 @@ export default [
     path: '',
     component: page('dashboard/auth.vue'),
     children: [
-      {path: '/admin', redirect: {name: 'dashboard.users.index'}},
-      {path: '/admin/index', name: 'dashboard.index', redirect: {name: 'dashboard.users.index'}},
+      {path: '/', redirect: {name: 'dashboard.products.index'}},
+      {path: '/admin', redirect: {name: 'dashboard.products.index'}},
+      {path: '/admin/index', name: 'dashboard.index', redirect: {name: 'dashboard.products.index'}},
       {
         path: 'admin/users',
         component: {render: (c) => c('router-view')},

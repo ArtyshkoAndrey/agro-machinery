@@ -9,18 +9,15 @@
 namespace App\Http\Controllers\Auth\Dashboard;
 
 use Str;
-use File;
 use Storage;
+use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Traits\Controllers\UploadImage;
 
 class CategoryController extends Controller
 {
-  use UploadImage;
-
   public function index(Request $request): \Illuminate\Http\JsonResponse
   {
     $query = Category::query();
@@ -46,17 +43,66 @@ class CategoryController extends Controller
     return JsonResponse::success(['categories' => $categories]);
   }
 
-  public function show(Category $category): \Illuminate\Http\JsonResponse
+  public function show(Category $category, Request $request): \Illuminate\Http\JsonResponse
   {
     $category = $category->load(['child']);
 
+    if ($request->boolean('has_parent', false)) {
+      $category = $category->append(['parent']);
+      $category = $category->load(['parents']);
+    }
+
     return JsonResponse::success(['category' => $category]);
+  }
+
+  public function store(Request $request): \Illuminate\Http\JsonResponse
+  {
+    $request->validate([
+      'ru.name' => 'required|string',
+      'en.name' => 'required|string',
+      'ru.description' => 'required|string',
+      'en.description' => 'required|string',
+      'image' => 'required|exists:images,id',
+      'file' => 'nullable|string',
+      'category_id' => 'nullable|exists:categories,id',
+    ]);
+
+    $category = Category::create($request->except(['category', 'image']));
+    $category->save();
+
+    $image = Image::find($request->get('image'));
+    $image->order = 1;
+    $image->save();
+
+    if ($c_id = $request->get('category_id', null)) {
+      $category->parents()->attach($c_id);
+    }
+
+    $category->images()->saveMany([$image]);
+
+
+    return JsonResponse::success([
+      'category' => $category,
+    ]);
+  }
+
+  public function destroy(Category $category): \Illuminate\Http\JsonResponse
+  {
+    $c = $category->toArray();
+
+    foreach ($category->images as $image) {
+      $image->delete();
+    }
+
+    $category->delete();
+
+    return JsonResponse::success(['category' => $c]);
   }
 
   public function pdfUpload(Request $request): \Illuminate\Http\JsonResponse
   {
     $request->validate([
-      'pdf' => 'required|file'
+      'pdf' => 'required|file',
     ]);
     $name = Str::random(16) . '.pdf';
     $request->file('pdf')->storeAs(

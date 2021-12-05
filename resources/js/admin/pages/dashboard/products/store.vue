@@ -312,7 +312,7 @@ export default {
       let self = this
       return {
         paramName: "image",
-        url: '/api/admin/products/image/upload',
+        url: '/api/admin/image/upload',
         thumbnailWidth: 150,
         maxFilesize: 2,
         dictRemoveFile: this.locale === 'ru' ? 'Удалить' : 'Remove',

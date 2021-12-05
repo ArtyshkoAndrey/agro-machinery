@@ -1,10 +1,34 @@
 <template>
   <div>
     <transition appear mode="out-in" name="fade">
-      <Loader v-if="$root.$loading.show" key="1"/>
+      <Loader v-if="$root.$loading.show" key="1" />
 
       <div v-else key="2">
         <div class="row justify-content-center">
+          <div v-if="category !== null" class="col-12">
+            <nav aria-label="breadcrumb mt-3">
+              <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+                  <router-link :to="{name: 'dashboard.categories.index'}">
+                    {{ $t('categories.breadcrumb.index') }}
+                  </router-link>
+                </li>
+
+                <li v-for="parent in category.parent" :key="parent.id" class="breadcrumb-item">
+                  <router-link :to="{ name: 'dashboard.categories.index', query: { category_id: parent.id }}" class="">
+                    {{ parent.translations ? parent.translations.find(e => e.locale === locale).name : parent.name }}
+                  </router-link>
+                </li>
+
+                <li class="breadcrumb-item">
+                  {{ category.translations ? category.translations.find(e => e.locale === locale).name : category.name }}
+                </li>
+
+
+              </ol>
+            </nav>
+          </div>
           <div class="col-12 col-md-8">
             <h2 v-if="category !== null">
               {{ $t('categories.index.title_category') }}
@@ -25,7 +49,6 @@
             >
               Создать
             </vs-button>
-
           </div>
         </div>
         <div class="row gy-3 mt-3">
@@ -55,9 +78,9 @@
                           flat
                           icon
                           success
-                          @click="update(item.id)"
+                          @click="openedUpdateModal(item.id)"
                         >
-                          <em class="bx bx-pencil"/>
+                          <em class="bx bx-pencil" />
                         </vs-button>
                       </div>
                       <div class="col">
@@ -102,7 +125,10 @@
 
         <create-modal :id="category_id"
                       :bus="busOpenedModal"
-                      @create="store"
+        />
+
+        <update-modal :id="category_id"
+                      :bus="busUpdateOpenModal"
         />
 
       </div>
@@ -115,14 +141,17 @@
 import axios from 'axios'
 import Loader from '~/admin/components/Loader.vue'
 import CreateModal from "./parts/createModal";
-import {mapGetters} from "vuex";
+import UpdateModal from "./parts/updateModal";
+import { mapGetters } from "vuex";
+import { removeCategory } from '~/admin/api/categories'
 import Vue from "vue";
 
 export default {
   name: 'Index',
   components: {
     Loader,
-    CreateModal
+    CreateModal,
+    UpdateModal
   },
   metaInfo() {
     return {
@@ -132,7 +161,8 @@ export default {
   data: () => ({
     categories: [],
     category: null,
-    busOpenedModal: new Vue()
+    busOpenedModal: new Vue(),
+    busUpdateOpenModal: new Vue()
   }),
   computed: {
     ...mapGetters({
@@ -165,7 +195,8 @@ export default {
       }
       axios.get(url, {
         params: {
-          no_parents: true
+          no_parents: true,
+          has_parent: true
         }
       })
         .then(r => {
@@ -173,6 +204,8 @@ export default {
           if (this.category_id) {
             this.category = r.data.payload.category
             this.categories = r.data.payload.category.child
+
+            console.warn(r.data.payload.category)
           } else {
             this.categories = r.data.payload.categories
           }
@@ -188,14 +221,48 @@ export default {
     openedCreateModal() {
       this.busOpenedModal.$emit('open')
     },
+    openedUpdateModal (id) {
+      this.busUpdateOpenModal.$emit('open', id)
+    },
 
-    store() {
+    async deleteItem (id) {
+      await removeCategory(id)
+        .then(r => {
+          console.log(r)
+          this.$vs.notification({
+            duration: 2000,
+            sticky: true,
+            position: 'top-right',
+            color: 'success',
+            title: this.$t('notification.delete.success.title', {name: r.name}),
+            text: this.$t('notification.delete.success.text', {name: r.name}),
+          })
+        })
 
+      await this.get()
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .breadcrumb {
+    .breadcrumb-item + .breadcrumb-item {
+      padding-left: 0.1rem;
 
+      &:before {
+        padding-right: 0.1rem;
+      }
+    }
+    .breadcrumb-item {
+      a {
+        color: #4ECB71;
+        text-decoration: none;
+        transition: 0.3s;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
 </style>

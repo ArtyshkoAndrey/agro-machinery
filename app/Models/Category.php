@@ -121,7 +121,7 @@ class Category extends Model implements TranslatableContract
   public function parents(): BelongsToMany
   {
     return $this->belongsToMany(
-      __CLASS__,
+      Category::class,
       'category_categories',
       'child_category_id',
       'category_id'

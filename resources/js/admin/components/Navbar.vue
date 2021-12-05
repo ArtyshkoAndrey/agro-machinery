@@ -7,7 +7,7 @@
     class="py-2"
   >
     <template #left>
-      <vs-navbar-item id="guide" @click="$router.push({name: 'dashboard.invoice.index'})">
+      <vs-navbar-item id="guide" @click="$router.push({name: 'dashboard.products.index'})">
         Главная
       </vs-navbar-item>
     </template>
@@ -50,7 +50,7 @@ export default {
       // Log out the user.
       await this.$store.dispatch('auth/logout')
       // Redirect to login.
-      this.$router.push({ name: 'login' })
+      await this.$router.push({name: 'login'})
     }
   }
 }
