@@ -67,11 +67,15 @@ class ProductController extends Controller
       'images.*.id' => 'required|exists:images,id',
 
       'new' => 'required|boolean',
-      'popular' => 'required|boolean'
+      'popular' => 'required|boolean',
+
+      'attributes' => 'sometimes|array',
+      'attributes.*.id' => 'required|exists:attributes,id',
+      'attributes.*.value' => 'required|string',
     ]);
 
     $product = new Product($request->except(
-      ['images', 'category_id', 'suitable']
+      ['images', 'category_id', 'suitable', 'attributes']
     ));
 
     $data = $request->all();
@@ -92,6 +96,12 @@ class ProductController extends Controller
     $product->images()->saveMany($images);
 
     $product->suitable()->sync($data['suitable']);
+    $attrs = $request->get('attributes');
+    if (count($attrs) > 0) {
+      foreach ($attrs as $item) {
+        $product->attributes()->attach($item['id'], ['value' => $item['value']]);
+      }
+    }
 
     $product->save();
 
@@ -110,7 +120,7 @@ class ProductController extends Controller
    */
   public function show(Product $product): \Illuminate\Http\JsonResponse
   {
-    $product->load(['suitable', 'category', 'images']);
+    $product->load(['suitable', 'category', 'images', 'attributes']);
     return JsonResponse::success(['product' => $product]);
   }
 
@@ -141,7 +151,11 @@ class ProductController extends Controller
       'images.*.id' => 'required|exists:images,id',
 
       'new' => 'required|boolean',
-      'popular' => 'required|boolean'
+      'popular' => 'required|boolean',
+
+      'attributes' => 'sometimes|array',
+      'attributes.*.id' => 'required|exists:attributes,id',
+      'attributes.*.value' => 'required|string',
     ]);
 
     $product->update($request->except(
@@ -156,6 +170,14 @@ class ProductController extends Controller
     $product->save();
 
     $product->suitable()->sync($data['suitable']);
+
+    $attrs = $request->get('attributes');
+    $product->attributes()->detach();
+    if (count($attrs) > 0) {
+      foreach ($attrs as $item) {
+        $product->attributes()->attach($item['id'], ['value' => $item['value']]);
+      }
+    }
 
     $product->save();
 

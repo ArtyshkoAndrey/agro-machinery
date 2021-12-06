@@ -13,27 +13,35 @@
           <template #icon>
             ru
           </template>
+
+          <template v-if="form.errors.has('ru.name')" #message-danger>
+            {{ form.errors.get('ru.name') }}
+          </template>
         </vs-input>
 
         <vs-input v-model="form.en.name" :placeholder="$t('categories.inputs.name')" class="mt-2">
           <template #icon>
             en
           </template>
+
+          <template v-if="form.errors.has('en.name')" #message-danger>
+            {{ form.errors.get('en.name') }}
+          </template>
         </vs-input>
 
         <vs-select
           v-model="form.category_id"
-          class="mt-2"
           :placeholder="$t('categories.inputs.parent')"
+          class="mt-2"
           filter
         >
           <template v-if="form.errors.has('category_id')" #message-danger>
             {{ form.errors.get('category_id') }}
           </template>
 
-          <vs-option :label="''"
+          <vs-option key="nullable"
+                     :label="''"
                      :value="''"
-                     key="nullable"
           >
             {{ $t('categories.inputs.withoutParent') }}
           </vs-option>
@@ -48,41 +56,58 @@
       </div>
 
       <div class="col-lg-8 col-md-6 mt-2 mt-md-0">
-        <div class="vs-input-parent vs-input-parent--state-null vs-input-content vs-component--primary">
+        <div
+          class="vs-input-parent vs-input-parent--state-null vs-input-content vs-component--primary align-items-baseline"
+        >
           <textarea v-model="form.ru.description" :placeholder="$t('categories.inputs.description')"
                     class="vs-input vs-input--has-icon"
           />
           <span class="vs-input__icon">
             ru
           </span>
+          <span v-if="form.errors.has('ru.description')" class="text-danger ps-3">
+            {{ form.errors.get('ru.description') }}
+          </span>
         </div>
 
-        <div class="vs-input-parent vs-input-parent--state-null vs-input-content mt-2 vs-component--primary">
+        <div
+          class="vs-input-parent vs-input-parent--state-null vs-input-content mt-2 vs-component--primary align-items-baseline"
+        >
           <textarea v-model="form.en.description" :placeholder="$t('categories.inputs.description')"
                     class="vs-input vs-input--has-icon"
           />
           <span class="vs-input__icon">
             en
           </span>
+          <span v-if="form.errors.has('en.description')" class="text-danger ps-3">
+            {{ form.errors.get('en.description') }}
+          </span>
         </div>
       </div>
       <div class="col-12 col-md-6 mt-3">
         <h4 class="ps-2">PDF</h4>
-        <vue-dropzone id="dropzonePDF" :options="dropzoneOptionsPDF" :use-custom-slot="true">
+        <vue-dropzone id="dropzonePDF" ref="pdfDropZone" :options="dropzoneOptionsPDF" :use-custom-slot="true">
           <div class="dropzone-custom-content">
             <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
             <div class="subtitle">...or click to select a file from your computer</div>
           </div>
         </vue-dropzone>
+
+        <span v-if="form.errors.has('file')" class="text-danger ps-3">
+          {{ form.errors.get('file') }}
+        </span>
       </div>
       <div class="col-12 col-md-6 mt-3">
         <h4 class="ps-2">Photo</h4>
-        <vue-dropzone id="dropzonePhoto" :options="dropzoneOptionsPhoto" :use-custom-slot="true">
+        <vue-dropzone id="dropzonePhoto" ref="photoDropZone" :options="dropzoneOptionsPhoto" :use-custom-slot="true">
           <div class="dropzone-custom-content">
             <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
             <div class="subtitle">...or click to select a file from your computer</div>
           </div>
         </vue-dropzone>
+        <span v-if="form.errors.has('image')" class="text-danger ps-3">
+          {{ form.errors.get('image') }}
+        </span>
       </div>
     </div>
 
@@ -178,12 +203,14 @@ export default {
             file.previewElement.dataset.name = self.form.file
           })
           this.on("removedfile", function (file) {
-            if (file.previewElement.dataset.name === self.form.file) {
-              self.removePDF(self.form.file)
-              self.form.file = null
-            } else {
-              alert(Error)
-              return 0;
+            if (self.$refs.pdfDropZone.dropzone.disabled !== true) {
+              if (file.previewElement.dataset.name === self.form.file) {
+                self.removePDF(self.form.file)
+                self.form.file = null
+              } else {
+                alert(Error)
+                return 0;
+              }
             }
           })
         }
@@ -217,8 +244,9 @@ export default {
             file.previewElement.dataset.id = image.id
           })
           this.on("removedfile", function (file) {
-            console.log(file.previewElement.dataset.id , self.form.image)
-              if (Number(file.previewElement.dataset.id)=== self.form.image) {
+            if (self.$refs.photoDropZone.dropzone.disabled !== true) {
+              console.log(file.previewElement.dataset.id, self.form.image)
+              if (Number(file.previewElement.dataset.id) === self.form.image) {
                 removeImage(self.form.image)
                   .then(r => {
                     console.log(r)
@@ -227,6 +255,7 @@ export default {
                   .catch(e => {
                     console.log(e)
                   })
+              }
             }
           })
         }

@@ -121,6 +121,12 @@
       "popular": "Popular",
       "suitable": "Suitable products",
       "category": "Category"
+    },
+    "parts": {
+      "attributesDialog": {
+        "title": "Choose attribute",
+        "openButton": "Add Attribute"
+      }
     }
   },
   "login": {

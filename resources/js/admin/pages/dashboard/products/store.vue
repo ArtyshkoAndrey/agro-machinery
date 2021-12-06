@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition appear name="fade">
-      <Loader v-if="$root.$loading.show" />
+      <Loader v-if="$root.$loading.show"/>
 
       <div v-else>
         <div class="row align-items-center justify-content-between mx-0">
@@ -30,17 +30,14 @@
                 </vs-input>
               </div>
               <div class="col-12 col-lg mt-5 mt-lg-0 position-relative">
-                <span style="font-size: 0.8rem; padding: 5px 10px; top: -35px"
-                      class="position-absolute"
+                <span class="position-absolute"
+                      style="font-size: 0.8rem; padding: 5px 10px; top: -35px"
                 >
                   {{ $t('products.inputs.description') }}
                 </span>
                 <editor
                   id="uuid"
                   v-model="form.ru.description"
-                  style="background-color: rgba(var(--vs-gray-2), 1); border-radius: 5px; padding: 5px 15px"
-                  api-key="z826n1n5ayf774zeqdphsta5v2rflavdm2kvy7xtmczyokv3"
-                  cloud-channel="5"
                   :init="{
                     plugins: [
                       'autolink',
@@ -70,11 +67,14 @@
                     powerpaste_html_import: 'clean',
                   }"
                   :inline="true"
-                  tag-name="div"
                   :menubar:="false"
+                  api-key="z826n1n5ayf774zeqdphsta5v2rflavdm2kvy7xtmczyokv3"
+                  cloud-channel="5"
+                  style="background-color: rgba(var(--vs-gray-2), 1); border-radius: 5px; padding: 5px 15px"
+                  tag-name="div"
                   value="Начни писать тут..."
                 />
-                <span v-if="form.errors.has('ru.description')" class="text-danger"  style="font-size: 0.7rem">
+                <span v-if="form.errors.has('ru.description')" class="text-danger" style="font-size: 0.7rem">
                   {{ form.errors.get('ru.description') }}
                 </span>
               </div>
@@ -98,16 +98,14 @@
               </div>
 
               <div class="col-12 col-lg mt-5 mt-lg-0 position-relative">
-                <span style="font-size: 0.8rem; padding: 5px 10px; top: -35px"
-                      class="position-absolute">
+                <span class="position-absolute"
+                      style="font-size: 0.8rem; padding: 5px 10px; top: -35px"
+                >
                   {{ $t('products.inputs.description') }}
                 </span>
                 <editor
                   id="uuid2"
                   v-model="form.en.description"
-                  style="background-color: rgba(var(--vs-gray-2), 1); border-radius: 5px; padding: 5px 15px"
-                  api-key="z826n1n5ayf774zeqdphsta5v2rflavdm2kvy7xtmczyokv3"
-                  cloud-channel="5"
                   :init="{
                     plugins: [
                       'autolink',
@@ -137,8 +135,11 @@
                     powerpaste_html_import: 'clean',
                   }"
                   :inline="true"
-                  tag-name="div"
                   :menubar:="false"
+                  api-key="z826n1n5ayf774zeqdphsta5v2rflavdm2kvy7xtmczyokv3"
+                  cloud-channel="5"
+                  style="background-color: rgba(var(--vs-gray-2), 1); border-radius: 5px; padding: 5px 15px"
+                  tag-name="div"
                   value="Right now..."
                 />
                 <span v-if="form.errors.has('en.description')" class="text-danger" style="font-size: 0.7rem">
@@ -157,11 +158,11 @@
               <div class="col-md-6 col-lg-3">
                 <vs-input
                   v-model="form.cost"
+                  :label-placeholder="$t('products.inputs.cost')"
                   icon-after
-                  type="number"
                   min="0"
                   step="1"
-                  :label-placeholder="$t('products.inputs.cost')"
+                  type="number"
                 >
                   <template #icon>
                     T
@@ -175,16 +176,16 @@
               <div class="col-md-6 col-lg-3 mt-3 mt-md-0">
                 <vs-select
                   v-model="form.category_id"
-                  filter
                   :placeholder="$t('products.inputs.category')"
+                  filter
                 >
                   <template v-if="form.errors.has('category_id')" #message-danger>
                     {{ form.errors.get('category_id') }}
                   </template>
 
                   <vs-option v-for="category in categories"
-                             :label="category.translations.find(e => e.locale === locale).name"
                              :key="category.id"
+                             :label="category.translations.find(e => e.locale === locale).name"
                              :value="category.id"
                   >
                     {{ category.translations.find(e => e.locale === locale).name }}
@@ -195,9 +196,9 @@
               <div class="col-md-6 col-lg-3 mt-3 mt-lg-0">
                 <vs-select
                   v-model="form.suitable"
+                  :placeholder="$t('products.inputs.suitable')"
                   filter
                   multiple
-                  :placeholder="$t('products.inputs.suitable')"
                 >
                   <template v-if="form.errors.has('suitable')" #message-danger>
                     {{ form.errors.get('suitable') }}
@@ -232,7 +233,7 @@
 
             <div class="row">
               <div class="col-12">
-                <vue-dropzone id="dropzone" :options="dropzoneOptions" :use-custom-slot="true">
+                <vue-dropzone id="dropzone" ref="photoDropZone" :options="dropzoneOptions" :use-custom-slot="true">
                   <div class="dropzone-custom-content">
                     <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
                     <div class="subtitle">...or click to select a file from your computer</div>
@@ -244,12 +245,46 @@
               </div>
             </div>
 
+            <div class="row gy-4">
+              <div class="col-12">
+                <hr>
+              </div>
+
+              <div v-for="(attr, index) in attributesList" :key="attr.id"
+                   class="col-12 col-md-6 col-lg-4"
+              >
+                <vs-input v-model="attributesList[index].value"
+                          :placeholder="attr.translations.find(e => e.locale === locale).name"
+                          :label="attr.translations.find(e => e.locale === locale).name"
+                          icon-after
+                          type="text"
+                          @click-icon="removeAttribute(attr)"
+                >
+                  <template #icon>
+                    <i class="vs-icon-close vs-icon-hover-x"></i>
+                  </template>
+
+                </vs-input>
+              </div>
+
+              <div class="col-12">
+                <vs-button class="w-auto d-flex ms-auto" @click="openAttributesDialog">
+                  {{ $t('products.parts.attributesDialog.openButton') }}
+                </vs-button>
+              </div>
+
+
+              <div class="col-12">
+                <hr>
+              </div>
+            </div>
+
             <div class="row mt-4 justify-content-end">
               <div class="col-auto">
                 <vs-button
+                  :loading="form.busy"
                   success
                   @click="store"
-                  :loading="form.busy"
                 >
                   {{ $t('form.save') }}
                 </vs-button>
@@ -259,20 +294,24 @@
         </div>
       </div>
     </transition>
+
+    <AttributesDialog :bus="busAttributesDialog"/>
   </div>
 </template>
 
 <script>
-import { getCategories } from "~/admin/api/categories"
-import { getProducts } from "~/admin/api/products"
-import { removeImage } from "~/admin/api/images"
+import {getCategories} from "~/admin/api/categories"
+import {getProducts} from "~/admin/api/products"
+import {removeImage} from "~/admin/api/images"
 import Loader from '~/admin/components/Loader'
 import i18n from "~/admin/plugins/i18n"
 import Form from 'vform'
 import Editor from '@tinymce/tinymce-vue'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import Vue from 'vue'
+import AttributesDialog from "./parts/AttributesDialog";
 
 export default {
   name: 'Store',
@@ -280,7 +319,8 @@ export default {
     Loader,
     // eslint-disable-next-line vue/no-unused-components
     'editor': Editor,
-    vueDropzone: vue2Dropzone
+    vueDropzone: vue2Dropzone,
+    AttributesDialog
   },
   data: () => ({
     title: i18n.t('products.index.title'),
@@ -302,13 +342,15 @@ export default {
     }),
     categories: [],
     products: [],
+    attributesList: [],
+    busAttributesDialog: new Vue()
   }),
   computed: {
     ...mapGetters({
       locale: 'lang/locale',
       token: 'auth/token'
     }),
-    dropzoneOptions () {
+    dropzoneOptions() {
       let self = this
       return {
         paramName: "image",
@@ -336,25 +378,30 @@ export default {
             console.log(self.form.images)
           })
           this.on("removedfile", function (file) {
-            let id = file.previewElement.dataset.id
+            if (self.$refs.photoDropZone.dropzone.disabled !== true) {
+              let id = file.previewElement.dataset.id
 
-            self.form.images = self.form.images.filter(e => {
-              return Number(e.id) !== Number(id)
-            })
-            console.log(self.form.images)
-            if (id) {
-              removeImage(id)
-                .then(r => {
-                  console.log(r)
-                })
+              self.form.images = self.form.images.filter(e => {
+                return Number(e.id) !== Number(id)
+              })
+              console.log(self.form.images)
+              if (id) {
+                removeImage(id)
+                  .then(r => {
+                    console.log(r)
+                  })
+              }
             }
+
           })
         }
       }
     }
   },
-  metaInfo: {
-    title: i18n.t('products.index.title'),
+  metaInfo() {
+    return {
+      title: this.$t('products.index.title'),
+    }
   },
   watch: {
     locale: function (newVal) {
@@ -363,7 +410,7 @@ export default {
       })
     }
   },
-  async mounted () {
+  async mounted() {
 
     await this.$root.$loading.set(50)
 
@@ -380,13 +427,31 @@ export default {
     await console.log(this.products)
 
     await this.$root.$loading.finish()
+
+    this.busAttributesDialog.$on('addAttribute', this.addAttribute)
   },
   methods: {
-    store () {
-      this.form.post('/api/admin/products')
-      .then(r => {
-        console.warn(r)
+    store() {
+      this.form.attributes = this.attributesList.map((e) => {
+        return {id: e.id, value: e.value}
       })
+      this.form.post('/api/admin/products')
+        .then(r => {
+          console.warn(r)
+        })
+    },
+
+    addAttribute(attr) {
+      attr.value = ''
+      this.attributesList.push(attr)
+    },
+    openAttributesDialog() {
+      let ids = this.attributesList.map(e => e.id)
+
+      this.busAttributesDialog.$emit('open', ids)
+    },
+    removeAttribute(item) {
+      this.attributesList = this.attributesList.filter(e => e.id !== item.id)
     }
   }
 }

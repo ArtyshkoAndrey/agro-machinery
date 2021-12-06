@@ -6,7 +6,7 @@
       <div v-else>
         <div class="row align-items-center justify-content-between mx-0">
           <div class="col-md-6 col-sm-10 col-12">
-            <h4>{{ $t('products.store.title') }}</h4>
+            <h4>{{ $t('products.edit.title') }}</h4>
           </div>
         </div>
 
@@ -242,6 +242,40 @@
               </div>
             </div>
 
+            <div class="row gy-4">
+              <div class="col-12">
+                <hr>
+              </div>
+
+              <div v-for="(attr, index) in attributesList" :key="attr.id"
+                   class="col-12 col-md-6 col-lg-4"
+              >
+                <vs-input v-model="attributesList[index].value"
+                          :placeholder="attr.translations.find(e => e.locale === locale).name"
+                          :label="attr.translations.find(e => e.locale === locale).name"
+                          icon-after
+                          type="text"
+                          @click-icon="removeAttribute(attr)"
+                >
+                  <template #icon>
+                    <i class="vs-icon-close vs-icon-hover-x"></i>
+                  </template>
+
+                </vs-input>
+              </div>
+
+              <div class="col-12">
+                <vs-button class="w-auto d-flex ms-auto" @click="openAttributesDialog">
+                  {{ $t('products.parts.attributesDialog.openButton') }}
+                </vs-button>
+              </div>
+
+
+              <div class="col-12">
+                <hr>
+              </div>
+            </div>
+
             <div class="row mt-4 justify-content-end">
               <div class="col-auto">
                 <vs-button
@@ -257,6 +291,7 @@
         </div>
       </div>
     </transition>
+    <AttributesDialog :bus="busAttributesDialog"/>
   </div>
 </template>
 
@@ -272,6 +307,8 @@ import Editor from '@tinymce/tinymce-vue'
 import { mapGetters } from 'vuex'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import Vue from "vue"
+import AttributesDialog from "./parts/AttributesDialog"
 
 export default {
   name: 'Store',
@@ -279,7 +316,8 @@ export default {
     Loader,
     // eslint-disable-next-line vue/no-unused-components
     'editor': Editor,
-    vueDropzone: vue2Dropzone
+    vueDropzone: vue2Dropzone,
+    AttributesDialog
   },
   data: () => ({
     title: i18n.t('products.index.title'),
@@ -297,10 +335,13 @@ export default {
       suitable: [],
       new: false,
       popular: false,
-      images: []
+      images: [],
+      attributes: []
     }),
     categories: [],
     products: [],
+    attributesList: [],
+    busAttributesDialog: new Vue()
   }),
   computed: {
     ...mapGetters({
@@ -377,8 +418,10 @@ export default {
       return this.$route.params.id
     }
   },
-  metaInfo: {
-    title: i18n.t('products.index.title'),
+  metaInfo () {
+    return {
+      title: this.$t('products.index.title'),
+    }
   },
   watch: {
     locale: function (newVal) {
@@ -407,6 +450,14 @@ export default {
         this.form.popular = product.popular
 
         this.form.images = product.images
+        this.attributesList = []
+        product.attributes.forEach(attr => {
+          this.attributesList.push({
+            id: attr.pivot.attribute_id,
+            translations: attr.translations,
+            value: attr.pivot.value
+          })
+        })
       })
 
     await getCategories()
@@ -420,11 +471,24 @@ export default {
       })
 
     await this.$root.$loading.finish()
-
+    this.busAttributesDialog.$on('addAttribute', this.addAttribute)
   },
   methods: {
     store () {
 
+    },
+
+    addAttribute(attr) {
+      attr.value = ''
+      this.attributesList.push(attr)
+    },
+    openAttributesDialog() {
+      let ids = this.attributesList.map(e => e.id)
+
+      this.busAttributesDialog.$emit('open', ids)
+    },
+    removeAttribute(item) {
+      this.attributesList = this.attributesList.filter(e => e.id !== item.id)
     }
   }
 }

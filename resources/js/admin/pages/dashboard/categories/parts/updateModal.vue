@@ -13,11 +13,19 @@
           <template #icon>
             ru
           </template>
+
+          <template v-if="form.errors.has('ru.name')" #message-danger>
+            {{ form.errors.get('ru.name') }}
+          </template>
         </vs-input>
 
         <vs-input v-model="form.en.name" :placeholder="$t('categories.inputs.name')" class="mt-2">
           <template #icon>
             en
+          </template>
+
+          <template v-if="form.errors.has('en.name')" #message-danger>
+            {{ form.errors.get('en.name') }}
           </template>
         </vs-input>
 
@@ -31,9 +39,9 @@
             {{ form.errors.get('category_id') }}
           </template>
 
-          <vs-option :label="''"
+          <vs-option key="nullable"
+                     :label="''"
                      :value="''"
-                     key="nullable"
           >
             {{ $t('categories.inputs.withoutParent') }}
           </vs-option>
@@ -48,21 +56,31 @@
       </div>
 
       <div class="col-lg-8 col-md-6 mt-2 mt-md-0">
-        <div class="vs-input-parent vs-input-parent--state-null vs-input-content vs-component--primary">
+        <div
+          class="vs-input-parent vs-input-parent--state-null vs-input-content vs-component--primary align-items-baseline"
+        >
           <textarea v-model="form.ru.description" :placeholder="$t('categories.inputs.description')"
                     class="vs-input vs-input--has-icon"
           />
           <span class="vs-input__icon">
             ru
           </span>
+          <span v-if="form.errors.has('ru.description')" class="text-danger ps-3">
+            {{ form.errors.get('ru.description') }}
+          </span>
         </div>
 
-        <div class="vs-input-parent vs-input-parent--state-null vs-input-content mt-2 vs-component--primary">
+        <div
+          class="vs-input-parent vs-input-parent--state-null vs-input-content mt-2 vs-component--primary align-items-baseline"
+        >
           <textarea v-model="form.en.description" :placeholder="$t('categories.inputs.description')"
                     class="vs-input vs-input--has-icon"
           />
           <span class="vs-input__icon">
             en
+          </span>
+          <span v-if="form.errors.has('en.description')" class="text-danger ps-3">
+            {{ form.errors.get('en.description') }}
           </span>
         </div>
       </div>
@@ -74,6 +92,10 @@
             <div class="subtitle">...or click to select a file from your computer</div>
           </div>
         </vue-dropzone>
+
+        <span v-if="form.errors.has('file')" class="text-danger ps-3">
+          {{ form.errors.get('file') }}
+        </span>
       </div>
       <div class="col-12 col-md-6 mt-3">
         <h4 class="ps-2">Photo</h4>
@@ -83,6 +105,9 @@
             <div class="subtitle">...or click to select a file from your computer</div>
           </div>
         </vue-dropzone>
+        <span v-if="form.errors.has('image')" class="text-danger ps-3">
+          {{ form.errors.get('image') }}
+        </span>
       </div>
     </div>
 
@@ -99,7 +124,7 @@
 </template>
 
 <script>
-import {getCategories} from "~/admin/api/categories";
+import {getCategories, getCategory} from "~/admin/api/categories";
 import Vue from "vue";
 import Form from "vform";
 import {mapGetters} from "vuex";
@@ -108,8 +133,7 @@ import {mapGetters} from "vuex";
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import axios from "axios";
-import { removeImage } from "~/admin/api/images"
-import { getCategory } from "~/admin/api/categories"
+import {removeImage} from "~/admin/api/images"
 
 export default {
   name: "UpdateModal",
@@ -287,7 +311,7 @@ export default {
 
           setTimeout(() => {
             console.log(this.$refs)
-            if (category.image) {
+            if (category.image.id) {
               let file = {
                 size: category.image.size,
                 name: category.image.name,
@@ -373,6 +397,9 @@ export default {
           this.loading = false
           this.$parent.get()
         })
+        .catch(e => {
+          this.loading = false
+        })
     }
   }
 
@@ -380,16 +407,16 @@ export default {
 </script>
 
 <style lang="scss">
-  .vs-dialog {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+.vs-dialog {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
-  .dz-image {
-    > img  {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-    }
+.dz-image {
+  > img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
   }
+}
 </style>

@@ -128,13 +128,8 @@ return [
     ],
   ],
   'attributes' => [
-    'sample.days.*.free1' => '13123123',
-    'address' => 'Адрес',
-    'age' => 'Возраст',
     'available' => 'Доступно',
     'city' => 'Город',
-    'content' => 'Контент',
-    'country' => 'Страна',
     'current_password' => 'Текущий пароль',
     'date' => 'Дата',
     'day' => 'День',
@@ -159,5 +154,19 @@ return [
     'title' => 'Наименование',
     'username' => 'Никнейм',
     'year' => 'Год',
+    'ru' => [
+      'name' => 'Название/Имя',
+      'description' => 'Описание'
+    ],
+    'en' => [
+      'name' => 'Название/Имя',
+      'description' => 'Описание'
+    ],
+    'file' => 'Файл',
+    'image' => 'Фотография',
+    'images' => 'Фотографии',
+    'category_id' => 'Категория',
+    'category' => 'Категория',
+    'categories' => 'Категории',
   ],
 ];
