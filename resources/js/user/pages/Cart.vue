@@ -112,7 +112,9 @@
             </div>
           </div>
         </div>
+        <Footer />
       </section>
+
     </transition>
   </div>
 </template>
@@ -123,11 +125,13 @@ import { mapGetters, mapActions } from "vuex";
 import * as $ from 'jquery';
 require('jquery-mask-plugin');
 import Form from "vform";
+import Footer from '~/user/components/Footer'
 
 export default {
   name: "Cart",
   components: {
-    Spinner
+    Spinner,
+    Footer
   },
   async beforeRouteLeave(to, from, next) {
     await this.setLoading(true)

@@ -119,6 +119,7 @@
             </div>
           </div>
         </div>
+        <Footer />
 
       </section>
     </transition>
@@ -132,12 +133,14 @@ import Spinner from "../components/Spinner";
 import * as $ from 'jquery';
 import Item from "~/user/components/Product";
 import Zooming from 'zooming';
+import Footer from '~/user/components/Footer'
 
 export default {
   name: "Product",
   components: {
     Spinner,
-    Item
+    Item,
+    Footer
   },
   beforeRouteLeave(to, from, next) {
     this.loading = true

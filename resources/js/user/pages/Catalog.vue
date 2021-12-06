@@ -89,6 +89,8 @@
           :identifier="infiniteId"
           @infinite="infiniteHandler"
         />
+
+        <Footer />
       </section>
     </transition>
   </div>
@@ -100,13 +102,15 @@ import Product from '~/user/components/Product'
 import axios from 'axios'
 import {mapGetters} from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading';
+import Footer from '~/user/components/Footer'
 
 export default {
   name: "Catalog",
   components: {
     Spinner,
     Product,
-    InfiniteLoading
+    InfiniteLoading,
+    Footer
   },
   beforeRouteLeave(to, from, next) {
     this.loading = true

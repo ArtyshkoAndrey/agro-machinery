@@ -5,6 +5,8 @@
       <Child />
     </main>
 
+<!--    <Footer />-->
+
     <Cart />
   </div>
 </template>
@@ -13,13 +15,15 @@
 import Child from '~/user/components/Child';
 import Menu from '~/user/components/Menu';
 import Cart from '~/user/components/Cart';
+import Footer from '~/user/components/Footer';
 
 export default {
   name: 'Default',
   components: {
     Child,
     Menu,
-    Cart
+    Cart,
+    Footer
   },
   data: () => {
     return {}

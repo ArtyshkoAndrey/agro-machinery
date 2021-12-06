@@ -165,6 +165,7 @@
             </div>
           </div>
         </section>
+        <Footer />
       </div>
     </transition>
   </div>
@@ -177,6 +178,8 @@ import Spinner from '~/user/components/Spinner';
 import Product from '~/user/components/Product';
 import Button from '~/user/components/Button';
 import axios from "axios";
+import Footer from '~/user/components/Footer';
+
 export default {
   name: "Index",
   components: {
@@ -184,7 +187,8 @@ export default {
     CategoryInfo,
     Spinner,
     Product,
-    Button
+    Button,
+    Footer
   },
   metaInfo() {
     return {
