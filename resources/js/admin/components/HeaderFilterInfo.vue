@@ -11,7 +11,7 @@
       <div class="col-md-6 col-sm-10 col-12">
         <h4>{{ title }}</h4>
       </div>
-      <div class="col-md-auto col-12">
+      <div class="col-md-auto col-12" v-if="!hideCreate">
         <vs-button block
                    class="px-5 py-1 fw-bold"
                    flat
@@ -82,6 +82,11 @@ export default {
     filter: {
       type: Vue,
       required: true
+    },
+    hideCreate: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data: () => ({

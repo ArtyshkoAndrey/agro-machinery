@@ -88,6 +88,20 @@ export default [
           }
         ]
       },
+      {
+        path: 'admin/orders',
+        component: {render: (c) => c('router-view')},
+        alias: 'dashboard.orders.index',
+        children: [
+          {path: '', redirect: {name: 'dashboard.orders.index'}},
+          {
+            path: 'index', name: 'dashboard.orders.index', component: page('dashboard/orders/index.vue')
+          },
+          {
+            path: 'show/:id', name: 'dashboard.orders.show', component: page('dashboard/orders/show.vue')
+          }
+        ]
+      },
     ]
   },
 

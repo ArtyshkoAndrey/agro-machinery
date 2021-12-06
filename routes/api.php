@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
     'manufacturers' => App\Http\Controllers\Auth\Dashboard\ManufacturerController::class,
     'products' => App\Http\Controllers\Auth\Dashboard\ProductController::class,
     'categories' => App\Http\Controllers\Auth\Dashboard\CategoryController::class,
+    'orders' => App\Http\Controllers\Auth\Dashboard\OrderController::class,
   ]);
 });
 

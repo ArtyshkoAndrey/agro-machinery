@@ -10,6 +10,9 @@
 
   "comment_menu": "Items in menu",
   "menu": {
+    "orders": {
+      "title": "Заказы"
+    },
     "products": {
       "title": "Товары"
     },
@@ -102,10 +105,32 @@
     }
   },
 
+  "orders": {
+    "index": {
+      "title": "Список заказов",
+      "filter_title": "Заказы"
+    },
+    "show": {
+      "title": "Заказ № ",
+      "info": {
+        "title": "Информация клиента"
+      },
+      "products": {
+        "title": "Товары"
+      },
+      "user": {
+        "name": "Имя",
+        "email": "E-mail",
+        "phone": "Телефон",
+        "date": "Дата"
+      }
+    }
+  },
+
   "comment_products": "Products page",
   "products": {
     "index": {
-      "title": "Список пользователетй",
+      "title": "Список товаров",
       "filter_title": "Товары"
     },
     "edit-modal": {

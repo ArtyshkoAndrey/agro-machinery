@@ -9,6 +9,9 @@
   },
   "comment_menu": "Items in menu",
   "menu": {
+    "orders": {
+      "title": "Orders"
+    },
     "products": {
       "title": "Products"
     },
@@ -95,6 +98,25 @@
     },
     "breadcrumb": {
       "index": "Categories"
+    }
+  },
+
+  "orders": {
+    "index": {
+      "title": "List of Orders",
+      "filter_title": "Orders"
+    },
+    "show": {
+      "title": "Order № ",
+      "info": {
+        "title": "Customer Information"
+      },
+      "user": {
+        "name": "Name",
+        "email": "E-mail",
+        "phone": "Phone",
+        "date": "Date"
+      }
     }
   },
 

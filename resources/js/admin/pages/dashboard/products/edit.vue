@@ -352,7 +352,7 @@ export default {
       let self = this
       return {
         paramName: "image",
-        url: '/api/admin/products/image/upload',
+        url: '/api/admin/image/upload',
         thumbnailWidth: 150,
         maxFilesize: 2,
         dictRemoveFile: this.locale === 'ru' ? 'Удалить' : 'Remove',
@@ -475,7 +475,35 @@ export default {
   },
   methods: {
     store () {
+      this.form.attributes = this.attributesList.map((e) => {
+        return {id: e.id, value: e.value}
+      })
+      this.form.put('/api/admin/products/' + this.id)
+        .then(r => {
+          console.warn(r)
+          this.$vs.notification({
+            duration: 2000,
+            sticky: true,
+            position: 'top-right',
+            color: 'success',
+            title: this.$t('notification.update.success.title'),
+            text: this.$t('notification.update.success.text'),
+          })
 
+          this.$router.push({name: 'dashboard.products.index'})
+        })
+      .catch(e => {
+        console.warn(e)
+
+        this.$vs.notification({
+          duration: 4000,
+          sticky: true,
+          position: 'top-right',
+          color: 'danger',
+          title: this.$t('notification.update.danger.title'),
+          text: this.$t('notification.update.danger.text'),
+        })
+      })
     },
 
     addAttribute(attr) {

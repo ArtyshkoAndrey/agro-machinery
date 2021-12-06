@@ -20,6 +20,16 @@ class Item {
 
 const items = new Items()
 items.add(
+  'menu.orders.title',
+  'dashboard.orders.index',
+  '/admin/orders/index',
+  {
+    type: 'solid',
+    name: 'task'
+  }
+)
+
+items.add(
   'menu.products.title',
   'dashboard.products.index',
   '/admin/products/index',

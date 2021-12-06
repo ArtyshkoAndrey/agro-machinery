@@ -438,6 +438,28 @@ export default {
       this.form.post('/api/admin/products')
         .then(r => {
           console.warn(r)
+          this.$vs.notification({
+            duration: 2000,
+            sticky: true,
+            position: 'top-right',
+            color: 'success',
+            title: this.$t('notification.store.success.title'),
+            text: this.$t('notification.store.success.text'),
+          })
+
+          this.$router.push({name: 'dashboard.products.index'})
+        })
+        .catch(e => {
+          console.warn(e)
+
+          this.$vs.notification({
+            duration: 4000,
+            sticky: true,
+            position: 'top-right',
+            color: 'danger',
+            title: this.$t('notification.store.danger.title'),
+            text: this.$t('notification.store.danger.text'),
+          })
         })
     },
 

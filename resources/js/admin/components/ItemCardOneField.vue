@@ -13,7 +13,7 @@
                 :style="checkTitleRouter ? 'cursor: pointer' : '' "
                 @click="routePush(index)"
             >
-              {{ inputs[field] }}
+              {{ inputs[field] }} {{ field === 'cost' ? ' ₸' : '' }}
             </h6>
           </div>
 
@@ -83,6 +83,7 @@ export default {
     },
     hideId: {
       type: Boolean,
+      required: false,
       default: true
     }
   },
@@ -121,7 +122,8 @@ export default {
     },
 
     routePush (index) {
-      console.log(typeof this.$attrs['title-router'] !== 'undefined')
+      console.log(this.$attrs['title-router'])
+      this.$emit('title-route')
       if (typeof this.$attrs['title-router'] !== 'undefined') {
         if (index === 0 && !this.hideId) {
           this.$emit('title-route')

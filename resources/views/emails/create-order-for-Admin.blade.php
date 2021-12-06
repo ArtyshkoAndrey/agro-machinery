@@ -21,7 +21,7 @@
     | **{{ $order->cost }} ₸** |
   @endcomponent
 
-  @component('mail::button', ['url' => url('admin/order/' . $order->id)])
+  @component('mail::button', ['url' => url('admin/orders/show/' . $order->id)])
     {{ __('email-create-order-for-admin.button.show-order') }}
   @endcomponent
 
