@@ -94,7 +94,8 @@
       "name": "Name",
       "description": "Description",
       "parent": "Parent category",
-      "withoutParent": "Without Parent"
+      "withoutParent": "Without Parent",
+      "video": "Youtube link"
     },
     "breadcrumb": {
       "index": "Categories"

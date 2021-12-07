@@ -62,7 +62,8 @@
     "breadcrumb": {
       "index": "Home",
       "catalog": "Catalog"
-    }
+    },
+    "pdf": "Download the commercial offer"
   },
   "button": {
     "catalog": "Catalog",

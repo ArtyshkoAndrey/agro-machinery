@@ -29,6 +29,12 @@
           </template>
         </vs-input>
 
+        <vs-input v-model="form.video" :placeholder="$t('categories.inputs.video')" class="mt-2">
+          <template #icon>
+            <i class='bx bxl-youtube'></i>
+          </template>
+        </vs-input>
+
         <vs-select
           v-model="form.category_id"
           :placeholder="$t('categories.inputs.parent')"
@@ -167,7 +173,8 @@ export default {
       },
       category_id: '',
       file: null,
-      image: null
+      image: null,
+      video: null
     }),
     categories: []
   }),
@@ -315,7 +322,8 @@ export default {
           },
           category_id: '',
           file: null,
-          image: null
+          image: null,
+          video: null
         })
 
         this.$parent.get()

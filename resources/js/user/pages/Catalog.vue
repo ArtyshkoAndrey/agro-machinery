@@ -40,11 +40,37 @@
                 </li>
               </ol>
             </nav>
+
+            <div v-if="category ? category.file !== null : false" class="row d-none d-lg-flex mt-5">
+              <div class="col-12 col-sm-auto">
+                <a :href="category.fileUrl" class="d-flex justify-content-between align-items-center btn-pdf" target="_blank" download>
+                  <span>{{ $t('catalog.pdf') }}</span>
+                  <iconly name="arrow-right" type="light" />
+                </a>
+              </div>
+            </div>
           </div>
           <div class="col-12 col-sm-10 col-lg-4">
-            <p v-if="category_id" class="category-description">
+            <p v-if="category_id && category.video === null" class="category-description">
               {{ category.translations.find(e => e.locale === locale).description }}
             </p>
+
+            <div v-if="category && category.video" class="row">
+              <div class="col-12">
+                <iframe id="player" type="text/html" width="100%" height="250"
+                        :src="category.video + '?enablejsapi=1&origin=http://example.com'"
+                        frameborder="0" />
+              </div>
+            </div>
+
+            <div v-if="category ? category.file !== null : false" class="row d-flex d-lg-none mt-5">
+              <div class="col-12 col-sm-auto">
+                <a :href="category.fileUrl" class="d-flex justify-content-between align-items-center btn-pdf" target="_blank" download>
+                  <span>{{ $t('catalog.pdf') }}</span>
+                  <iconly name="arrow-right" type="light" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         <transition appear mode="out-in" name="fade">
@@ -191,6 +217,7 @@ export default {
             this.category_child = response.data.payload.categories.child
             this.category_parents = response.data.payload.categories.parent
           } else {
+            this.category = null
             this.category_child = response.data.payload.categories
           }
 
@@ -292,6 +319,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "resources/scss/user/variables";
 .btn-manufacturers {
   background: #F1F1F1;
   border-radius: 41px;
@@ -304,6 +332,27 @@ export default {
   &.active {
     background: #1A1819;
     color: #FFFFFF;
+  }
+}
+
+.btn-pdf {
+  background: $color-orange;
+  color: $color-dark;
+  padding: 9px;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration: none;
+  width: 100%;
+  border-radius: 16px 0;
+
+  @include respond-to(md) {
+    padding: 13px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  svg {
+    margin-left: 20px;
   }
 }
 </style>

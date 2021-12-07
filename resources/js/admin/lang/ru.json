@@ -98,7 +98,8 @@
       "name": "Название",
       "description": "Описание",
       "parent": "Родительская категория",
-      "withoutParent": "Без родителя"
+      "withoutParent": "Без родителя",
+      "video": "Ссылка на видео"
     },
     "breadcrumb": {
       "index": "Категории"

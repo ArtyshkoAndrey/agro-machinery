@@ -20,6 +20,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  *
  * @property int                                   $id
  * @property int                                   $to_index
+ * @property string|null                           $video
  * @property Carbon|null                           $created_at
  * @property Carbon|null                           $updated_at
  * @property-read CategoryTranslation|null         $translation
@@ -68,7 +69,8 @@ class Category extends Model implements TranslatableContract
 
   protected $fillable = [
     'to_index',
-    'file'
+    'file',
+    'video'
   ];
 
   protected $casts = [
