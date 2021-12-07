@@ -65,8 +65,10 @@ export default {
       user: 'auth/user'
     }),
   },
-  metaInfo: {
-    title: i18n.t('users.index.title'),
+  metaInfo () {
+    return {
+      title: this.$t('users.index.title'),
+    }
   },
   async mounted () {
     await this.busCreateUser.$on('save', this.store)

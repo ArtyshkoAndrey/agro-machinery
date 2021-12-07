@@ -54,7 +54,7 @@
                     </li>
 
 
-                    <li aria-current="page" class="breadcrumb-item active">
+                    <li aria-current="page" v-if="product.category.name" class="breadcrumb-item active">
                       <span>
                         {{ product.category ? product.category.translations.find(e => e.locale === locale).name : product.category.name }}
                       </span>
@@ -153,6 +153,11 @@ export default {
     await this.setLoading(false)
   },
   scrollToTop: false,
+  metaInfo () {
+    return {
+      title: (this.$t('Product.title')) + (this.product.name ? this.product.name : 'Загрузка')
+    }
+  },
   data: () => ({
     loading: true,
     loaderImage: true,
@@ -224,8 +229,11 @@ export default {
       axios.get('/api/users/product/' + this.id)
         .then(response => {
           this.product = response.data.payload.product
+          if (this.product.category === null) {
+            this.product.category = {}
+            this.product.category.parents = []
+          }
           this.product.images.forEach((e, index) => index === 0 ? e.show = true : e.show = false)
-          console.log(this.product.images)
           if (this.product.images.length > 0) {
             this.images = [...this.product.images]
           } else {

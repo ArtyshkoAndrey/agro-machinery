@@ -190,9 +190,9 @@ export default {
     Button,
     Footer
   },
-  metaInfo() {
+  metaInfo () {
     return {
-      title: 'Главная страница'
+      title: this.$t('index.title')
     }
   },
   beforeRouteLeave (to, from, next) {

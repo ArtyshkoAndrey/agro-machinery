@@ -43,7 +43,6 @@ export default {
     ItemCardOneField
   },
   data: () => ({
-    title: i18n.t('products.index.title'),
     viewLength: 10,
     products: {},
     filter: new Vue(),
@@ -51,11 +50,10 @@ export default {
       'id', 'name'
     ]
   }),
-  computed: {
-
-  },
-  metaInfo: {
-    title: i18n.t('products.index.title'),
+  metaInfo () {
+    return {
+      title: this.$t('products.index.title')
+    }
   },
   async mounted () {
 

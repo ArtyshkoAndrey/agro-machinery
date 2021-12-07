@@ -21,6 +21,7 @@
     "manufacturers": "Manufacturers"
   },
   "index": {
+    "title": "Home pages",
     "section_2": {
       "title": "Products",
       "content_1": "The best companies in Turkey for the production of agricultural equipment with a guarantee",
@@ -57,6 +58,7 @@
     }
   },
   "catalog": {
+    "title": "Product catalog",
     "breadcrumb": {
       "index": "Home",
       "catalog": "Catalog"
@@ -67,6 +69,7 @@
     "more": "More"
   },
   "Product": {
+    "title": "Product - ",
     "prefix-cost": "at",
     "buy": "Add to Cart",
     "specifications": "Specifications",
@@ -84,5 +87,11 @@
   },
   "create-order": {
     "title": "Your order has been accepted and is being processed"
+  },
+  "errors": {
+    "404": {
+      "title": "There is no such page",
+      "content": "Oops... There is no such page."
+    }
   }
 }

@@ -149,6 +149,11 @@ export default {
       cost: 0
     })
   }),
+  metaInfo () {
+    return {
+      title: this.$t('Cart.title')
+    }
+  },
   computed: {
     ...mapGetters({
       products: 'cart/response_products',

@@ -400,7 +400,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$t('products.index.title'),
+      title: this.$t('products.store.title'),
     }
   },
   watch: {

@@ -1,13 +1,13 @@
 <template>
   <div class="row text-center">
-    <h3>Ошибка</h3>
+    <h3>{{ $t('errors.404.content') }}</h3>
   </div>
 </template>
 
 <script>
 export default {
   metaInfo () {
-    return { title: 'Главная страница' }
+    return { title: this.$t('error.404.title') }
   },
   scrollToTop: false,
   data: () => ({

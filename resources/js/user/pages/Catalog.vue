@@ -112,6 +112,11 @@ export default {
     InfiniteLoading,
     Footer
   },
+  metaInfo () {
+    return {
+      title: this.$t('catalog.title')
+    }
+  },
   beforeRouteLeave(to, from, next) {
     this.loading = true
     setTimeout(() => {

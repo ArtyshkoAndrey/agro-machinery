@@ -5,10 +5,6 @@ export function getProducts () {
     .then(response => {
       return response.data.payload.products
     })
-    .catch(e => {
-      // catch errors here if you want
-      console.log(e);
-    });
 }
 
 export function getProduct (id) {
@@ -16,8 +12,4 @@ export function getProduct (id) {
     .then(response => {
       return response.data.payload.product
     })
-    .catch(e => {
-      // catch errors here if you want
-      console.log(e);
-    });
 }

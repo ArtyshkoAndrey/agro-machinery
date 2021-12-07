@@ -155,7 +155,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$t('attributes.index.title')
+      title: this.$t('categories.index.title')
     }
   },
   data: () => ({

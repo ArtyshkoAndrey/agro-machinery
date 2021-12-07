@@ -154,7 +154,7 @@ export default {
           position: 'top-right',
           color: 'danger',
           title: this.$t('notification.get.danger.title'),
-          text: this.$t('notification.get.danger.text'),
+          text: e.response ? e.response.data.message : this.$t('notification.get.danger.text')
         })
 
         this.$router.push({name: 'dashboard.orders.index'})

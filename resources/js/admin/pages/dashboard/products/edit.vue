@@ -420,7 +420,7 @@ export default {
   },
   metaInfo () {
     return {
-      title: this.$t('products.index.title'),
+      title: this.$t('products.edit.title'),
     }
   },
   watch: {
@@ -459,15 +459,51 @@ export default {
           })
         })
       })
+      .catch(e => {
+        this.$vs.notification({
+          duration: 2000,
+          sticky: true,
+          position: 'top-right',
+          color: 'danger',
+          title: this.$t('notification.get.danger.title'),
+          text: e.response ? e.response.data.message : this.$t('notification.get.danger.text')
+        })
+
+        this.$router.push({name: 'dashboard.products.index'})
+      })
 
     await getCategories()
       .then(r => {
         this.categories = r
       })
+    .catch(e => {
+      this.$vs.notification({
+        duration: 2000,
+        sticky: true,
+        position: 'top-right',
+        color: 'danger',
+        title: this.$t('notification.get.danger.title'),
+        text: e.response ? e.response.data.message : this.$t('notification.get.danger.text')
+      })
+
+      this.$router.push({name: 'dashboard.products.index'})
+    })
 
     await getProducts()
       .then(r => {
         this.products = r
+      })
+      .catch(e => {
+        this.$vs.notification({
+          duration: 2000,
+          sticky: true,
+          position: 'top-right',
+          color: 'danger',
+          title: this.$t('notification.get.danger.title'),
+          text: e.response ? e.response.data.message : this.$t('notification.get.danger.text')
+        })
+
+        this.$router.push({name: 'dashboard.products.index'})
       })
 
     await this.$root.$loading.finish()

@@ -112,13 +112,14 @@ export default {
         this.form.en.name = en.name
       })
     .catch(e => {
+
       this.$vs.notification({
-        duration: 2000,
+        duration: 4000,
         sticky: true,
         position: 'top-right',
         color: 'danger',
-        title: 'Error',
-        text: e.response.data.message
+        title: this.$t('notification.get.danger.title'),
+        text: e.response ? e.response.data.message : this.$t('notification.get.danger.text')
       })
 
       this.$router.push({

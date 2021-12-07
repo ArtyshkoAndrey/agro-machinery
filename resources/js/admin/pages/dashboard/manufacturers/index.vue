@@ -39,7 +39,6 @@ import HeaderFilterInfo from '~/admin/components/HeaderFilterInfo.vue'
 import ItemCardOneField from '~/admin/components/ItemCardOneField.vue'
 import EditItemsModal from "~/admin/components/EditItemsModal";
 import Vue from "vue";
-import i18n from "~/admin/plugins/i18n";
 import {mapGetters} from "vuex";
 
 export default {
@@ -59,6 +58,11 @@ export default {
       'id', 'name'
     ]
   }),
+  metaInfo() {
+    return {
+      title: this.$t('manufacturers.index.title')
+    }
+  },
   computed: {
     ...mapGetters({
       user: 'auth/user'

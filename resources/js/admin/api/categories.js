@@ -5,10 +5,6 @@ export function getCategories () {
     .then(response => {
       return response.data.payload.categories
     })
-    .catch(e => {
-      // catch errors here if you want
-      console.log(e);
-    });
 }
 
 export function getCategory (id) {
@@ -27,8 +23,4 @@ export function removeCategory (id) {
     .then(response => {
       return response.data.payload.category
     })
-    .catch(e => {
-      // catch errors here if you want
-      console.log(e);
-    });
 }

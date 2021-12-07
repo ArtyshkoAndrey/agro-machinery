@@ -5,10 +5,6 @@ export function getAttributes () {
     .then(response => {
       return response.data.payload.attributes
     })
-    .catch(e => {
-      // catch errors here if you want
-      console.log(e);
-    });
 }
 
 export function getAttribute (id) {
