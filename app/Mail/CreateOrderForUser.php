@@ -31,6 +31,6 @@ class CreateOrderForUser extends Mailable
   {
     return $this->markdown('emails.create-order-for-user', [
       'order' => $this->order
-    ]);
+    ])->subject('Поступил новый заказ');
   }
 }
