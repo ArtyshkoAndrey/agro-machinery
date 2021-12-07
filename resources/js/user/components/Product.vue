@@ -1,6 +1,6 @@
 <template>
   <div class="card product-card">
-    <span class="badge">{{ item.category.translations.find(e => e.locale === locale).name }}</span>
+    <span v-if="item.category" class="badge">{{ item.category.translations.find(e => e.locale === locale).name }}</span>
     <div class="product-card-image">
       <img :src="item.image.uri + '?w=300&h=auto3&fit=crop&fm=webp'" alt="product">
     </div>
@@ -40,10 +40,9 @@ export default {
     Button
   },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     item: {
       type: Object,
-      required: false,
+      required: true,
     }
   },
   computed: {

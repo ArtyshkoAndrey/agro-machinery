@@ -49,6 +49,10 @@ class CategoryController extends Controller
       $categories = $categories->load(['child']);
     }
 
+    if ($request->boolean('has_count_products', false)) {
+      $categories = $categories->append(['countProducts']);
+    }
+
     return JsonResponse::success(['categories' => $categories]);
   }
 

@@ -26,12 +26,6 @@
             </router-link>
           </li>
 
-<!--          <li class="nav-item">-->
-<!--            <router-link class="nav-link" to="#">-->
-<!--              {{ $t('SecondMenu.about') }}-->
-<!--            </router-link>-->
-<!--          </li>-->
-
           <li class="nav-item dropdown">
             <a id="dropdownMenuButton1" href="#" type="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               {{ $t('SecondMenu.catalog') }}
@@ -42,7 +36,7 @@
                   <div v-for="category in categories" :key="category.id" class="col-md-6 category-item-menu">
                     <router-link :to="{name: 'catalog', query: { category: category.id }}">
                       {{ category.translations.find(e => e.locale === locale).name }}
-                      <span class="badge bg-secondary">{{ category.countProducts }}</span>
+                      <span class="badge bg-secondary d-none d-md-inline-block">{{ category.countProducts }}</span>
                     </router-link>
                   </div>
                 </div>
@@ -60,7 +54,7 @@
                   <div v-for="manufacturer in manufacturers" :key="manufacturer.id" class="col-md-6 category-item-menu">
                     <router-link :to="{name: 'catalog', query: { category: manufacturer.id }}">
                       {{ manufacturer.name }}
-                      <span class="badge bg-secondary">{{ manufacturer.products_count }}</span>
+                      <span class="badge bg-secondary d-none d-md-inline-block">{{ manufacturer.products_count }}</span>
                     </router-link>
                   </div>
                 </div>
@@ -80,7 +74,7 @@
 <!--            </router-link>-->
 <!--          </li>-->
 
-          <li class="nav-item ms-lg-auto mt-5 mt-md-0">
+          <li class="nav-item ms-md-auto mt-5 mt-md-0">
             <button class="nav-link bg-transparent border-0" form @click="setLocale(tempLocale)">
               {{ locales[$i18n.locale] }}
             </button>
@@ -242,6 +236,18 @@ export default {
   #second-menu {
 
     @include respond-up(md) {
+
+      a.dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:after {
+          height: 5px;
+          width: 5px;
+        }
+      }
+
       .navbar-collapse {
         margin-left: -0.75rem;
         margin-right: -0.75rem;

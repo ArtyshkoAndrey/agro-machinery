@@ -22,7 +22,7 @@ mix
   .js('resources/js/user/app.js', 'public/user/dist/js').vue({version: 2})
   .sass('resources/scss/user/app.scss', 'public/user/dist/css')
 
-  // .disableNotifications()
+  .disableNotifications()
 
 if (mix.inProduction()) {
   // mix.versionHash()
@@ -55,4 +55,4 @@ mix.then(() => {
   }
 })
 
-// mix.browserSync('http://localhost/')
+mix.browserSync('http://agro-machinery/')

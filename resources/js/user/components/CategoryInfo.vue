@@ -4,7 +4,7 @@
       <div class="bg-gray">
         <div class="col-12 category-item_image_text">
           <span class="category-item_counter">
-            28
+            {{ category.countProducts ? category.countProducts : 'Nan' }}
           </span>
           <span class="category-item_title">
             {{ $t('index.category-item.count') }}

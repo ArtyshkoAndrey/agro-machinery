@@ -62,7 +62,7 @@
 
         <div class="row">
           <div class="col-12 mt-3">
-            <h5>Производители</h5>
+            <h5>{{ $t('SecondMenu.manufacturers') }}</h5>
           </div>
           <div class="col-12 mt-2">
             <div class="row">
@@ -81,7 +81,7 @@
 
         <div class="row catalog-list-products gx-1 gx-sm-2 gx-md-4 gx-lg-3 gy-2 gy-md-4">
           <div v-for="product in products" :key="product.id" class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
-            <product :item="product"/>
+            <product :item="product" />
           </div>
         </div>
 
@@ -239,7 +239,6 @@ export default {
         })
     },
     async setActiveManufacturer(manufacturer) {
-      // if(manufacturer.active !== undefined) {
       manufacturer.active = !manufacturer.active
 
       await this.setLoading(true)
@@ -248,9 +247,6 @@ export default {
       await this.getProducts()
       await this.setLoading(false)
 
-      // } else {
-      //   manufacturer.active = true
-      // }
     },
     async setLoading(status) {
       return new Promise((resolve) => {
@@ -276,15 +272,12 @@ export default {
             })
 
             this.lastPage = response.data.payload.products.last_page
-            // this.currentPage = response.data.payload.products.current_page
             this.currentPage = this.currentPage + 1;
             if (this.currentPage > this.lastPage) {
               $state.complete();
             } else {
               $state.loaded();
             }
-
-
           })
       }, 1500)
 

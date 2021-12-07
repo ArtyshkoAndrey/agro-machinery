@@ -3,7 +3,7 @@
     <div class="container d-none d-md-block">
       <div class="row ">
         <div class="col-lg-3 d-none d-lg-block">
-          <img alt="logo" src="public/images/user/logo.png">
+          <img alt="logo" src="/public/images/user/logo.png">
         </div>
 
         <div class="col-lg-7 offset-lg-2 offset-md-0 align-self-center">
@@ -33,23 +33,31 @@
     <div class="container">
       <div class="row d-block d-md-none mb-4">
         <div class="col-8 col-sm-5">
-          <img alt="logo" src="public/images/user/logo.png">
+          <img alt="logo" src="/public/images/user/logo.png">
         </div>
       </div>
       <div class="row gy-4">
         <div class="d-none d-md-block d-lg-none col-12 col-md-4 col-lg-3">
-          <img alt="logo" src="public/images/user/logo.png">
+          <img alt="logo" src="/public/images/user/logo.png">
         </div>
 
         <div class="col-12 col-md-4 col-lg-3 offset-md-1 offset-lg-0 weekend">
-          <p class="time">Пн - Сб  9:00 - 18:00</p>
-          <p class="day d-none d-md-block">Воскрессенье - выходной</p>
-          <p class="day d-block d-md-none">Приезжайте в наш магазин</p>
+          <p class="time">
+            {{ $t('Menu.date') }}
+          </p>
+          <p class="day d-none d-md-block">
+            {{ $t('Menu.weekend') }}
+          </p>
+          <p class="day d-block d-md-none">
+            {{ $t('Menu.slang') }}
+          </p>
         </div>
-        
+
         <div class="col-12 col-md-4 col-lg-3 offset-lg-1 weekend">
           <a class="time" href="tel:+7 (705) 764-44-44">+7 (705) 764-44-44</a>
-          <p class="day">г. Алматы, Кульжинский тракт, 9к</p>
+          <p class="day">
+            {{ $t('Menu.place') }}
+          </p>
         </div>
 
         <div class="col-12 col-md-4 offset-md-4 col-lg-3 offset-lg-1 weekend">
@@ -63,12 +71,6 @@
 <script>
 export default {
   name: "Footer",
-  computed: {
-
-  },
-  mounted() {
-    console.log(this.$parent.loading)
-  }
 }
 </script>
 
@@ -81,7 +83,7 @@ footer {
   padding-bottom: 24px;
 
   position: absolute;
-  width: 100vw;
+  width: 100%;
   left: 0;
 
 

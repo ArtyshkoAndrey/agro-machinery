@@ -11,8 +11,7 @@ export default [
       {path: 'index', name: 'index', component: page('Index.vue')},
       {path: 'catalog', name: 'catalog', component: page('Catalog.vue')},
       {path: 'cart', name: 'cart', component: page('Cart.vue')},
-      {path: 'product/:id', name: 'product', component: page('Product.vue')},
-      {path: 'test', name: 'test', component: page('Index_2.vue')},
+      {path: 'product/:id', name: 'product', component: page('Product.vue')}
     ]
   },
 

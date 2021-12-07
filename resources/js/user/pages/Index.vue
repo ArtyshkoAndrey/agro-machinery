@@ -227,7 +227,8 @@ export default {
       await axios.get('/api/users/categories', {
         params: {
           to_index: 1,
-          max_count: 4
+          max_count: 4,
+          has_count_products: true
         }
       })
       .then(response => {

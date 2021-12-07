@@ -9,7 +9,8 @@
   "Menu": {
     "date": "Mon - Sat 9:00 - 18:00",
     "weekend": "Sunday is a day off",
-    "place": "Almaty, Kulzhinsky tract, 9 k"
+    "place": "Almaty, Kulzhinsky tract, 9 k",
+    "slang": "Come to our store"
   },
   "SecondMenu": {
     "index": "Home",

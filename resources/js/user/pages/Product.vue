@@ -7,18 +7,18 @@
           <div class="col-lg-5 col-md-5 col-sm-10 col-12">
             <div v-if="images.length > 0" id="img-slider">
               <button class="next-slide btn-slider btn" @click="slide(1)">
-                <iconly name="arrow-right2" type="outline"/>
+                <iconly name="arrow-right2" type="outline" />
               </button>
               <button class="prev-slide btn-slider btn" @click="slide(-1)">
-                <iconly name="arrow-left2" type="outline"/>
+                <iconly name="arrow-left2" type="outline" />
               </button>
               <transition appear mode="out-in" name="fade">
-
                 <img v-if="loaderImage === false"
                      :key="1"
                      :src="image"
                      class="w-100 h-100 img-zooming"
                      style="object-fit: cover"
+                     :alt="product.name"
                 >
                 <img v-else :key="2"
                      alt=""
@@ -65,9 +65,7 @@
               <div class="col-12">
                 <h1 class="name">{{ product.translations.find(e => e.locale === locale).name }}</h1>
               </div>
-              <div class="col-12 col-md-12 col-lg-8 description" v-html="product.translations.find(e => e.locale === locale).description">
-
-              </div>
+              <div class="col-12 col-md-12 col-lg-8 description" v-html="product.translations.find(e => e.locale === locale).description" />
               <div class="col-12 cost-wrapper">
                 <div class="row align-items-center">
                   <div class="col-12 col-sm-auto cost">
@@ -190,11 +188,10 @@ export default {
     await this.$root.$loading.set(50)
 
     await setTimeout(() => {
-      console.log($('#img-slider').width())
-      $('#img-slider').height($('#img-slider').width())
+      let img = $('#img-slider')
+      img.height(img.width())
       $(window).resize(function () {
-        console.log($('#img-slider').width())
-        $('#img-slider').height($('#img-slider').width())
+        img.height(img.width())
       })
     }, 1000)
     await this.$root.$loading.finish();
@@ -204,8 +201,6 @@ export default {
       console.log(this.images)
       let index = this.images.findIndex(e => e.show)
       if (who > 0 && (index + 1) <= this.images.length - 1) {
-        // Vue.set(this.images, index,false)
-        // Vue.set(this.images, index + 1,true)
         this.images[index].show = false
         this.images[index + 1].show = true
         console.log(this.images[index + 1].id)
@@ -218,16 +213,12 @@ export default {
       if (who < 0 && (index - 1) >= 0) {
         this.images[index].show = false
         this.images[index - 1].show = true
-        // Vue.set(this.images, index,false)
-        // Vue.set(this.images, index - 1,true)
         console.log(this.images[index - 1].id)
 
         this.images = [...this.images]
         index = this.images.findIndex(e => e.show)
         this.setImage(this.images[index].uri)
       }
-
-
     },
     async getProduct() {
       axios.get('/api/users/product/' + this.id)
@@ -285,7 +276,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../scss/user/variables';
+@import 'resources/scss/user/variables';
 
 #img-slider {
   position: relative;
@@ -293,7 +284,6 @@ export default {
   img {
     object-fit: cover;
     object-position: center;
-
     z-index: 9;
   }
 
