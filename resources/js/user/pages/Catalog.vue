@@ -29,7 +29,7 @@
                 </li>
 
                 <li v-for="parent in category_parents" :key="parent.id" class="breadcrumb-item">
-                  <router-link :to="{ name: 'catalog', query: { category: parent.id }}" class="">
+                  <router-link :to="{ name: 'catalog', query: paramsCategory(parent.id)}" class="">
                     {{ parent.translations ? parent.translations.find(e => e.locale === locale).name : parent.name }}
                   </router-link>
                 </li>
@@ -76,7 +76,7 @@
         <transition appear mode="out-in" name="fade">
           <div v-if="category_child.length > 0" class="row category-list gx-2 gy-3">
             <div v-for="cat in category_child" :key="cat.id" class="col-6 col-sm-4 col-lg-3">
-              <router-link :to="{ path: 'catalog', query: { category: cat.id }}"
+              <router-link :to="{ path: 'catalog', query: paramsCategory(cat.id)}"
                            class="category-button w-100 d-flex justify-content-between align-items-center"
               >
                 <span>{{ cat.translations ? cat.translations.find(e => e.locale === locale).name : cat.name }}</span>
@@ -153,6 +153,7 @@ export default {
     await this.setLoading(true)
     this.infiniteId += 1;
     next()
+    await this.getNewManufacturers()
     await this.getCategories()
     await this.getProducts()
     await this.setLoading(false)
@@ -177,6 +178,10 @@ export default {
     category_id() {
       return this.$route.query.category
     },
+    manufacturer_id () {
+      console.log(this.$route.query.manufacturer)
+      return this.$route.query.manufacturer
+    },
     manufacturers_id() {
       let ids = []
 
@@ -187,21 +192,60 @@ export default {
         return ids
 
       return undefined
-    }
+    },
   },
   async mounted() {
+    console.log(this.manufacturer_id)
     await this.$root.$loading.set(30)
+    await this.getNewManufacturers()
     await this.getCategories()
     await this.$root.$loading.set(50)
     await this.getProducts()
     await this.$root.$loading.set(70)
-    await this.getManufacturers()
     await this.$root.$loading.finish();
     await setTimeout(() => {
       this.loading = false
     }, 500)
   },
   methods: {
+    async updateLocalManufacturers () {
+      await this.getNewManufacturers()
+    },
+    getNewManufacturers () {
+      axios.get('/api/users/manufacturers/')
+        .then(response => {
+          let manufacturers = response.data.payload.manufacturers
+          manufacturers.forEach(e => e.active = false)
+          this.manufacturers = manufacturers
+
+          let ids = this.manufacturer_id
+          if (Array.isArray(ids))  {
+            ids.forEach(id => {
+              this.manufacturers.find(e => e.id === Number(id)).active = true;
+            })
+          }
+        })
+        .catch(e => {
+          console.warn(e, this.manufacturers)
+          this.$Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: e.response.data.message,
+          })
+        })
+    },
+    paramsCategory(id) {
+      return {
+        category: id,
+        manufacturer: this.manufacturers_id
+      }
+    },
+    paramsManufacturers() {
+      return {
+        category: this.category_id,
+        manufacturer: this.manufacturers_id
+      }
+    },
     getCategories() {
       axios.get('/api/users/categories', {
         params: {
@@ -273,11 +317,13 @@ export default {
     async setActiveManufacturer(manufacturer) {
       manufacturer.active = !manufacturer.active
 
-      await this.setLoading(true)
-      this.infiniteId += 1;
+      // await this.setLoading(true)
+      // this.infiniteId += 1;
 
-      await this.getProducts()
-      await this.setLoading(false)
+      this.$router.push({name: 'catalog', query: this.paramsManufacturers()})
+
+      // await this.getProducts()
+      // await this.setLoading(false)
 
     },
     async setLoading(status) {

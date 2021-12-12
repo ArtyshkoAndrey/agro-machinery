@@ -52,7 +52,7 @@
               <div class="container">
                 <div class="row gy-2 gy-md-4">
                   <div v-for="manufacturer in manufacturers" :key="manufacturer.id" class="col-md-6 category-item-menu">
-                    <router-link :to="{name: 'catalog', query: { category: manufacturer.id }}">
+                    <router-link :to="{name: 'catalog', query: { manufacturer: [manufacturer.id] }}">
                       {{ manufacturer.name }}
                       <span class="badge bg-secondary d-none d-md-inline-block">{{ manufacturer.products_count }}</span>
                     </router-link>
