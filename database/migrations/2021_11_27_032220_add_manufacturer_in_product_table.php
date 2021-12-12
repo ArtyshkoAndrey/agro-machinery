@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Product;
+use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -22,7 +24,9 @@ class AddManufacturerInProductTable extends Migration
         ->cascadeOnDelete();
     });
 
-    \App\Models\Product::query()->update(['manufacturer_id' => \App\Models\Manufacturer::first()->id]);
+    if (Product::all()->count() > 0) {
+      Product::query()->update(['manufacturer_id' => Manufacturer::first()->id]);
+    }
 
     Schema::table('products', function (Blueprint $table) {
       $table->foreignId('manufacturer_id')
