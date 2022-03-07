@@ -12,9 +12,7 @@
 
         <div class="card p-4 mt-3">
           <div class="card-body px-0">
-
             <div class="row">
-
               <div class="col-12 mb-4">
                 <h6>Russian</h6>
               </div>
@@ -73,14 +71,13 @@
                   :menubar:="false"
                   value="Начни писать тут..."
                 />
-                <span v-if="form.errors.has('ru.description')" class="text-danger"  style="font-size: 0.7rem">
+                <span v-if="form.errors.has('ru.description')" class="text-danger" style="font-size: 0.7rem">
                   {{ form.errors.get('ru.description') }}
                 </span>
               </div>
             </div>
 
             <div class="row">
-
               <div class="col-12 mb-4 mt-4">
                 <h6>English</h6>
               </div>
@@ -98,7 +95,8 @@
 
               <div class="col-12 col-lg mt-5 mt-lg-0 position-relative">
                 <span style="font-size: 0.8rem; padding: 5px 10px; top: -35px"
-                      class="position-absolute">
+                      class="position-absolute"
+                >
                   {{ $t('products.inputs.description') }}
                 </span>
                 <editor
@@ -181,8 +179,8 @@
                   </template>
 
                   <vs-option v-for="category in categories"
-                             :label="category.translations.find(e => e.locale === locale).name"
                              :key="category.id"
+                             :label="category.translations.find(e => e.locale === locale).name"
                              :value="category.id"
                   >
                     {{ category.translations.find(e => e.locale === locale).name }}
@@ -232,8 +230,12 @@
               <div class="col-12">
                 <vue-dropzone id="dropzone" ref="myVueDropzone" :options="dropzoneOptions" :use-custom-slot="true">
                   <div class="dropzone-custom-content">
-                    <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
-                    <div class="subtitle">...or click to select a file from your computer</div>
+                    <h3 class="dropzone-custom-title">
+                      Drag and drop to upload content!
+                    </h3>
+                    <div class="subtitle">
+                      ...or click to select a file from your computer
+                    </div>
                   </div>
                 </vue-dropzone>
                 <span v-if="form.errors.has('images')" class="text-danger" style="font-size: 0.7rem">
@@ -258,9 +260,8 @@
                           @click-icon="removeAttribute(attr)"
                 >
                   <template #icon>
-                    <i class="vs-icon-close vs-icon-hover-x"></i>
+                    <i class="vs-icon-close vs-icon-hover-x" />
                   </template>
-
                 </vs-input>
               </div>
 
@@ -280,8 +281,8 @@
               <div class="col-auto">
                 <vs-button
                   success
-                  @click="store"
                   :loading="form.busy"
+                  @click="store"
                 >
                   {{ $t('form.save') }}
                 </vs-button>
@@ -291,7 +292,7 @@
         </div>
       </div>
     </transition>
-    <AttributesDialog :bus="busAttributesDialog"/>
+    <AttributesDialog :bus="busAttributesDialog" />
   </div>
 </template>
 
@@ -386,16 +387,18 @@ export default {
             console.log(self.form.images)
           })
           this.on("removedfile", function (file) {
-            let id = file.previewElement.dataset.id
+            if (self.$refs.myVueDropzone.dropzone.disabled !== true) {
+              let id = file.previewElement.dataset.id
 
-            self.form.images = self.form.images.filter(e => {
-              return Number(e.id) !== Number(id)
-            })
-            console.log(self.form.images)
-            removeImage(id)
-              .then(r => {
-                console.log(r)
+              self.form.images = self.form.images.filter(e => {
+                return Number(e.id) !== Number(id)
               })
+              console.log(self.form.images)
+              removeImage(id)
+                .then(r => {
+                  console.log(r)
+                })
+            }
           })
 
           self.form.images.forEach(image => {

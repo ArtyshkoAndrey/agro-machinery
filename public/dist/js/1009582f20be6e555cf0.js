@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[672],{1672:(t,e,n)=>{n.r(e),n.d(e,{default:()=>s});const r={metaInfo:function(){return{title:this.$t("error.404.title")}},scrollToTop:!1,data:function(){return{title:window.config.appName}}};const s=(0,n(1900).Z)(r,(function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"row text-center"},[n("h3",[t._v(t._s(t.$t("errors.404.content")))])])}),[],!1,null,"52e491ce",null).exports}}]);
-//# sourceMappingURL=1009582f20be6e555cf0.js.map
